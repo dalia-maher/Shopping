@@ -4,6 +4,7 @@
     Author     : Dalia
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -39,6 +40,31 @@
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function () {
     $(".megamenu").megamenu();});</script>
+        <script>
+            var request = null;
+            function createRequest() {
+                if (window.XMLHttpRequest)
+                    request = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    request = new ActiveXObject(Microsoft.XMLHTTP);                
+            }
+            function validateCredit() {
+                createRequest();
+                request.onreadystatechange = handleCredit;
+                var credit = document.getElementById("credit").value;
+                request.open("GET", "CheckCredit?cardID=" + credit, true);
+                request.send(null);
+            }
+
+            function handleCredit() {
+                if (request.readyState == 4 && request.status == 200) {
+                    var responseValue = request.responseText;
+                    document.getElementById("validation").innerHTML = responseValue;
+                } else {
+                    document.getElementById("validation").innerHTML = "Error code: " + request.status;
+                }
+            };
+        </script>
         <script src="js/menu_jquery.js"></script>
         <script src="js/simpleCart.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -46,14 +72,14 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-
+        <c:import url="/ShowCategories" />
     </head>
 
     <body>
         <script>
-$(function () {
-    $("#datepicker").datepicker();
-});
+            $(function () {
+                $("#datepicker").datepicker();
+            });
         </script>
         <!-- header -->
         <%@ include file="header.html" %>
@@ -72,28 +98,8 @@ $(function () {
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-
-                                            <ul>
-                                                <li><a href="products.jsp">Glasses</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
                                 </div>
+                            </div>
                         </li>
                         <li><a class="color1" href="#">catalog</a>
                             <div class="megapanel">
@@ -179,38 +185,54 @@ $(function () {
                 <div class="reg">
                     <h3>Register Now</h3>
                     <p>Welcome, please enter the following details to continue.</p>
-                    <p>If you have previously registered with us, <a href="#">click here</a></p>
-                    <form>
+                    <p>If you have previously registered with us, you can just login.</p>
+                    <form action="Register.java">
                         <ul>
                             <li class="text-info">First Name: </li>
-                            <li><input type="text" value=""></li>
+                            <li><input type="text" name="fname" value=""></li>
                         </ul>
                         <ul>
                             <li class="text-info">Last Name: </li>
-                            <li><input type="text" value=""></li>
+                            <li><input type="text" name="lname" value=""></li>
                         </ul>				 
                         <ul>
                             <li class="text-info">Email: </li>
-                            <li><input type="text" value=""></li>
+                            <li><input type="text" name="email" value=""></li>
                         </ul>
                         <ul>
                             <li class="text-info">Password: </li>
-                            <li><input type="password" value=""></li>
+                            <li><input type="password" name="password" value=""></li>
                         </ul>
                         <ul>
                             <li class="text-info">Re-enter Password:</li>
-                            <li><input type="password" value=""></li>
+                            <li><input type="password" name="repeat" value=""></li>
+                        </ul>
+                        <ul>
+                            <li class="text-info">Job:</li>
+                            <li><input type="text" name="job" value=""></li>
                         </ul>
                         <ul>
                             <li class="text-info">Address:</li>
-                            <li><input type="text" value=""></li>
-
+                            <li><input type="text" name="address" value=""></li>
                         </ul>
                         <ul>
                             <li class="text-info">BirthDay Date:</li>
-                            <li><input type="text" id="datepicker"></li>
+                            <li><input type="text" name="bdate" id="datepicker"></li>
                         </ul>
-
+                        <ul>
+                            <li class="text-info">Credit:</li>
+                            <li><input type="text" id="credit" onblur="validateCredit()"><label id="validation"></label></li>
+                        </ul>
+                        <c:set var="myCategories" value="${requestScope.categoriesList}" />
+                        <ul>
+                            <li class="text-info">Interests:</li>
+                            <li><ul>
+                                <c:set var="myCategories" value="${requestScope.categoriesList}" />
+                                <c:forEach var="category" items= "${myCategories}">
+                                    <li><input type="checkbox" value="<c:out value="${category.getCategoryID()}"/> "></li><li><c:out value="${category.getName()}"/></li>
+                                </c:forEach>
+                            </ul></li>
+                        </ul>
                         <script> $("#datepicker").datepicker({
                             onSelect: function() { 
                             var dateObject = $(this).datepicker('getDate'); 
@@ -219,7 +241,6 @@ $(function () {
                         });</script>
                        
                         <input type="submit" value="Register Now">
-                        <p class="click">By clicking this button, you are agree to my  <a href="#">Policy Terms and Conditions.</a></p> 
                     </form>
                 </div>
             </div>

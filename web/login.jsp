@@ -63,27 +63,6 @@
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                           
-                                            <ul>
-                                                <li><a href="products.jsp">Glasses</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                   
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                </div>
                             </div>
                         </li>
                         <li><a class="color1" href="#">catalog</a>
@@ -173,11 +152,11 @@
                         <div class="strip"></div>
                         <p>Welcome, please enter the following to continue.</p>
                         <p>If you have previously Login with us, <a href="#">Click Here</a></p>
-                        <form>
-                            <h5>User Name:</h5>	
-                            <input type="text" value="">
+                        <form method="post" action="Login">
+                            <h5>Email:</h5>	
+                            <input name="email" type="text" value="">
                             <h5>Password:</h5>
-                            <input type="password" value="">					
+                            <input name="password" type="password" value="">
                             <input type="submit" value="Login">
                         </form>
                        <a href="#">Forgot Password ?</a>
