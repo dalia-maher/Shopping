@@ -69,10 +69,7 @@ $(function () {
                                 <div class="row">
                                     <div class="col1">
                                         <div class="h_nav">
-
-                                            <ul>
-                                                <%@ include file="categoryItems.html" %>
-                                            </ul>	
+                                            <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
                                     <div class="col1">
@@ -162,7 +159,8 @@ $(function () {
                                     <div class="col1"></div>
                                 </div>
                             </div>
-                        </li>				
+                        </li>
+                    </ul>
 
                         <div class="search">
                             <form>

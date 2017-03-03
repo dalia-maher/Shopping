@@ -102,11 +102,7 @@ $(function () {
                                 <div class="row">
                                     <div class="col1">
                                         <div class="h_nav">
-
-                                            <ul>
-                                                <%@ include file="categoryItems.jsp" %>
-                                                <li><a id="cat1" href="products.jsp">jewellery</a></li>
-                                            </ul>	
+                                            <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
 
@@ -222,7 +218,8 @@ $(function () {
                     </div>
                 </div>
             </div>
-            <!-- //products -->
+        </div>
+        <!-- //products -->
             <%@ include file="footer.html" %>
     </body>
 </html>

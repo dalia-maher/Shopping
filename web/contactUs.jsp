@@ -47,28 +47,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->    
     <%@ include file="header.html" %>
 <!------>
-<div class="mega_nav">
-	 <div class="container">
-		 <div class="menu_sec">
-		 <!-- start header menu -->
-		<ul class="megamenu skyblue">
-			<li class="active grid"><a class="color1" href="index.html">Home</a></li>
+        <div class="mega_nav">
+            <div class="container">
+                <div class="menu_sec">
+                    <!-- start header menu -->
+                    <ul class="megamenu skyblue">
+			<li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
 			<li class="grid"><a class="color1" href="#">Category</a>
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
                                         <div class="h_nav">
-                                            
-                                                <ul>
-                                                    <%@ include file="categoryItems.html" %>
-                                                </ul>	
+                                            <%@ include file="categoryItems.jsp" %>
+                                        </div>							
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col2"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                </div>
+                            </div>
+			</li>
+			<li><a class="color1" href="#">catalog</a>
+                            <div class="megapanel">
+                                <div class="row">
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Popular Brands</h4>
+                                            <ul>
+                                                <li><a href="products.jsp">Slave Bracelets</a></li>
+                                                <li><a href="products.jsp">Rings</a></li>
+                                                <li><a href="products.jsp">Necklaces</a></li>
+                                                <li><a href="products.jsp">Chokers</a></li>
+                                                <li><a href="products.jsp">Cuff Links</a></li>									
+                                                <li><a href="products.jsp">Bangles</a></li>
+                                            </ul>	
                                         </div>							
                                     </div>
                                     <div class="col1">
                                         <div class="h_nav">
-                                           
+                                            <h4>Style Zone</h4>
                                             <ul>
-                                                <li><a href="products.jsp">Glasses</a></li>
+                                                <li><a href="products.jsp">Men</a></li>
                                                 <li><a href="products.jsp">Women</a></li>
                                                 <li><a href="products.jsp">Brands</a></li>
                                                 <li><a href="products.jsp">Kids</a></li>
@@ -77,93 +100,54 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             </ul>	
                                         </div>							
                                     </div>
-                                   
-					<div class="row">
-						<div class="col2"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-					</div>
-    			</div>
-			</li>
-			<li><a class="color1" href="#">catalog</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>Popular Brands</h4>
-								<ul>
-									<li><a href="products.jsp">Slave Bracelets</a></li>
-									<li><a href="products.jsp">Rings</a></li>
-									<li><a href="products.jsp">Necklaces</a></li>
-									<li><a href="products.jsp">Chokers</a></li>
-									<li><a href="products.jsp">Cuff Links</a></li>									
-									<li><a href="products.jsp">Bangles</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>Style Zone</h4>
-								<ul>
-									<li><a href="products.jsp">Men</a></li>
-									<li><a href="products.jsp">Women</a></li>
-									<li><a href="products.jsp">Brands</a></li>
-									<li><a href="products.jsp">Kids</a></li>
-									<li><a href="products.jsp">Accessories</a></li>
-									<li><a href="products.jsp">Style Videos</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>All Jewellery</h4>
-								<ul>
-									<li><a href="products.jsp">eum fugiat</a></li>
-									<li><a href="products.jsp">commodi consequatur</a></li>
-									<li><a href="products.jsp">illum qui dolorem</a></li>
-									<li><a href="products.jsp">nihil molestiae</a></li>
-									<li><a href="products.jsp">eum fugiat</a></li>
-									<li><a href="products.jsp">consequatur eum</a></li>
-								</ul>	
-							</div>												
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>Seating</h4>
-								<ul>
-									<li><a href="products.jsp">eum fugiat</a></li>
-									<li><a href="products.jsp">commodi consequatur</a></li>
-									<li><a href="products.jsp">illum qui dolorem</a></li>
-									<li><a href="products.jsp">nihil molestiae</a></li>
-									<li><a href="products.jsp">eum fugiat</a></li>
-									<li><a href="products.jsp">consequatur eum</a></li>
-								</ul>	
-							</div>						
-						</div>
-					</div>
-					<div class="row">
-						<div class="col2"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-					</div>
-    			</div>
-			</li>				
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>All Jewellery</h4>
+                                            <ul>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">commodi consequatur</a></li>
+                                                <li><a href="products.jsp">illum qui dolorem</a></li>
+                                                <li><a href="products.jsp">nihil molestiae</a></li>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">consequatur eum</a></li>
+                                            </ul>	
+                                        </div>												
+                                    </div>
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Seating</h4>
+                                            <ul>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">commodi consequatur</a></li>
+                                                <li><a href="products.jsp">illum qui dolorem</a></li>
+                                                <li><a href="products.jsp">nihil molestiae</a></li>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">consequatur eum</a></li>
+                                            </ul>	
+                                        </div>						
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col2"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                </div>
+                            </div>
+                        </li>				
 											
-		</ul> 
-			<div class="search">
-				 <form>
-					<input type="text" value="" placeholder="Search...">
-					<input type="submit" value="">
-					</form>
+                    </ul> 
+                    <div class="search">
+                        <form>
+                            <input type="text" value="" placeholder="Search...">
+                            <input type="submit" value="">
+                        </form>
 			</div>
 			<div class="clearfix"></div>
-		 </div>
-	  </div>
-</div>
+                    </div>
+            </div>
+        </div>
 <!---->
 <!-- contact -->
 	<div class="contact-bottom">
@@ -188,7 +172,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
 					<input type="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
 					<input type="text" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
-					<textarea type="text"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+					<textarea onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
 					<input type="submit" value="Submit" >
 				</form>
 			</div>

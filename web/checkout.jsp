@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : checkout
     Created on : Feb 28, 2017, 6:29:37 PM
@@ -58,11 +57,8 @@
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
-                                        <div class="h_nav">
-                                            
-                                                <ul>
-                                                    <%@ include file="categoryItems.html" %>
-                                                </ul>	
+                                        <div class="h_nav">                                            
+                                            <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
                                     <div class="col1">
@@ -183,7 +179,6 @@
                     <ul class="total_price">
                         <li class="last_price"> <h4>TOTAL</h4></li>	
                         <li class="last_price"><span>6150.00</span></li>
-                        <div class="clearfix"> </div>
                     </ul> 
                     <div class="clearfix"></div>
                     <a class="order" href="#">Place Order</a>

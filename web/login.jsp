@@ -60,10 +60,7 @@
                                 <div class="row">
                                     <div class="col1">
                                         <div class="h_nav">
-                                            
-                                                <ul>
-                                                    <%@ include file="categoryItems.html" %>
-                                                </ul>	
+                                            <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
                                     <div class="col1">

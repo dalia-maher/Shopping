@@ -58,10 +58,7 @@
                                 <div class="row">
                                     <div class="col1">
                                         <div class="h_nav">
-                                            
-                                                <ul>
-                                                     <%@ include file="categoryItems.html" %>
-                                                </ul>	
+                                            <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
                                     <div class="col1">
@@ -262,11 +259,11 @@
                 </div>
 
                 <!-- collapse -->
-                <div class="panel-group collpse" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group collpse" id="accordion" role="tablist">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-controls="collapseOne">
                                     Description
                                 </a>
                             </h4>
@@ -280,7 +277,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-controls="collapseTwo">
                                     additional information
                                 </a>
                             </h4>
@@ -294,7 +291,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingThree">
                             <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-controls="collapseThree">
                                     reviwes(5)
                                 </a>
                             </h4>
@@ -308,7 +305,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingFour">
                             <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-controls="collapseFour">
                                     help
                                 </a>
                             </h4>
