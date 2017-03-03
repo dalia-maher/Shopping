@@ -61,13 +61,6 @@
                                         </div>							
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                </div>
                             </div>
 			</li>
 			<li><a class="color1" href="#">catalog</a>
