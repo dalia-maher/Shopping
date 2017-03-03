@@ -22,7 +22,7 @@
         
          <script>
                                 function getProduct() {
-                                    var catId = 2;
+                                    var catId = $("#catId").text();
                                     var url = "displayProduct?numberOfPro=" + $("#result").children().length
                                     +"&categoryID=" + catId;
                                     $.get(url, displayProduct, 'json');
@@ -35,13 +35,15 @@
                                     if (statusTxt == "success") {
                                     console.log(responseTxt.length + "size");
                                     for (i = 0; i < responseTxt.length;i++)
-                                    {
-                                         var img = "images\\" + responseTxt[i].name + i +".jpg";
-                                         console.log(img);
+                                    {   var ProName=responseTxt[i].name;
+                                         var img = serverPath+"\\\images\\" + ProName + i +".jpg";
+                console.log(window.location);  
+                console.log(serverPath);
+                console.log(img);
                                         $("#result").append("<div class='products-grd'>" +
                                             "<div class='p-one simpleCart_shelfItem prd' > "+
                                             "<a href='productDescription.jsp'>" +
-                                            "<img src=" + img + "alt='Error' class='img-responsive' />" +
+                                            "<img src=\"" + "images/"+ProName+"0.jpg" + "\"alt='Error' class='img-responsive' />" +
                                             "<div class='mask'>" +
                                             "<span>Quick View</span>" +
                                             "</div>" +
@@ -64,6 +66,7 @@ jQuery(document).ready(function ($) {
         $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
     });
     $("#serverPath").hide();
+    $("#catId").hide();
     getProduct();
 });
         </script>
@@ -91,6 +94,7 @@ $(function () {
     <body>
         <%@ include file="header.html" %>
         <p id="serverPath"><%=getServletContext().getRealPath("")%></p>
+        <p id="catId">${param.categoryID}</p>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
@@ -200,20 +204,7 @@ $(function () {
                     <div class="col-md-12 products-grid-left">
                         <div id="result" class="products-grid-lft">
                            
-                            <div class="products-grd">
-                                <div class="p-one simpleCart_shelfItem prd">
-                                    <a href="productDescription.jsp">
-                                        <img src="images/10.jpg" alt="" class="img-responsive" />
-                                        <div class="mask">
-                                            <span>Quick View</span>
-                                        </div>
-                                    </a>
-                                    <h4>Aenean placerat</h4>
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price valsa">$729</span></a></p>
-
-                                </div>	
-                            </div>
-
+                           
                         </div>
                     </div>
                 </div>
