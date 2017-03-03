@@ -63,19 +63,6 @@
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                           
-                                            <ul>
-                                                <li><a href="products.jsp">Glasses</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
                                    
                                 <div class="row">
                                     <div class="col2"></div>
