@@ -23,7 +23,7 @@
                         <li class="top_link"><a href="Logout">Logout</a></li>
                         <!-- to do: set credit pop-up -->
                         <li class="top_link"><a href="#">Add Credit</a></li>
-                        <li class="top_link"><a href="viewProfile.jsp">My Account</a></li>					
+                        <li class="top_link"><a href="userProfile.jsp">My Account</a></li>					
                     </c:if>
                     <c:if test="${sessionScope.loggedInUser == null}">
                         <li class="top_link"><a href="login.jsp">Login</a></li>					
