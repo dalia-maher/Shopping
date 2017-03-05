@@ -5,39 +5,36 @@
  */
 package servlets;
 
-import beans.Category;
-import connections.DBController;
 import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Dalia
  */
-@WebServlet(name = "ShowCategories", urlPatterns = {"/ShowCategories"})
-public class ShowCategories extends HttpServlet {
+@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+public class Logout extends HttpServlet {
 
-    ServletConfig config;
-    
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        this.config = config;
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+
+        if(session != null) {
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+        }
     }
-    
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        ArrayList<Category> categories = DBController.getInstance().getAllCategories();
-        config.getServletContext().setAttribute("categoriesList", categories);
+        processRequest(request, response);
     }
 
 }

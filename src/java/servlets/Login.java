@@ -5,10 +5,9 @@
  */
 package servlets;
 
-import beans.Customer;
+import beans.User;
 import connections.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,14 +29,26 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        Customer user = DBController.getInstance().signIn(email, password);
-        if(user != null) {
-            // to do
-            HttpSession session = request.getSession();
-            session.setAttribute("email", email);
-        }
-        // set user doesn't exist on form page    
+        User user = DBController.getInstance().signIn(email, password);
         
+        if(user != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("loggedInUser", user);
+            if(user.isType()) {
+                // todo: set admin page
+                response.sendRedirect("adminPage.jsp");
+            }
+            else {
+                response.sendRedirect("index.jsp");
+            }
+        } else {
+            response.sendRedirect("login.jsp?attempt=1");
+        }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
 }
