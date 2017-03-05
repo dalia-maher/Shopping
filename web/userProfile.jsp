@@ -1,11 +1,16 @@
-
+<%-- 
+    Document   : viewProfile
+    Created on : Mar 3, 2017, 7:31:48 PM
+    Author     : Mrawi
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pendent Store a E-Commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Products :: w3layouts</title>
+        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,58 +24,15 @@
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-        
-         <script>
-                                function getProduct() {
-                                    var catId = $("#catId").text();
-                                    var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                                    +"&categoryID=" + catId;
-                                    $.get(url, displayProduct, 'json');
-
-                                }
-                                function displayProduct(responseTxt, statusTxt, xhr) {
-                                    // var messages = responseTxt.
-                                    serverPath = $("#serverPath").text();
-                                    //serverPath = serverPath.replace(/\\/g, "\\\\");
-                                    if (statusTxt == "success") {
-                                    console.log(responseTxt.length + "size");
-                                    for (i = 0; i < responseTxt.length;i++)
-                                    {   var ProName=responseTxt[i].name;
-                                        ProName=ProName.replace(/\s/g, "");
-                                        var catName = responseTxt[i].category.name;
-                                        catName = catName.replace(/\s/g, "");
-                                        // var img = serverPath+"\\\images\\" + ProName + i +".jpg";
-                //console.log(responseTxt[i].category.name);  
-                //console.log(ProName);
-                //console.log(img);
-                                        $("#result").append("<div class='products-grd'>" +
-                                            "<div class='p-one simpleCart_shelfItem prd' > "+
-                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img src=\"" + "images/"+catName+"/"+ProName+"0.jpg" + "\"alt='Error' class='img-responsive' />" +
-                                            "<div class='mask'>" +
-                                            "<span>Quick View</span>" +
-                                            "</div>" +
-                                            "</a>" +
-                                            "<h4>" + responseTxt[i].name + "</h4>" +
-                                            "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
-
-                                            "</div>" +
-                                            "</div>");
-                                    }
-                                }
-                            }
-
-                            </script>
-
+        <!-- start-smoth-scrolling -->
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
 jQuery(document).ready(function ($) {
     $(".scroll").click(function (event) {
         event.preventDefault();
         $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
     });
-    $("#serverPath").hide();
-    $("#catId").hide();
-    getProduct();
 });
         </script>
         <!-- start-smoth-scrolling -->
@@ -79,31 +41,26 @@ jQuery(document).ready(function ($) {
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function () {
     $(".megamenu").megamenu();
-
 });</script>
-        
+        <script src="js/menu_jquery.js"></script>
         <script src="js/simpleCart.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-        <!-- the jScrollPane script -->
-        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
-        <script type="text/javascript" id="sourcecode">
-$(function () {
-    $('.scroll-pane').jScrollPane();
-});
-        </script>
-        <!-- //the jScrollPane script -->
 
     </head>
     <body>
-        <%@ include file="header.jsp" %>
-        <p id="serverPath"><%=getServletContext().getRealPath("")%></p>
-        <p id="catId">${param.categoryID}</p>
+        <!-- header -->
+        <%@ include file="header.html" %>
+        <!------>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
                     <!-- start header menu -->
                     <ul class="megamenu skyblue">
-                        <li class="grid"><a class="color1" href="index.jsp">Home</a></li>
+                        <li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
                         <li class="grid"><a class="color1" href="#">Category</a>
                             <div class="megapanel">
                                 <div class="row">
@@ -187,8 +144,8 @@ $(function () {
                                 </div>
                             </div>
                         </li>
-                                            						
-                    </ul> 
+                    </ul>
+
                     <div class="search">
                         <form>
                             <input type="text" value="" placeholder="Search...">
@@ -200,20 +157,57 @@ $(function () {
             </div>
         </div>
         <!---->
-        <!-- products -->
-        <div class="products">
-            <div class="container">
-                <div class="products-grids">
-                    <div class="col-md-12 products-grid-left">
-                        <div id="result" class="products-grid-lft">
-                           
-                           
-                        </div>
-                    </div>
+        <!-- profie-form -->
+    <c:import url="/ViewProfile" />
+    <div class="reg-form">
+        <div class="container">
+                <div class="reg">
+
+                    <h3>${requestScope.userData.getUserName()}</h3>
+
+                     <form>
+                        <ul>
+                            <li class="text-info">First Name: </li>
+                            <li><p>${requestScope.userData.getFirstName()}</p></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li class="text-info">Last Name: </li>
+                            <li><p>${requestScope.userData.getLastName()}</p></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li class="text-info">Email: </li>
+                            <li><p>${requestScope.userData.getEmail()}</p></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li class="text-info">Password: </li>
+                            <li><p>${requestScope.userData.getPassword()}</p></li>
+                        </ul>
+                         <hr>
+                        <ul>
+                            <li class="text-info">Address:</li>
+                            <li><p>${requestScope.userData.getAddresse()}</p></li>
+
+                        </ul>
+                         <hr>
+                        <ul>
+                            <li class="text-info">BirthDay Date:</li>
+                            <li><p>${requestScope.userData.getBOD()}</p></li>
+                        </ul>
+
+
+
+                        <input type="submit" value="Edit Profile">
+                        </form>
+                       
                 </div>
             </div>
-        </div>
-        <!-- //products -->
-            <%@ include file="footer.html" %>
-    </body>
+    </div>
+
+<!-- footer -->
+<%@ include file="footer.html" %>
+
+</body>
 </html>

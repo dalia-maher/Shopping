@@ -8,6 +8,10 @@
         <servlet-name>showCategory</servlet-name>
         <servlet-class>servlets.ShowCategories</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewProfile</servlet-name>
+        <servlet-class>servlets.ViewProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>displayProduct</servlet-name>
         <url-pattern>/displayProduct</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>showCategory</servlet-name>
         <url-pattern>/showCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewProfile</servlet-name>
+        <url-pattern>/ViewProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
