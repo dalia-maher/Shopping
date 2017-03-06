@@ -13,21 +13,29 @@ public interface DBHandler {
     
     public boolean insertCategorey(String name);
 
+    public Category getCategory(int ID);
+    
     public boolean deleteCategorey(String name);
 
     public ArrayList<Category> getAllCategories();//for the homepage
 
     //Customer 
     
-    public Customer signUp(Customer customer);
+    public boolean signUp(User customer);
 
-    public boolean updateCustomer(Customer old, Customer neww);
+    public boolean updateCustomer(User old, User neww);
 
-    public ArrayList<Customer> getAllUsers();
+    public ArrayList<User> getAllUsers();
 
-    public Customer getUser(int id);
+    public User getUser(int id);
 
-    public Customer signIn(String email, String password);
+    public boolean validateEmail(String email);
+
+    public boolean validateUName(String username);
+
+    public int getUserID(String email);
+
+    public User signIn(String email, String password);
 
     //product
     
@@ -47,13 +55,13 @@ public interface DBHandler {
     
     //shopping cart
     
-    public boolean addToShoppingCart(Product product, Customer customer, int quantity);
+    public boolean addToShoppingCart(Product product, User customer, int quantity);
 
-    public boolean removeFromShoppingCart(Product product, Customer customer);
+    public boolean removeFromShoppingCart(Product product, User customer);
 
-    public boolean resetShoppingCart(Customer customer);
+    public boolean resetShoppingCart(User customer);
 
-    public boolean updateCartQuantity(Product product, Customer customer, int newQuantity);
+    public boolean updateCartQuantity(Product product, User customer, int newQuantity);
     
     //orders
 
@@ -63,22 +71,24 @@ public interface DBHandler {
 
     public ArrayList<Order> selectAllOrders(Product p);
 
-    public ArrayList<Order> selectAllOrders(Customer m);
+    public ArrayList<Order> selectAllOrders(User m);
 
     //Credits
     
     public boolean insertNewCards(ArrayList<CreditCard> cards);
 
     public ArrayList<CreditCard> getAllCredits();
+    
+    public int getCreditValue(int cardID);
 
     public boolean updateCreditCard(int cardID, int customerID);
     
     // /Interests
 
-    public ArrayList<Category> getInterests(Customer cusomer);
+    public ArrayList<Category> getInterests(User user);
 
-    public boolean insertInterests(Customer customer, ArrayList<Category> interest);
+    public boolean insertInterests(User user, ArrayList<Integer> interests);
 
-    public boolean deleteIntersts(Customer customer);
+    public boolean deleteIntersts(User user);
 
 }

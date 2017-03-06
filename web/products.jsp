@@ -94,7 +94,7 @@ $(function () {
 
     </head>
     <body>
-        <%@ include file="header.html" %>
+        <%@ include file="header.jsp" %>
         <p id="serverPath"><%=getServletContext().getRealPath("")%></p>
         <p id="catId">${param.categoryID}</p>
         <div class="mega_nav">

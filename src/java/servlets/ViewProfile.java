@@ -5,8 +5,12 @@
  */
 package servlets;
 
+
 import beans.Category;
-import beans.Customer;
+
+
+import beans.User;
+
 import connections.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,8 +68,8 @@ public class ViewProfile extends HttpServlet {
             throws ServletException, IOException {
         //until we finished the login
         //HttpSession userSession = request.getSession(false);
-        //Customer currentUser  = (Customer)userSession.getAttribute("User");
-        Customer currentUser = DBController.getInstance().getUser(1);
+        //User currentUser  = (User)userSession.getAttribute("User");
+        User currentUser = DBController.getInstance().getUser(1);
         request.setAttribute("userData", currentUser);
         ArrayList<Category> interest = DBController.getInstance().getInterests(currentUser);
        

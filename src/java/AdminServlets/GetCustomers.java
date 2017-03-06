@@ -5,7 +5,7 @@
  */
 package AdminServlets;
 
-import beans.Customer;
+import beans.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import connections.DBController;
@@ -31,7 +31,7 @@ public class GetCustomers extends HttpServlet
     {
         System.out.println("get in getCustomers");
 //        DBHandler db = new DBController();
-        ArrayList<Customer>allCustomers = new ArrayList<>();
+        ArrayList<User>allCustomers = new ArrayList<>();
         allCustomers = DBController.getInstance().getAllUsers();
         response.setContentType("applecation/json");
         PrintWriter out = response.getWriter();

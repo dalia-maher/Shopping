@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <c:import url="/ShowCategories" />
-    <c:set var="myCategories" value="${requestScope.categoriesList}" />
+    <c:set var="myCategories" value="${applicationScope.categoriesList}" />
     <ul>
         <c:forEach var="category" items= "${myCategories}">
             <li><a href="products.jsp?categoryID=<c:out value="${category.getCategoryID()}"/>">${category.getName()}</a></li>

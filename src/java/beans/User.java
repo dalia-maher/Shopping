@@ -6,7 +6,7 @@ import java.sql.Date;
  *
  * @author TahanyFawzy
  */
-public class Customer 
+public class User 
 {
     private int customerID;
     private String email;
@@ -20,10 +20,23 @@ public class Customer
     private Date BOD;
     private String job;
 
-    public Customer() {
+    public User() {
     }
     
-    public Customer(int customerID, String email, String userName, String password, String firstName, String lastName, String addresse, double credit, boolean type, Date BOD, String job) {
+    public User(String email, String userName, String password, String firstName, String lastName, String addresse, double credit, boolean type, Date BOD, String job) {
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.addresse = addresse;
+        this.credit = credit;
+        this.type = type;
+        this.BOD = BOD;
+        this.job = job;
+    }
+
+    public User(int customerID, String email, String userName, String password, String firstName, String lastName, String addresse, double credit, boolean type, Date BOD, String job) {
         this.customerID = customerID;
         this.email = email;
         this.userName = userName;
