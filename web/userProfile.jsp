@@ -28,20 +28,20 @@
         <script type="text/javascript" src="js/move-top.js"></script>
         <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
-jQuery(document).ready(function ($) {
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-    });
-});
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                });
+            });
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function () {
-    $(".megamenu").megamenu();
-});</script>
+                $(".megamenu").megamenu();
+            });</script>
         <script src="js/menu_jquery.js"></script>
         <script src="js/simpleCart.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -158,14 +158,14 @@ jQuery(document).ready(function ($) {
         </div>
         <!---->
         <!-- profie-form -->
-    <c:import url="/ViewProfile" />
-    <div class="reg-form">
-        <div class="container">
+        <c:import url="/ViewProfile" />
+        <div class="reg-form">
+            <div class="container">
                 <div class="reg">
 
                     <h3>${requestScope.userData.getUserName()}</h3>
 
-                     <form>
+                    <form action="editProfile.jsp">
                         <ul>
                             <li class="text-info">First Name: </li>
                             <li><p>${requestScope.userData.getFirstName()}</p></li>
@@ -185,29 +185,51 @@ jQuery(document).ready(function ($) {
                             <li class="text-info">Password: </li>
                             <li><p>${requestScope.userData.getPassword()}</p></li>
                         </ul>
-                         <hr>
+                        <hr>
+                        <ul>
+                            <li class="text-info">Job:</li>
+                            <li><p>${requestScope.userData.getJob()}</p></li>
+                        </ul>
+                        <hr>
                         <ul>
                             <li class="text-info">Address:</li>
                             <li><p>${requestScope.userData.getAddresse()}</p></li>
 
                         </ul>
-                         <hr>
+                        <hr>
                         <ul>
                             <li class="text-info">BirthDay Date:</li>
                             <li><p>${requestScope.userData.getBOD()}</p></li>
                         </ul>
+                        <hr>
+                        <ul>
+                            <li class="text-info">Credit:</li>
+                            <li><p>EGP  ${requestScope.userData.getCredit()}</p></li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li class="text-info">Interests:</li>
+                            <li>
+                                <br/>
+                                <ul>
+                                    <c:forEach  items= "${requestScope.userInterest}" var="interest">
 
+                                       <li><c:out value="${interest.getName()}"/></li>
+                                        <br>
 
-
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                        </ul>
                         <input type="submit" value="Edit Profile">
-                        </form>
-                       
+                    </form>
+
                 </div>
             </div>
-    </div>
+        </div>
 
-<!-- footer -->
-<%@ include file="footer.html" %>
+        <!-- footer -->
+        <%@ include file="footer.html" %>
 
-</body>
+    </body>
 </html>

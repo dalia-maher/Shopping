@@ -39,10 +39,9 @@
                                         ProName=ProName.replace(/\s/g, "");
                                         var catName = responseTxt[i].category.name;
                                         catName = catName.replace(/\s/g, "");
-                                        // var img = serverPath+"\\\images\\" + ProName + i +".jpg";
-                //console.log(responseTxt[i].category.name);  
-                //console.log(ProName);
-                //console.log(img);
+//                                        var data = responseTxt[i].category.images;
+//                                        var arr = data.split("&&");
+//                                        alert(arr[0]);
                                         $("#result").append("<div class='products-grd'>" +
                                             "<div class='p-one simpleCart_shelfItem prd' > "+
                                             "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
