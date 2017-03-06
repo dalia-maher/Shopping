@@ -207,7 +207,7 @@ public class DBController implements DBHandler {
             preparedStatement.setString(3, product.getDescription());
             preparedStatement.setInt(4, product.getQuantity());
             preparedStatement.setDouble(5, product.getPrice());
-            preparedStatement.setInt(6, product.getImages());
+            preparedStatement.setString(6, product.getImages());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in add product");
@@ -249,7 +249,7 @@ public class DBController implements DBHandler {
             while (resultSet.next()) {
                 allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getInt("quantity"),
-                        resultSet.getInt("images")));
+                        resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -267,7 +267,7 @@ public class DBController implements DBHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")),resultSet.getString("name"), resultSet.getString("description"),
-                        resultSet.getInt("quantity") ,resultSet.getDouble("price")));
+                        resultSet.getDouble("price"),resultSet.getInt("quantity"),resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -288,7 +288,7 @@ public class DBController implements DBHandler {
             preparedStatement.setString(3, neww.getDescription());
             preparedStatement.setInt(4, neww.getQuantity());
             preparedStatement.setDouble(5, neww.getPrice());
-            preparedStatement.setInt(6, neww.getImages());
+            preparedStatement.setString(6, neww.getImages());
             preparedStatement.setInt(7, old.getProductID());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -316,7 +316,7 @@ public class DBController implements DBHandler {
             {
                 allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")), 
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getInt("quantity")
-                        , resultSet.getInt("images")));
+                        , resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -338,7 +338,7 @@ public class DBController implements DBHandler {
             {
                 allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")), 
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getInt("quantity")
-                        , resultSet.getInt("images")));
+                        , resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {

@@ -5,10 +5,12 @@
  */
 package servlets;
 
+import beans.Category;
 import beans.Customer;
 import connections.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +58,7 @@ public class ViewProfile extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,6 +67,12 @@ public class ViewProfile extends HttpServlet {
         //Customer currentUser  = (Customer)userSession.getAttribute("User");
         Customer currentUser = DBController.getInstance().getUser(1);
         request.setAttribute("userData", currentUser);
+        ArrayList<Category> interest = DBController.getInstance().getInterests(currentUser);
+       
+        request.setAttribute("userInterest", interest);
+        for(int i=0 ; i<interest.size();i++){
+            System.out.println(interest.get(i).getName());
+        }
         
        // processRequest(request, response);
     }

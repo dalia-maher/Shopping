@@ -9,6 +9,7 @@ import beans.Category;
 import connections.DBController;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ShowCategories", urlPatterns = {"/ShowCategories"})
 public class ShowCategories extends HttpServlet {
+    ServletConfig config ;
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config); //To change body of generated methods, choose Tools | Templates.
+        this.config=config;
+    }
+    
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -28,6 +36,8 @@ public class ShowCategories extends HttpServlet {
         
         ArrayList<Category> categories = DBController.getInstance().getAllCategories();
         request.setAttribute("categoriesList", categories);
+        config.getServletContext().setAttribute("categoriesList", categories);
+        
     }
 
 }
