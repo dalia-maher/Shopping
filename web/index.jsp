@@ -127,11 +127,16 @@
 											
                     </ul> 
                     <div class="search">
-                        <form>
-                            <input type="text" value="" placeholder="Search...">
+                        <form action ="SearchProducts" method ="get">
+                            <input type="text" value="" placeholder="Search..." name = "keyword">
                             <input type="submit" value="">
+                            <select name = searchon>
+                                
+                                <option value="name">Name</option>
+                                <option value="price">Price</option>
+                            </select>
                         </form>
-			</div>
+                    </div>
 			<div class="clearfix"></div>
                     </div>
             </div>
@@ -196,7 +201,7 @@
                         </li>
                         <li>
                             <div class="banner-info">
-                                <div class="banner-info1">
+                                 <div class="banner-info1">
                                     <div class="banner-inf">
                                         <h1>doloribus alias consequatur aut perferendis</h1>
                                         <p>Repellat earum rerum hic tenetur a sapiente delectus, 

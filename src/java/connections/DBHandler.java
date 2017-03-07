@@ -53,7 +53,7 @@ public interface DBHandler {
 
     public ArrayList<Product> searchProduct(String query);
 
-    public ArrayList<Product>searchProductByPrice(int price);
+    public ArrayList<Product>searchProductByPrice(double price);
     
     //shopping cart
     

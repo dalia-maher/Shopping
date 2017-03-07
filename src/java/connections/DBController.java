@@ -416,12 +416,12 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public ArrayList<Product> searchProductByPrice(int price) {
+    public ArrayList<Product>searchProductByPrice(double price) {
         ArrayList<Product>allProducts = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`,"
                     + " `description`, `quantity`, `price`, `images` FROM `product` WHERE `price` <=?");
-            preparedStatement.setInt(1, price);
+            preparedStatement.setDouble(1, price);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) 
             {
@@ -513,7 +513,7 @@ public class DBController implements DBHandler {
             return false;
         }
     }
-    
+
     public Product getProduct(int ID) {
         ArrayList<Product> allProducts = getAllProducts();
         for (int i = 0; i < allProducts.size(); i++) {

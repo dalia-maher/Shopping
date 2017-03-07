@@ -126,7 +126,7 @@
             }
         
              function delProduct(id){
-                  $.ajax({url: '../deleteProduct', //servlet url
+                  $.ajax({url: '../DeleteProduct', //servlet url
                     type: 'POST', //servlet request type
                     dataType: 'json', //For output type
                     data: {'id':id},
