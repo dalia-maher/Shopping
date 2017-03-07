@@ -122,7 +122,8 @@
         <div class="single">
             <div class="container">
                 <div class="single-page" >
-                    <p id="productID" hidden>${param.productID}</p>
+                    <!--<p id="productID" hidden>${param.productID}</p>-->
+                    <input type="text" id="productID" hidden value = "${param.productID}" />
                     <div id="div2" class="col-md-5 zoom-grid flexslider details-lft-inf">
 <!--                        <div class="flexslider" id = "imgs">
                             <ul class="slides">

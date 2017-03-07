@@ -1,6 +1,6 @@
 <%-- 
-    Document   : searchResults
-    Created on : Mar 6, 2017, 2:36:11 AM
+    Document   : userOrders
+    Created on : Mar 7, 2017, 8:00:44 AM
     Author     : TahanyFawzy
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pendent Store a E-Commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Products :: w3layouts</title>
+        <title>My Orders</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,49 +23,6 @@
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-
-        <script>
-            function getProduct() {
-                var catId = $("#catId").text();
-                var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                        + "&categoryID=" + catId;
-                $.get(url, displayProduct, 'json');
-
-            }
-            function displayProduct(responseTxt, statusTxt, xhr) {
-                // var messages = responseTxt.
-                serverPath = $("#serverPath").text();
-                //serverPath = serverPath.replace(/\\/g, "\\\\");
-                if (statusTxt == "success") {
-                    console.log(responseTxt.length + "size");
-                    for (i = 0; i < responseTxt.length; i++)
-                    {
-                        var ProName = responseTxt[i].name;
-                        ProName = ProName.replace(/\s/g, "");
-                        var catName = responseTxt[i].category.name;
-                        catName = catName.replace(/\s/g, "");
-                        // var img = serverPath+"\\\images\\" + ProName + i +".jpg";
-                        //console.log(responseTxt[i].category.name);  
-                        //console.log(ProName);
-                        //console.log(img);
-                        $("#result").append("<div class='products-grd'>" +
-                                "<div class='p-one simpleCart_shelfItem prd' > " +
-                                "<a href='productDescription.jsp?productID=" + responseTxt[i].productID + "'>" +
-                                "<img src=\"" + "images/" + catName + "/" + ProName + "0.jpg" + "\"alt='Error' class='img-responsive' />" +
-                                "<div class='mask'>" +
-                                "<span>Quick View</span>" +
-                                "</div>" +
-                                "</a>" +
-                                "<h4>" + responseTxt[i].name + "</h4>" +
-                                "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
-                                "</div>" +
-                                "</div>");
-                    }
-                }
-            }
-
-        </script>
-
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
                 $(".scroll").click(function (event) {
@@ -209,27 +166,7 @@
                 <div class="products-grids">
                     <div class="col-md-12 products-grid-left">
                         <div id="result" class="products-grid-lft">
-                            <c:if test="${!empty searchResults}">
-                                <c:forEach items="${searchResults}" var="product">
-                                    <div class='products-grd'>
-                                        <div class='p-one simpleCart_shelfItem prd' >
-                                            <a href='productDescription.jsp?productID="${product.productID}"'>
-                                                <img src="images/${product.category.name}/${product.name}0.jpg" alt='Error' class='img-responsive'/>
-                                                <div class='mask'>
-                                                    <span>Quick View</span>
-                                                </div>
-                                            </a>
-                                            <h4>${product.name}</h4>
-                                            <p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> ${product.price}</span></a></p>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </c:if>
-                            <c:if test="${empty searchResults}">
-                                <center>
-                                    <h3><c:out value="no search data."/></h3>
-                                </center>
-                            </c:if>
+                            
                         </div>
                     </div>
                 </div>
@@ -239,4 +176,3 @@
         <%@ include file="footer.html" %>
     </body>
 </html>
-

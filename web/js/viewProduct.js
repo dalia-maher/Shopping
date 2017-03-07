@@ -5,7 +5,9 @@ function beginRetrieving()
 
 function getProductDetails() {
     console.log("get Product");
-    var id = $("#productID").text();
+   var id = $("#productID").val();
+   console.log("id = "+id);
+    //var id = document.getElementById("productID").
     var data = {"productID": id};
     $.ajax({url: '/Shopping/DisplayProductDetails',
         type: 'GET',
