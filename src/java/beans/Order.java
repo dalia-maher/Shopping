@@ -8,7 +8,7 @@ public class Order
 {
     private int orderID;
     private Product product;
-    private Customer customer;
+    private User customer;
     private int quantity;
     private String date;
     private double price;
@@ -32,11 +32,11 @@ public class Order
         this.product = product;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 
@@ -64,7 +64,7 @@ public class Order
         this.price = price;
     }
 
-    public Order(int orderID, Product product, Customer customer, int quantity, String date, double price) {
+    public Order(int orderID, Product product, User customer, int quantity, String date, double price) {
         this.orderID = orderID;
         this.product = product;
         this.customer = customer;

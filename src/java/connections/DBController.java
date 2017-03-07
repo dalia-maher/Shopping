@@ -74,13 +74,13 @@ public class DBController implements DBHandler {
             return allCategories;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all categories");
+            System.err.println("error in selecting all categories");
             return null;
         }
     }
 
     @Override
-    public Customer signUp(Customer customer) {
+    public boolean signUp(User customer) {
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO `customer`( `email`, `username`, "
                     + "`password`, `firstname`, `lastname`, `credit`, `addresse`, `type`, `BDate`, `job`) "
@@ -93,19 +93,19 @@ public class DBController implements DBHandler {
             preparedStatement.setDouble(6, customer.getCredit());
             preparedStatement.setString(7, customer.getAddresse());
             preparedStatement.setBoolean(8, customer.isType());
-            preparedStatement.setDate(9, customer.getBOD());
+            preparedStatement.setString(9, customer.getBOD().toString());
             preparedStatement.setString(10, customer.getJob());
             preparedStatement.executeUpdate();
-            return customer;
+            return true;
         } catch (SQLException ex) {
             System.err.println("error in signup");
             ex.printStackTrace();
-            return null;
+            return false;
         }
     }
 
     @Override
-    public boolean updateCustomer(Customer old, Customer neww) {
+    public boolean updateCustomer(User old, User neww) {
         try {
             preparedStatement = connection.prepareStatement("UPDATE `customer` SET `email`=?,"
                     + "`username`=?,`password`=?,`firstname`=?"
@@ -129,15 +129,15 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public ArrayList<Customer> getAllUsers() {
-        ArrayList<Customer> allCustomers = new ArrayList<>();
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> allCustomers = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `customerID`, `email`, `username`,"
                     + " `password`, `firstname`, `lastname`, `credit`, `addresse`, `type`, `BDate`, "
                     + "`job` FROM `customer`");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                allCustomers.add(new Customer(resultSet.getInt("customerID"), resultSet.getString("email"),
+                allCustomers.add(new User(resultSet.getInt("customerID"), resultSet.getString("email"),
                         resultSet.getString("username"), resultSet.getString("password"),
                         resultSet.getString("firstname"), resultSet.getString("lastname"),
                         resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"),
@@ -146,13 +146,13 @@ public class DBController implements DBHandler {
             return allCustomers;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all customers");
+            System.err.println("error in selecting all customers");
             return null;
         }
     }
 
     @Override
-    public Customer getUser(int id) {
+    public User getUser(int id) {
         try {
             preparedStatement = connection.prepareStatement("SELECT `customerID`, `email`, `username`,"
                     + " `password`, `firstname`, `lastname`, `credit`, `addresse`, `type`, `BDate`, "
@@ -160,7 +160,7 @@ public class DBController implements DBHandler {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Customer(resultSet.getInt("customerID"), resultSet.getString("email"),
+                return new User(resultSet.getInt("customerID"), resultSet.getString("email"),
                         resultSet.getString("username"), resultSet.getString("password"),
                         resultSet.getString("firstname"), resultSet.getString("lastname"),
                         resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"),
@@ -175,25 +175,72 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public Customer signIn(String email, String password) {
+    public User signIn(String email, String password) {
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM `customer` WHERE `email`=? and `password`=?");
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return new Customer(resultSet.getInt("customerID"), resultSet.getString("email"),
+                return new User(resultSet.getInt("customerID"), resultSet.getString("email"),
                         resultSet.getString("username"), resultSet.getString("password"),
                         resultSet.getString("firstname"), resultSet.getString("lastname"),
                         resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"),
                         resultSet.getDate("BDate"), resultSet.getString("job"));
             }
-            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("error in signin");
-            return null;
         }
+        return null;
+    }
+
+    @Override
+    public boolean validateEmail(String email) {
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM `customer` WHERE `email`=?");
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in validating");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean validateUName(String username) {
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM `customer` WHERE `username`=?");
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in validating");
+        }
+        return false;
+    }
+    
+    @Override
+    public int getUserID(String email) {
+        try {
+            preparedStatement = connection.prepareStatement("SELECT `customerID` FROM `customer` WHERE `email`=?");
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("customerID");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in getting user email");
+        }
+        return -1;
     }
 
     @Override
@@ -229,6 +276,7 @@ public class DBController implements DBHandler {
         }
     }
 
+    @Override
     public Category getCategory(int ID) {
         ArrayList<Category> allCategories = getAllCategories();
         for (int i = 0; i < allCategories.size(); i++) {
@@ -254,12 +302,13 @@ public class DBController implements DBHandler {
             return allProducts;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all products");
+            System.err.println("error in selecting all products");
             return null;
         }
     }
     
-    public ArrayList<Product>getProductsCategory(int categoryID){
+    @Override
+    public ArrayList<Product> getProductsCategory(int categoryID){
         ArrayList<Product> allProducts = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM `product` WHERE categoryID = ?");
@@ -272,7 +321,7 @@ public class DBController implements DBHandler {
             return allProducts;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all products");
+            System.err.println("error in selecting all products");
             return null;
         }
      
@@ -348,7 +397,7 @@ public class DBController implements DBHandler {
         }
     }
     @Override
-    public boolean addToShoppingCart(Product product, Customer customer, int quantity) {
+    public boolean addToShoppingCart(Product product, User customer, int quantity) {
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO `shoppingcart`(`productID`, `CustomerID`,"
                     + " `quantity`) VALUES (?,?,?)");
@@ -364,7 +413,7 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean removeFromShoppingCart(Product product, Customer customer) {
+    public boolean removeFromShoppingCart(Product product, User customer) {
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM `shoppingcart` WHERE `productID`=? "
                     + "and `CustomerID`=?");
@@ -379,7 +428,7 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean resetShoppingCart(Customer customer) {
+    public boolean resetShoppingCart(User customer) {
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM `shoppingcart` WHERE `CustomerID`=?");
             preparedStatement.setInt(1, customer.getCustomerID());
@@ -392,7 +441,7 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean updateCartQuantity(Product product, Customer customer, int newQuantity) {
+    public boolean updateCartQuantity(Product product, User customer, int newQuantity) {
         try {
             preparedStatement = connection.prepareStatement("UPDATE `shoppingcart` SET `quantity`=? "
                     + "WHERE `productID`=? and `CustomerID`=?");
@@ -450,7 +499,7 @@ public class DBController implements DBHandler {
             return allOrders;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all orders");
+            System.err.println("error in selecting all orders");
             return null;
         }
     }
@@ -471,13 +520,13 @@ public class DBController implements DBHandler {
             return allOrders;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all orders by product");
+            System.err.println("error in selecting all orders by product");
             return null;
         }
     }
 
     @Override
-    public ArrayList<Order> selectAllOrders(Customer m) {
+    public ArrayList<Order> selectAllOrders(User m) {
         ArrayList<Order> allOrders = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, "
@@ -492,7 +541,7 @@ public class DBController implements DBHandler {
             return allOrders;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all orders by customer");
+            System.err.println("error in selecting all orders by customer");
             return null;
         }
     }
@@ -546,13 +595,13 @@ public class DBController implements DBHandler {
             return allCredits;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all credits");
+            System.err.println("error in selecting all credits");
             return null;
         }
     }
 
     @Override
-    public ArrayList<Category> getInterests(Customer cusomer) {
+    public ArrayList<Category> getInterests(User cusomer) {
         ArrayList<Category> allCategories = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `customerID`, `categoryID` FROM `interests` WHERE `customerID` =?");
@@ -564,22 +613,22 @@ public class DBController implements DBHandler {
             return allCategories;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in selectiong all inerests");
+            System.err.println("error in selecting all inerests");
             return null;
         }
     }
 
     @Override
-    public boolean insertInterests(Customer customer, ArrayList<Category> interest) {
-
-        int id = customer.getCustomerID();
+    public boolean insertInterests(User user, ArrayList<Integer> interests) {
+        
+        int id = getUserID(user.getEmail());
         boolean flag = false;
-        for (int i = 0; i < interest.size(); i++) {
+        for (int i = 0; i < interests.size(); i++) {
             try {
                 preparedStatement = connection.prepareStatement("INSERT INTO `interests`(`customerID`, `categoryID`) "
                         + "VALUES(?,?)");
                 preparedStatement.setInt(1, id);
-                preparedStatement.setInt(2, interest.get(i).getCategoryID());
+                preparedStatement.setInt(2, interests.get(i));
                 flag = preparedStatement.executeUpdate() > 0;
             } catch (SQLException ex) {
                 System.err.println("error in insert interests");
@@ -591,8 +640,7 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean deleteIntersts(Customer customer) 
-    {
+    public boolean deleteIntersts(User customer) {
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM `interests` WHERE `customerID`=?");
             preparedStatement.setInt(1, customer.getCustomerID());
@@ -603,4 +651,21 @@ public class DBController implements DBHandler {
             return false;
         }
     }
+
+    @Override
+    public int getCreditValue(int cardID) {
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM `credit` WHERE `cardID` =? AND `customerID` IS NULL");
+            preparedStatement.setInt(1, cardID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("cardValue");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selecting credits");
+        }
+        return -1;
+    }
+
 }

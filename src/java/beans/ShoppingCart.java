@@ -7,7 +7,7 @@ package beans;
 public class ShoppingCart 
 {
     private Product product;
-    private Customer customer;
+    private User customer;
     private int quantity;
 
     public ShoppingCart() {
@@ -21,11 +21,11 @@ public class ShoppingCart
         this.product = product;
     }
 
-    public Customer getCustomer() {
+    public User getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(User customer) {
         this.customer = customer;
     }
 
@@ -37,7 +37,7 @@ public class ShoppingCart
         this.quantity = quantity;
     }
 
-    public ShoppingCart(Product product, Customer customer, int quantity) {
+    public ShoppingCart(Product product, User customer, int quantity) {
         this.product = product;
         this.customer = customer;
         this.quantity = quantity;

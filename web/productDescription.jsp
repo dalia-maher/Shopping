@@ -25,14 +25,6 @@
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/jquery-1.11.1.min.js"></script>
         <script src="js/bootstrap.js"></script>
-
-
-        <!-- //js -->
-        <!-- start-smoth-scrolling -->
-
-
-        <!--        <script type="text/javascript" src="js/move-top.js"></script>
-                <script type="text/javascript" src="js/easing.js"></script>-->
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
                 $(".scroll").click(function (event) {
@@ -53,13 +45,14 @@
             });</script>
         <!--<script src="js/menu_jquery.js"></script>-->
         <script src="js/simpleCart.min.js"></script>
+        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <script src="js/viewProduct.js"></script>
     </head>
 
-    <body onload="beginRetrieving()">
-        <!-- header -->
-        <%@ include file="header.html" %>
+    <body>
+    <!-- header -->
+        <%@ include file="header.jsp" %>
         <!------>
         <div class="mega_nav">
             <div class="container">
@@ -75,20 +68,6 @@
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-
-                                            <ul>
-                                                <li><a href="products.jsp">Glasses</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-
                                     <div class="row">
                                         <div class="col2"></div>
                                         <div class="col1"></div>
@@ -114,45 +93,8 @@
                                             </ul>	
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Style Zone</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Men</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>All Jewellery</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>												
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Seating</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>						
-                                    </div>
+                                                                      
+                                    
                                 </div>
                                 <div class="row">
                                     <div class="col2"></div>

@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | About :: w3layouts</title>
+        <title>Pendent Store an E-commerce Online Shopping Website </title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,8 +24,6 @@
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
         <!-- start-smoth-scrolling -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $(".scroll").click(function(event){		
@@ -39,13 +37,12 @@
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-        <script src="js/menu_jquery.js"></script>
         <script src="js/simpleCart.min.js"> </script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         
     </head>
     <body>
-        <%@ include file="header.html" %>
+        <%@ include file="header.jsp" %>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
@@ -60,13 +57,6 @@
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
                                 </div>
                             </div>
 			</li>
