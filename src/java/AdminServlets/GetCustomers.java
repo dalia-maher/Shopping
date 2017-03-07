@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author TahanyFawzy
  */
+@WebServlet(name = "GetCustomers", urlPatterns = {"/GetCustomers"})
 public class GetCustomers extends HttpServlet 
 {
 
@@ -33,7 +35,7 @@ public class GetCustomers extends HttpServlet
 //        DBHandler db = new DBController();
         ArrayList<User>allCustomers = new ArrayList<>();
         allCustomers = DBController.getInstance().getAllUsers();
-        response.setContentType("applecation/json");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         GsonBuilder gsonB = new GsonBuilder();
         Gson gson = gsonB.create();

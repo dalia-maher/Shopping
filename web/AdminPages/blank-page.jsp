@@ -1,144 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+        <title>SB Admin - Bootstrap Admin Template</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="css/sb-admin.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            var currentpage = 0;
+            var deletedindexes = "";
+            var curid = null;
+            var originalImages = "";
+            var maxbound = 0;
 
-</head>
+            var curimgsize = null;
+            function getCatgories(l) {
+                $.ajax({url: '../AddCatgorey', //servlet url
+                    type: 'GET', //servlet request type
+                    dataType: 'json', //For output type
+                    success: function (data, textStatus, jqXHR) {
+                        $("#selectCatgories").empty();
+                        for (var i = 0; i < data.length; i++) {
+                            $("#selectCatgories").append($("<option></option>").attr("id", data[i].categoryID).val(data[i].categoryID).text(data[i].name));
+                        }
+                        document.getElementById("selectCatgories").value = l;
+                    }
+                });
+            }
+            function test(id) {
+                $.ajax({url: '../deleteProduct', //servlet url
+                    type: 'GET', //servlet request type
+                    dataType: 'json', //For output type
+                    data: {'id': id},
+                    success: function (data, textStatus, jqXHR) {
+                        deletedindexes = "";
+                        curid = data.productID;
+                        curimgsize = data.images;
+                        originalImages = data.images;
+                        $("#modal-edit").modal("show");
+                        $("#txtProductName").val(data.name);
+                        $("#txtProductPrice").val(data.price);
+                        $("#txtProductQuantity").val(data.quantity);
+                        $("#txtProductDesc").val(data.description);
+                        getCatgories(data.category.categoryID);
+                        $("#imagesDiv").html("<h3>Images</h3>");
+                        var arr = data.images.split("&&");
+                        console.log(arr);
+                        for (var i = 0; i < arr.length; i++) {
+                            var item = "  <div id=\"imgdiv" + arr[i] + "\" class=\"modal-header\"><button onclick=\"deleteImage('" + arr[i] + "')\" type=\"button\" class=\"close\"  aria-label=\"Close\">" +
+                                    "<span  aria-hidden=\"true\">&times;</span></button>";
+                            item += "<img  class=\"img-responsive img-rounded px-2\" src=\"" + "..\\images\\" + data.category.name + "\\" + arr[i] + ".png" + "\" ></img>";
+                            item += "</div>";
+                            if (arr[i] != "")
+                            {
+                                $("#imagesDiv").append(item);
+                                maxbound = arr[i];
+                            }
+                        }
+                    }
+                });
+            }
+            function deleteImage(i) {
+                deletedindexes += i + "&&";
+                document.getElementById('imgdiv' + i).style.display = "none";
+            }
+            function fillTable() {
+                $.ajax({url: '../GetProducts', //servlet url
+                    type: 'GET', //servlet request type
+                    dataType: 'json', //For output type
+                    data: {'offset': currentpage},
+                    success: function (data, textStatus, jqXHR) {
+                        $("#DataTable").empty();
+                        var item = "<thead><tr><th>#</th><th>Product Name</th><th>Product Price</th><th>Product Quantity</th><th>Product Description</th><th>Image</th></tr></thead>";
+                        $("#DataTable").append(item);
+                        for (var i = 0; i < data.length; i++) {
+                            var img = "";
+                            var imagearr = data[i].images.split("&&");
+                            if (imagearr.length > 0)
+                            {
+                                var rel = imagearr[0];
+                                if (imagearr[0] == "") {
+                                    rel = imagearr[1];
+                                }
+                                img = "..\\images\\" + data[i].category.name + "\\" + rel + ".png";
+                            }
+                            item = "<tr onclick=\"test(" + data[i].productID + ")\">" +
+                                    "<td>" + data[i].productID + "</td>" +
+                                    "<td>" + data[i].name + "</td>" +
+                                    "<td>" + data[i].price + "</td>" +
+                                    "<td>" + data[i].quantity + "</td>" +
+                                    "<td>" + data[i].description + "</td>" +
+                                    "<td><img src=\"" + img + "\" class=\"img-responsive img-rounded px-2\" width=100 height=100></img></td>" +
+                                    "</tr>";
+                            $("#DataTable").append(item);
+                        }
 
-<body class="color">
-<style>
-  .color{
-   background-color: #f65a5b;
-  }
-  
-  .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-    color: #fff;
-    background-color: #b35656;
-}
+                        if (currentpage == 0)
+                        {
+                            document.getElementById("btnprev").disabled = true;
+                        } else
+                        {
+                            document.getElementById("btnprev").disabled = false;
+                        }
+                        if (data.length < 10)
+                        {
+                            document.getElementById("btnnext").disabled = true;
+                        } else
+                        {
+                            document.getElementById("btnnext").disabled = false;
+                        }
+                    }
+                });
+            }
+            function btnPrev() {
+                currentpage--;
+                fillTable();
+            }
+            function btnNext() {
+                currentpage++;
+                fillTable();
 
-.navbar-inverse .navbar-nav>li>a {
-    color: #f5f5f5;
-}
-.navbar-inverse .navbar-brand {
-    color: #ffffff;
-}
-.top-nav>li>a {
-    color: #fff;
-}
-</style>
-    <div id="wrapper">
+            }
+            function btnSaveEditProduct(event) {
+                event.preventDefault();
+                var productname = $("#txtProductName").val();
+                var productPrice = $("#txtProductPrice").val();
+                var productQuantity = $("#txtProductQuantity").val();
+                var productDesc = $("#txtProductDesc").val();
+                var catgorey = $("#selectCatgories option:selected").text();
+                var catgoreyID = $("#selectCatgories option:selected").attr("id");
+                var files = document.getElementById("inputImages").files;
+                if (productname != "" && parseFloat(productPrice) != "NaN" && productDesc != "" && parseInt(catgoreyID) != "NaN") {
+                    var formdata = new FormData();
+                    formdata.append("id", curid);
+                    formdata.append("name", productname);
+                    formdata.append("price", productPrice);
+                    formdata.append("quantity", productQuantity);
+                    formdata.append("desc", productDesc);
+                    formdata.append("imgLength", files.length);
+                    formdata.append("catgorey", catgorey);
+                    formdata.append("catgoreyID", catgoreyID);
+                    formdata.append("deletedImages", deletedindexes);
+                    formdata.append("originalImages", originalImages);
+                    formdata.append("maxbound", maxbound);
+                    for (var i = 0; i < files.length; i++)
+                    {
+                        formdata.append("file" + (i), files[i]);
+                    }
+                    $.ajax({
+                        url: '../ProductEditServlet',
+                        type: 'POST',
+                        data: formdata,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function () {
+                            deletedindexes = "";
+                            curid = null;
+                            curimgsize = null;
+                             $("#modal-edit").modal("hide");
+                             fillTable();
+                        },
+                        error: function () {
 
-      <nav class="navbar navbar-inverse navbar-fixed-top color" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.jsp">SB Admin</a>
-            </div>
-            <!-- Top Menu Items -->
-            
-              <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                         <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav color">
-                    <li >
-                        <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                  
-                    <li>
-                        <a href="tables.jsp"><i class="fa fa-fw fa-table"></i> Users</a>
-                    </li>
-                    <li>
-                        <a href="forms.jsp"><i class="fa fa-fw fa-edit"></i> Products</a>
-                    </li>
-                  
-                    <li class="active">
-                        <a href="blank-page.jsp"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
-                  
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-        <div id="page-wrapper">
+                        }
+                    });
+                } else {
+                    showModal("Data Validation Fails");
+                    //error handle
+                }
+                return false;
 
-            <div class="container-fluid">
+            }
+        </script>
+        <style>
+            .color{
+                background-color: #f65a5b;
+            }
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Blank Page
-                            <small>Subheading</small>
-                        </h1>
-                        <ol class="breadcrumb">
-                            <li>
-                                <i class="fa fa-dashboard"></i>  <a href="index.jsp">Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <i class="fa fa-file"></i> Blank Page
-                            </li>
-                        </ol>
+            .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+                color: #fff;
+                background-color: #b35656;
+            }
+
+            .navbar-inverse .navbar-nav>li>a {
+                color: #f5f5f5;
+            }
+            .navbar-inverse .navbar-brand {
+                color: #ffffff;
+            }
+            .top-nav>li>a {
+                color: #fff;
+            }
+        </style>
+    </head>
+
+    <body class="color" onload="fillTable();">
+        <div class="modal fade modal-ext" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" >
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="col-lg-9">
+                            <form onsubmit="return btnSaveEditProduct(event);" role="form" id="addProductForm" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input class="form-control" id="txtProductName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Product Price</label>
+                                    <input class="form-control" type="number" id="txtProductPrice" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Available Quantity</label>
+                                    <input class="form-control" type="number" id="txtProductQuantity" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" rows="3" id="txtProductDesc" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Add Images</label>
+                                    <input type="file" accept="image/*" multiple id="inputImages">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="form-control" id="selectCatgories">                                 
+                                    </select>
+                                </div>
+                                <button type="submit" id="btnSave"  class="btn btn-default">Save</button>
+                            </form>
+                        </div>
+                        <div class="col-lg-3 pre-scrollable" id="imagesDiv" style="height: 450px;overflow-y: scroll;">
+                        </div>
+
                     </div>
-                </div>
-                <!-- /.row -->
+                    <!--Body-->
 
+                </div>
+                <!--/.Content-->
             </div>
-            <!-- /.container-fluid -->
+        </div>
+
+        <div id="wrapper">
+            <%@ include file="navHeader.jsp" %>
+            <div id="page-wrapper">
+
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                All Products
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li>
+                                    <i class="fa fa-dashboard"></i>  <a href="index.jsp">Dashboard</a>
+                                </li>
+                                <li class="active">
+                                    <i class="fa fa-file"></i> Products
+                                </li>
+
+                                <li >
+                                    <button class="btn-info" id="btnprev" onclick="btnPrev()">Previous</button>
+                                </li>
+                                <li >
+                                    <button id="btnnext" onclick="btnNext()">Next</button>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!-- /.container-fluid -->
+                <table class="table" id="DataTable">
+                </table>
+            </div>
+            <!-- /#page-wrapper -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /#wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
+    </body>
 
 </html>

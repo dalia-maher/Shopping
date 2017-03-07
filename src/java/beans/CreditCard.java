@@ -6,29 +6,29 @@ package beans;
  */
 
 public class CreditCard {
-    private int cardID;
+    private String cardID;
     private int cardValue;
     private int customerID;
     
     public CreditCard() {
     }
     
-    public CreditCard(int cardID, int cardValue) {
+    public CreditCard(String cardID, int cardValue) {
         this.cardID = cardID;
         this.cardValue = cardValue;
     }
 
-    public CreditCard(int cardID, int cardValue, int customerID) {
+    public CreditCard(String cardID, int cardValue, int customerID) {
         this.cardID = cardID;
         this.cardValue = cardValue;
         this.customerID = customerID;
     }
 
-    public int getCardID() {
+    public String getCardID() {
         return cardID;
     }
 
-    public void setCardID(int cardID) {
+    public void setCardID(String cardID) {
         this.cardID = cardID;
     }
 

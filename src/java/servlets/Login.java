@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
             session.setAttribute("loggedInUser", user);
             if(user.isType()) {
                 // todo: set admin page
-                response.sendRedirect("adminPage.jsp");
+                response.sendRedirect("AdminPages/index.jsp");
             }
             else {
                 response.sendRedirect("index.jsp");

@@ -25,8 +25,6 @@
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
         <!-- start-smoth-scrolling -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
 jQuery(document).ready(function ($) {
     $(".scroll").click(function (event) {
@@ -42,18 +40,16 @@ jQuery(document).ready(function ($) {
         <script>$(document).ready(function () {
     $(".megamenu").megamenu();
 });</script>
-        <script src="js/menu_jquery.js"></script>
-        <script src="js/simpleCart.min.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="js/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="js/jquery-1.12.4.js"></script>
+        <script src="js/jquery-ui.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
 
     </head>
     <body>
         <!-- header -->
-        <%@ include file="header.html" %>
+        <%@ include file="header.jsp" %>
         <!------>
         <div class="mega_nav">
             <div class="container">

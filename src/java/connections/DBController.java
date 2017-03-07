@@ -93,7 +93,7 @@ public class DBController implements DBHandler {
             preparedStatement.setDouble(6, customer.getCredit());
             preparedStatement.setString(7, customer.getAddresse());
             preparedStatement.setBoolean(8, customer.isType());
-            preparedStatement.setString(9, customer.getBOD().toString());
+            preparedStatement.setDate(9, customer.getBOD());
             preparedStatement.setString(10, customer.getJob());
             preparedStatement.executeUpdate();
             return true;
@@ -238,7 +238,7 @@ public class DBController implements DBHandler {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.err.println("error in getting user email");
+            System.err.println("error in getting user ID");
         }
         return -1;
     }
@@ -254,7 +254,7 @@ public class DBController implements DBHandler {
             preparedStatement.setString(3, product.getDescription());
             preparedStatement.setInt(4, product.getQuantity());
             preparedStatement.setDouble(5, product.getPrice());
-            preparedStatement.setInt(6, product.getImages());
+            preparedStatement.setString(6, product.getImages());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in add product");
@@ -264,10 +264,10 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean deleteProduct(Product product) {
+    public boolean deleteProduct(int productID) {
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM `product` WHERE `ID`=?");
-            preparedStatement.setInt(1, product.getProductID());
+            preparedStatement.setInt(1, productID);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in deleting product");
@@ -288,6 +288,28 @@ public class DBController implements DBHandler {
     }
 
     @Override
+    public ArrayList<Product> getAllProducts(int offset, int limit) {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`,"
+                    + " `description`, `quantity`, `price`, `images` FROM `product` LIMIT ? OFFSET ?");
+            preparedStatement.setInt(2, offset);
+            preparedStatement.setInt(1, limit);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
+                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
+                        resultSet.getInt("quantity"), resultSet.getString("images")));
+            }
+            return allProducts;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selectiong all products");
+            return null;
+        }
+    }
+
+    @Override
     public ArrayList<Product> getAllProducts() {
         ArrayList<Product> allProducts = new ArrayList<>();
         try {
@@ -296,8 +318,8 @@ public class DBController implements DBHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
-                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getInt("quantity"),
-                        resultSet.getInt("images")));
+                        resultSet.getString("name"), resultSet.getString("description"), 
+                        resultSet.getDouble("price"), resultSet.getInt("quantity"), resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -315,8 +337,9 @@ public class DBController implements DBHandler {
             preparedStatement.setInt(1, categoryID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")),resultSet.getString("name"), resultSet.getString("description"),
-                        resultSet.getInt("quantity") ,resultSet.getDouble("price")));
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
+                        resultSet.getString("name"), resultSet.getString("description"),
+                        resultSet.getInt("quantity"), resultSet.getDouble("price")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -328,7 +351,7 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean editProduct(Product old, Product neww) {
+    public boolean editProduct(int old, Product neww) {
         try {
             preparedStatement = connection.prepareStatement("UPDATE `product` SET `categoryID`=?,"
                     + "`name`=?,`description`=?,`quantity`=?,`price`=?,`images`=? WHERE `ID`=?");
@@ -337,13 +360,30 @@ public class DBController implements DBHandler {
             preparedStatement.setString(3, neww.getDescription());
             preparedStatement.setInt(4, neww.getQuantity());
             preparedStatement.setDouble(5, neww.getPrice());
-            preparedStatement.setInt(6, neww.getImages());
-            preparedStatement.setInt(7, old.getProductID());
+            preparedStatement.setString(6, neww.getImages());
+            preparedStatement.setInt(7, old);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in editiing product");
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    public int getCurrentID(){
+     try {
+            preparedStatement = connection.prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'product'");
+            ResultSet myset=preparedStatement.executeQuery();
+            if (myset.next()) {
+             return myset.getInt("AUTO_INCREMENT");
+         }
+            else
+           return 0;
+  
+        } catch (SQLException ex) {
+            System.err.println("error in get Last ID");
+            ex.printStackTrace();
+            return 0;
         }
     }
 
@@ -363,9 +403,9 @@ public class DBController implements DBHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) 
             {
-                allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")), 
-                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getInt("quantity")
-                        , resultSet.getInt("images")));
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")), 
+                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
+                        resultSet.getInt("quantity"), resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -385,9 +425,9 @@ public class DBController implements DBHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) 
             {
-                allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")), 
-                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"), resultSet.getInt("quantity")
-                        , resultSet.getInt("images")));
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")), 
+                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
+                        resultSet.getInt("quantity"), resultSet.getString("images")));
             }
             return allProducts;
         } catch (SQLException ex) {
@@ -473,8 +513,8 @@ public class DBController implements DBHandler {
             return false;
         }
     }
-
-    private Product getProduct(int ID) {
+    
+    public Product getProduct(int ID) {
         ArrayList<Product> allProducts = getAllProducts();
         for (int i = 0; i < allProducts.size(); i++) {
             if (allProducts.get(i).getProductID() == ID) {
@@ -552,7 +592,7 @@ public class DBController implements DBHandler {
         for (int i = 0; i < cards.size(); i++) {
             try {
                 preparedStatement = connection.prepareStatement("INSERT INTO `credit`(`cardID`, `cardValue`) VALUES (?,?)");
-                preparedStatement.setInt(1, cards.get(i).getCardID());
+                preparedStatement.setString(1, cards.get(i).getCardID());
                 preparedStatement.setInt(2, cards.get(i).getCardValue());
                 flag = preparedStatement.executeUpdate() > 0;
             } catch (SQLException ex) {
@@ -565,14 +605,14 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean updateCreditCard(int cardID, int customerID) {
+    public boolean updateCreditCard(String cardID, int customerID) {
         boolean flag = false;
         ArrayList<CreditCard> cards = getAllCredits();
         for (int i = 0; i < cards.size(); i++) {
             try {
                 preparedStatement = connection.prepareStatement("UPDATE `credit` SET `customerID` = ? WHERE `cardID` = ? ");
                 preparedStatement.setInt(1, customerID);
-                preparedStatement.setInt(2, cardID);
+                preparedStatement.setString(2, cardID);
                 flag = preparedStatement.executeUpdate() > 0;
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -590,7 +630,7 @@ public class DBController implements DBHandler {
             preparedStatement = connection.prepareStatement("SELECT `cardID`, `cardValue`, `customerID` FROM `credit` WHERE customerID IS NULL ");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                allCredits.add(new CreditCard(resultSet.getInt("cardID"), resultSet.getInt("cardValue")));
+                allCredits.add(new CreditCard(resultSet.getString("cardID"), resultSet.getInt("cardValue")));
             }
             return allCredits;
         } catch (SQLException ex) {
@@ -653,10 +693,10 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public int getCreditValue(int cardID) {
+    public int getCreditValue(String cardID) {
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM `credit` WHERE `cardID` =? AND `customerID` IS NULL");
-            preparedStatement.setInt(1, cardID);
+            preparedStatement.setString(1, cardID);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt("cardValue");

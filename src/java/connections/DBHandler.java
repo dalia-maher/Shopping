@@ -41,13 +41,15 @@ public interface DBHandler {
     
     public boolean addProduct(Product product);//edit or add the same function
 
-    public boolean deleteProduct(Product product);
+    public boolean deleteProduct(int productID);
+
+    public ArrayList<Product> getAllProducts(int offset, int limit);
 
     public ArrayList<Product> getAllProducts();
     
     public ArrayList<Product>getProductsCategory(int categoryID);
 
-    public boolean editProduct(Product old, Product neww);
+    public boolean editProduct(int old, Product neww);
 
     public ArrayList<Product> searchProduct(String query);
 
@@ -79,9 +81,9 @@ public interface DBHandler {
 
     public ArrayList<CreditCard> getAllCredits();
     
-    public int getCreditValue(int cardID);
+    public int getCreditValue(String cardID);
 
-    public boolean updateCreditCard(int cardID, int customerID);
+    public boolean updateCreditCard(String cardID, int customerID);
     
     // /Interests
 
