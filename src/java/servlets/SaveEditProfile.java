@@ -6,7 +6,7 @@
 package servlets;
 
 import beans.Category;
-import beans.Customer;
+import beans.User;
 import connections.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -92,21 +93,19 @@ public class SaveEditProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //processRequest(request, response);
-        //HttpSession userSession = request.getSession(false);
-        //Customer currentUser  = (Customer)userSession.getAttribute("User");
+        HttpSession userSession = request.getSession(false);
+        User currentUser  = (User)userSession.getAttribute("loggedInUser");
         Double userCredit = 0.0;
         Date BOD = null;
-        Customer currentUser = DBController.getInstance().getUser(1);// until make seeions
+        //User currentUser = DBController.getInstance().getUser(1);// until make seeions
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
         String credit = request.getParameter("credit");
         String birthDay = request.getParameter("bdate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-             BOD = (Date)sdf.parse(birthDay);
-        } catch (ParseException ex) {
-            Logger.getLogger(SaveEditProfile.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        BOD = Date.valueOf(birthDay);
+        System.out.println(BOD);
 //        if (birthDay != null) {
 //            BOD = Date.valueOf(birthDay);
 //        }
@@ -114,7 +113,7 @@ public class SaveEditProfile extends HttpServlet {
         String pass = request.getParameter("password");
         String[] interest = request.getParameterValues("userInterest");
         ArrayList<Category> categories = (ArrayList<Category>) config.getServletContext().getAttribute("categoriesList");
-        ArrayList<Category> userInt = new ArrayList<>();
+        ArrayList<Integer> userInt = new ArrayList<>();
         System.out.println(interest.length+"size");
         if (interest.length != 0) {
             for (int i = 0; i < categories.size(); i++) {
@@ -122,27 +121,28 @@ public class SaveEditProfile extends HttpServlet {
                    int catId = Integer.parseInt(interest[k].trim());
                     if (catId == categories.get(i).getCategoryID()) {
                        // System.out.println("servlets.SaveEditProfile.doPost()"+"d5laat if "+categories.get(i).getCategoryID());
-                        userInt.add(categories.get(i));
+                        userInt.add(categories.get(i).getCategoryID());
                     }
                }
                     
                 }
             
         }
-        for(int i=0;i<userInt.size();i++){
-            System.out.println(userInt.get(i).getCategoryID());
-        }
+//        for(int i=0;i<userInt.size();i++){
+//            System.out.println(userInt.get(i));
+//        }
         DBController.getInstance().deleteIntersts(currentUser);
         DBController.getInstance().insertInterests(currentUser, userInt);
 
         if (credit != null) {
             userCredit = Double.valueOf(credit);
         }
-        DBController.getInstance().updateCustomer(currentUser, new Customer(currentUser.getCustomerID(), currentUser.getEmail(), currentUser.getUserName(),
-                pass, fname, lname, request.getParameter("address"), userCredit, false, BOD, request.getParameter("job")));
+        User newUser =  new User(currentUser.getCustomerID(), currentUser.getEmail(), currentUser.getUserName(),
+                pass, fname, lname, request.getParameter("address"), userCredit, false, BOD, request.getParameter("job"));
+        DBController.getInstance().updateCustomer(currentUser,newUser );
                 response.sendRedirect("userProfile.jsp");
                 
-    
+                 userSession.setAttribute("loggedInUser",newUser);
     }
       
     /**

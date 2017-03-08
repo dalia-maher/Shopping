@@ -192,66 +192,30 @@
                             });
                         });
                     </script>
+                    <form method="post" action="AddingToCart?prooductID=${param.productID}&categoryID=${param.categoryID}">
+                     
                     <div class="details-left-info">
-                        <h3>autem quibusdam officiis debitis aut</h3>
-                            <h4>Pellentesque pretium </h4>
+                        <h3 name="productName">autem quibusdam officiis debitis aut</h3>
+                          
                             <div class="simpleCart_shelfItem">
-                            <p><span class="item_price qwe">$ 729</span> <a href="#">Click for offer</a></p>
-                            <div class="col-rad">
-                                <div class="col-rad-left">
-                                    <select class="arrival">
-                                        <option>Color</option>
-                                        <option>Green</option>
-                                        <option>Violet</option>
-                                        <option>Pink</option>
-                                    </select>
-                                </div>
-                                <div class="col-rad-right">
-                                    <section>
-                                        <div class="row">
-                                            <div class="colr ert">
-                                                <label class="radio"><input type="radio" name="radio" checked=""><i></i>14Kt</label>
-                                            </div>
-                                            <div class="colr">
-                                                <label class="radio"><input type="radio" name="radio"><i></i>10Kt</label>
-                                            </div>
-                                        </div>						
-                                    </section>
-                                </div>
+                            <p><span  name="priceProduct" class="item_price qwe">$ 729</span></p>
+                            
+                                
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="col-rad tyy">
-                                <div class="col-rad-left">
-                                    <p>Diamond</p>
-                                </div>
-                                <div class="col-rad-right">
-                                    <section>
-                                        <div class="row">
-                                            <div class="colr ert">
-                                                <label class="radio"><input type="radio" name="radio1" checked=""><i></i>SI GH</label>
-                                            </div>
-                                            <div class="colr">
-                                                <label class="radio"><input type="radio" name="radio1"><i></i>VS GH</label>
-                                            </div>
-                                            <div class="colr">
-                                                <label class="radio"><input type="radio" name="radio1"><i></i>VVS EF</label>
-                                            </div>
-                                        </div>						
-                                    </section>
-                                </div>
+                                
                                 <div class="clearfix"> </div>
                             </div>
                             <p class="qty">Qty ::</p><input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
                             <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
+                                
+                                    <input type="submit" value="add to cart">
+                                
                             </div>
                         </div>
-                        <div class="flower-type">
-                            <p>Model  ::<a href="#">Gem Stone</a></p>
-                            <p>Carrets  ::<a href="#">22</a></p>
-                        </div>
-                        <p class="desc">Proin vestibulum scelerisque tempus. Phasellus at fermentum erat. Pellentesque mattis velit eget elit condimentum gravida. Donec vehicula mollis velit, a eleifend est hendrerit quis. Etiam pulvinar at ex eget cursus. Etiam luctus orci ut tortor rhoncus, sit amet faucibus lorem finibus. Nulla id ornare arcu. or lowest node and working upwards) are as follows:</p>
-                    </div>
+                        
+                         </div>
                     <div class="clearfix"></div>				 	
                 </div>
 
@@ -266,11 +230,12 @@
                             </h4>
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="panel-body">
+                            <div name="Description" class="panel-body">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
                     </div>
+                    </form>
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h4 class="panel-title">

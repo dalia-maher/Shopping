@@ -34,10 +34,13 @@ public class CheckCredit extends HttpServlet {
             else {
                 cardID = Integer.parseInt(credit);
                 int cardValue = DBController.getInstance().getCreditValue(cardID);
-                    if(cardValue > 0)
+                    if(cardValue > 0){
                        out.print("true");
-                    else
+                        
+                    }
+                    else{
                        out.print("false");
+                    }
             }
         }
     }

@@ -16,6 +16,11 @@ ul,label{
 	margin:0;
 	padding:0;
 }
+#nonEdit{
+    border-width:0px;
+border:none;
+
+}
 body a:hover{
 	text-decoration:none;
 }

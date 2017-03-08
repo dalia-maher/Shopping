@@ -7,6 +7,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="beans.User"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,39 +36,14 @@
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
 
-                document.getElementById('credit').style.display = 'none';
+
             });
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 
-        <script>
-            var request = null;
-            function createRequest() {
-                if (window.XMLHttpRequest)
-                    request = new XMLHttpRequest();
-                else if (window.ActiveXObject)
-                    request = new ActiveXObject(Microsoft.XMLHTTP);
-            }
-            function validateCredit() {
-                createRequest();
-                request.onreadystatechange = handleCredit;
-                var credit = document.getElementById("credit").value;
-                request.open("GET", "CheckCredit?cardID=" + credit, true);
-                request.send(null);
-            }
 
-            function handleCredit() {
-                if (request.readyState == 4 && request.status == 200) {
-                    var responseValue = request.responseText;
-                    document.getElementById("validation").innerHTML = responseValue;
-                } else {
-                    document.getElementById("validation").innerHTML = "Error code: " + request.status;
-                }
-            }
-            ;
-        </script>
         <script src="js/menu_jquery.js"></script>
         <script src="js/simpleCart.min.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -102,7 +79,7 @@
         </script>
 
         <!-- header -->
-        <%@ include file="header.html" %>
+        <%@ include file="header.jsp" %>
         <!------>
         <div class="mega_nav">
             <div class="container">
@@ -200,87 +177,84 @@
         </div>
         <!---->
         <!-- edit-form -->
-        <c:import url="/ViewProfile" />
+
         <c:import url="/ShowCategories"/>
         <div class="reg-form">
             <div class="container">
                 <div class="reg">
-                    <h3>${requestScope.userData.getUserName()}</h3>
-
-                    <form action="SaveEditProfile" method="post">
-                        <ul>
-                            <li class="text-info">First Name: </li>
-                            <li><input type="text" name="fname" value="${requestScope.userData.getFirstName()}" required></li>
-                        </ul>
-                        <ul>
-                            <li class="text-info">Last Name: </li>
-                            <li><input type="text" name="lname" value="${requestScope.userData.getLastName()}" required></li>
-                        </ul>				 
-                        <!--<ul>
-                            <li class="text-info">Email: </li>
-                            <li><input type="text" name="email" value="${requestScope.userData.getEmail()}"></li>
-                        </ul> -->
-                        <ul>
-                            <li class="text-info">Password: </li>
-                            <li><input type="text" name="password" id="pass" value="${requestScope.userData.getPassword()}" required></li>
-                        </ul>
-                        <ul>
-                            <li class="text-info">Re-enter Password:</li>
-                            <li><input type="text" name="repeat"  id="confirm" value="${requestScope.userData.getPassword()}" required onchange="validatePassword()"/> </li><label id="validation"></label>
-                        </ul>
-                        <ul>
-                            <li class="text-info">Job:</li>
-                            <li><input type="text" name="job" value="${requestScope.userData.getJob()}"></li>
-                        </ul>
-                        <ul>
-                            <li class="text-info">Address:</li>
-                            <li><input type="text" name="address" value="${requestScope.userData.getAddresse()}"></li>
-                        </ul>
-                        <ul>
-                            <li class="text-info">BirthDay Date:</li>
-                            <li><input type="text" name="bdate" id="datepicker" value="${requestScope.userData.getBOD()}"></li>
-                        </ul>
-                      <!--  <ul>
-                            <li class="text-info"> Your credit for now is :</li>
-                            <li>EGP ${requestScope.userData.getCredit()} <br/><br/> 
-                                <input type="radio" onclick="radioPressed()" id="enableCredit" value="1">Add new credit</li>
-
-                            <li id="credit"><input type="text" onblur="validateCredit()"><label id="validation"></label></li>
-                        </ul>
-                        <script>
-                            function radioPressed(){
-                            if (document.getElementById('enableCredit').checked) {
-                                document.getElementById('credit').style.display = 'block';
-                            }
-                        }
-                        </script>-->
-
-                        <ul>
-                            <li class="text-info">Interests:</li>
-                            <li>
-                                <br/>
-                                <ul>
-                                    <c:set var="numberOfMathched" value="0"/>
-                                    <c:forEach items= "${applicationScope.categoriesList}" var="category">
-
-                                                <li><input id="${category.categoryID}" type="checkbox"  name ="userInterest"  value="<c:out value="${category.getCategoryID()}"/> "></li>
-                                                <li><c:out value="${category.getName()}"/></li>
-                                                <br>
-                                                
-                                    </c:forEach> 
-                                                <script>
-                                       <c:forEach items= "${requestScope.userInterest}" var="interest">
-                                        document.getElementById(${interest.categoryID}).checked=true;
-   
-                                       </c:forEach>
-                                            </script>
-                                </ul>
-                            </li>
-                        </ul>
+                    <c:if test="${sessionScope.loggedInUser != null}">
 
 
-                        <input type="submit" value="Save">
-                    </form>
+                        <h3>${sessionScope.loggedInUser.userName}</h3>
+
+                        <form action="SaveEditProfile" method="post" onsubmit="return validatePassword()">
+                            <ul>
+                                <li class="text-info">First Name: </li>
+                                <li><input type="text" name="fname" value="${sessionScope.loggedInUser.getFirstName()}" required></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Last Name: </li>
+                                <li><input type="text" name="lname" value="${sessionScope.loggedInUser.getLastName()}" required></li>
+                            </ul>				 
+                            <!--<ul>
+                                <li class="text-info">Email: </li>
+                                <li><input type="text" name="email" value="${sessionScope.loggedInUser.getEmail()}"></li>
+                            </ul> -->
+                            <ul>
+                                <li class="text-info">Password: </li>
+                                <li><input type="text" name="password" id="pass" value="${sessionScope.loggedInUser.getPassword()}" required></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Re-enter Password:</li>
+                                <li><input type="text" name="repeat"  id="confirm" value="${sessionScope.loggedInUser.getPassword()}" required onchange="validatePassword()"/> </li><label id="validation"></label>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Job:</li>
+                                <li><input type="text" name="job" value="${sessionScope.loggedInUser.getJob()}"></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Address:</li>
+                                <li><input type="text" name="address" value="${sessionScope.loggedInUser.getAddresse()}"></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">BirthDay Date:</li>
+                                <li><input type="text" name="bdate" id="datepicker" value="${sessionScope.loggedInUser.getBOD()}"></li>
+                            </ul>
+
+                            <c:import url="/ViewProfile" />
+                            <ul>
+                                <li class="text-info">Interests:</li>
+                                <li>
+                                    <br/>
+                                    <ul>
+                                        <c:set var="numberOfMathched" value="0"/>
+                                        <c:forEach items= "${applicationScope.categoriesList}" var="category">
+
+                                            <li><input id="${category.categoryID}" type="checkbox"  name ="userInterest"  value="<c:out value="${category.getCategoryID()}"/> "></li>
+                                            <li><c:out value="${category.getName()}"/></li>
+                                            <br>
+
+                                        </c:forEach> 
+                                        <script>
+                                            <c:forEach items= "${requestScope.userInterest}" var="interest">
+                                            document.getElementById(${interest.categoryID}).checked = true;
+
+                                            </c:forEach>
+                                        </script>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <script> $("#datepicker").datepicker({
+                                    onSelect: function () {
+                                        var dateObject = $(this).datepicker('getDate');
+                                        console.log(dateObject);
+                                    }
+                                });</script>
+
+                            <input type="submit" value="Save">
+                        </form>
+
+                    </c:if>
                 </div>
             </div>
         </div>

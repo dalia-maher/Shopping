@@ -39,7 +39,7 @@ public class ShowCategories extends HttpServlet {
         
         ArrayList<Category> categories = DBController.getInstance().getAllCategories();
 
-        request.setAttribute("categoriesList", categories);
+        //request.setAttribute("categoriesList", categories);
         config.getServletContext().setAttribute("categoriesList", categories);
         
 
