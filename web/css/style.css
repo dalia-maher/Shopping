@@ -3280,4 +3280,8 @@ label.radio {
 		background: url(../images/1.png) no-repeat 47px 2px;
 		background-size: 11%;
 	}
+        .product-img{
+            width: 300px;
+            height: 300px;
+        }
 }
