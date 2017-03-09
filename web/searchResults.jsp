@@ -1,83 +1,129 @@
 <%-- 
-    Document   : checkout
-    Created on : Feb 28, 2017, 6:29:37 PM
-    Author     : Dalia
+    Document   : searchResults
+    Created on : Mar 6, 2017, 2:36:11 AM
+    Author     : TahanyFawzy
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Checkout :: w3layouts</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pendent Store a E-Commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Products :: w3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-        Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-                        function hideURLbar(){ window.scrollTo(0,1); } </script>
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-        <!-- start-smoth-scrolling -->
+
+        <script>
+            function getProduct() {
+                var catId = $("#catId").text();
+                var url = "displayProduct?numberOfPro=" + $("#result").children().length
+                        + "&categoryID=" + catId;
+                $.get(url, displayProduct, 'json');
+
+            }
+            function displayProduct(responseTxt, statusTxt, xhr) {
+                // var messages = responseTxt.
+                serverPath = $("#serverPath").text();
+                //serverPath = serverPath.replace(/\\/g, "\\\\");
+                if (statusTxt == "success") {
+                    console.log(responseTxt.length + "size");
+                    for (i = 0; i < responseTxt.length; i++)
+                    {
+                        var ProName = responseTxt[i].name;
+                        ProName = ProName.replace(/\s/g, "");
+                        var catName = responseTxt[i].category.name;
+                        catName = catName.replace(/\s/g, "");
+                        // var img = serverPath+"\\\images\\" + ProName + i +".jpg";
+                        //console.log(responseTxt[i].category.name);  
+                        //console.log(ProName);
+                        //console.log(img);
+                        $("#result").append("<div class='products-grd'>" +
+                                "<div class='p-one simpleCart_shelfItem prd' > " +
+                                "<a href='productDescription.jsp?productID=" + responseTxt[i].productID + "'>" +
+                                "<img src=\"" + "images/" + catName + "/" + ProName + "0.jpg" + "\"alt='Error' class='img-responsive' />" +
+                                "<div class='mask'>" +
+                                "<span>Quick View</span>" +
+                                "</div>" +
+                                "</a>" +
+                                "<h4>" + responseTxt[i].name + "</h4>" +
+                                "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
+                                "</div>" +
+                                "</div>");
+                    }
+                }
+            }
+
+        </script>
+
         <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $(".scroll").click(function(event){		
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
                     event.preventDefault();
-                    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
+                $("#serverPath").hide();
+                $("#catId").hide();
+                getProduct();
             });
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
-        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-        <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-    </head>
+        <script>$(document).ready(function () {
+                $(".megamenu").megamenu();
 
+            });
+        </script>
+
+        <script src="js/simpleCart.min.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
+        <!-- the jScrollPane script -->
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" id="sourcecode">
+            $(function () {
+                $('.scroll-pane').jScrollPane();
+            });
+        </script>
+        <!-- //the jScrollPane script -->
+
+    </head>
     <body>
-        <!-- header -->
         <%@ include file="header.jsp" %>
-        <!------>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
                     <!-- start header menu -->
                     <ul class="megamenu skyblue">
-                        <li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
+                        <li class="grid"><a class="color1" href="index.jsp">Home</a></li>
                         <li class="grid"><a class="color1" href="#">Category</a>
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
-                                        <div class="h_nav">                                            
+                                        <div class="h_nav">
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                           
-                                            <ul>
-                                                <li><a href="products.jsp">Glasses</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
+
+                                    <div class="row">
+                                        <div class="col2"></div>
+                                        <div class="col1"></div>
+                                        <div class="col1"></div>
+                                        <div class="col1"></div>
+                                        <div class="col1"></div>
                                     </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
                                 </div>
-                            </div>
                         </li>
                         <li><a class="color1" href="#">catalog</a>
                             <div class="megapanel">
@@ -143,8 +189,8 @@
                                     <div class="col1"></div>
                                 </div>
                             </div>
-                        </li>				
-                        						
+                        </li>
+
                     </ul> 
                     <div class="search">
                         <form>
@@ -157,107 +203,40 @@
             </div>
         </div>
         <!---->
-        <!-- check-out -->
-        <div class="container">
-            <div class="check">	 
-                <div class="col-md-3 cart-total">
-                    <a class="continue" href="#">Continue to basket</a>
-                    <div class="price-details">
-                        <h3>Price Details</h3>
-                        <span>Total</span>
-                        <span class="total1">6200.00</span>
-                        <span>Discount</span>
-                        <span class="total1">10%(Festival Offer)</span>
-                        <span>Delivery Charges</span>
-                        <span class="total1">150.00</span>
-                        <div class="clearfix"></div>				 
-                    </div>	
-                    <ul class="total_price">
-                        <li class="last_price"> <h4>TOTAL</h4></li>	
-                        <li class="last_price"><span>6150.00</span></li>
-                    </ul> 
-                    <div class="clearfix"></div>
-                    <a class="order" href="#">Place Order</a>
-                    <div class="total-item">
-                        <h3>OPTIONS</h3>
-                        <h4>COUPONS</h4>
-                        <a class="cpns" href="#">Apply Coupons</a>
-                    </div>
-                </div>
-                <div class="col-md-9 cart-items">
-                    <h1>My Shopping Bag (2)</h1>
-                    <script>
-                        $(document).ready(function(c) {
-                            $('.close1').on('click', function(c){
-                                $('.cart-header').fadeOut('slow', function(c){
-                                    $('.cart-header').remove();
-                                });
-                            });	  
-                        });
-                    </script>
-                    <div class="cart-header">
-                        <div class="close1"> </div>
-                        <div class="cart-sec simpleCart_shelfItem">
-                            <div class="cart-item cyc">
-                                <img src="images/12.jpg" class="img-responsive" alt=""/>
-                            </div>
-                            <div class="cart-item-info">
-                                <ul class="qty">
-                                    <li><p>Size : 5</p></li>
-                                    <li><p>Qty : 1</p></li>
-                                </ul>
-                                <div class="delivery">
-                                    <p>Service Charges : Rs.100.00</p>
-                                    <span>Delivered in 2-3 bussiness days</span>
-                                    <div class="clearfix"></div>
-                                </div>	
-                                <div class="fgh">
-                                    <a href="#">Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-
+        <!-- products -->
+        <div class="products">
+            <div class="container">
+                <div class="products-grids">
+                    <div class="col-md-12 products-grid-left">
+                        <div id="result" class="products-grid-lft">
+                            <c:if test="${!empty searchResults}">
+                                <c:forEach items="${searchResults}" var="product">
+                                    <div class='products-grd'>
+                                        <div class='p-one simpleCart_shelfItem prd' >
+                                            <a href='productDescription.jsp?productID="${product.productID}"'>
+                                                <img src="images/${product.category.name}/${product.name}0.jpg" alt='Error' class='img-responsive'/>
+                                                <div class='mask'>
+                                                    <span>Quick View</span>
+                                                </div>
+                                            </a>
+                                            <h4>${product.name}</h4>
+                                            <p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> ${product.price}</span></a></p>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${empty searchResults}">
+                                <center>
+                                    <h3><c:out value="no search data."/></h3>
+                                </center>
+                            </c:if>
                         </div>
                     </div>
-                    <script>
-                        $(document).ready(function(c) {
-                            $('.close2').on('click', function(c){
-                                $('.cart-header2').fadeOut('slow', function(c){
-                                    $('.cart-header2').remove();
-                                });
-                            });	  
-                        });
-                    </script>
-                    <div class="cart-header2">
-                        <div class="close2"> </div>
-                        <div class="cart-sec simpleCart_shelfItem">
-                            <div class="cart-item cyc">
-                                <img src="images/13.jpg" class="img-responsive" alt=""/>
-                            </div>
-                            <div class="cart-item-info">
-                                <ul class="qty">
-                                    <li><p>Size : 5</p></li>
-                                    <li><p>Qty : 1</p></li>
-                                </ul>
-                                <div class="delivery">
-                                    <p>Service Charges : Rs.100.00</p>
-                                    <span>Delivered in 2-3 bussiness days</span>
-                                    <div class="clearfix"></div>
-                                </div>	
-                                <div class="fgh">
-                                    <a href="#">Add To Cart</a>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>					
-                        </div>
-                    </div>		
                 </div>
-                <div class="clearfix"> </div>
             </div>
         </div>
-        <!-- //check-out -->
-        <!-- footer -->
+        <!-- //products -->
         <%@ include file="footer.html" %>
-        <!-- //footer -->
     </body>
 </html>
+

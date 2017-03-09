@@ -37,6 +37,15 @@ public class Product
        
     }
 
+    public Product(Category category, String name, String description, int quantity, double price, String images) {
+        this.category = category;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.images = images;
+    }
+
     public int getProductID() {
         return productID;
     }

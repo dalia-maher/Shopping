@@ -78,18 +78,18 @@ public class UdateUserCredit extends HttpServlet {
         //processRequest(request, response);
         PrintWriter out = response.getWriter();
         String cardId = request.getParameter("creditID");
-        int card =0;
-        if(cardId != null){
-            card = Integer.parseInt(cardId);
-        }
+       // int card =0;
+//        if(cardId != null){
+//            card = Integer.parseInt(cardId);
+//        }
         HttpSession userSession = request.getSession(false);
         if (userSession != null) {
             User currentUser = (User) userSession.getAttribute("loggedInUser");
             User oldUser = currentUser;
             double oldCredit = currentUser.getCredit();
-            double newCrrdit = DBController.getInstance().getCreditValue(card);
+            double newCrrdit = DBController.getInstance().getCreditValue(cardId);
             
-           if (DBController.getInstance().updateCreditCard(card,currentUser.getCustomerID())){
+           if (DBController.getInstance().updateCreditCard(cardId,currentUser.getCustomerID())){
                currentUser.setCredit(oldCredit+newCrrdit);
                System.out.println("servlets.UdateUserCredit.doPost()"+currentUser.getCredit());
                userSession.setAttribute("loggedInUser",currentUser);

@@ -81,7 +81,6 @@ jQuery(document).ready(function ($) {
 
 });</script>
         
-        <script src="js/simpleCart.min.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <!-- the jScrollPane script -->
         <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
