@@ -191,10 +191,28 @@
                 getProductDetails();
 
             });
+            
+            function addToCart(){
+               var quantity=document.getElementById("quantity").value;
+                $.ajax({
+                    url: "AddingToCart",
+                    type: 'POST',
+                    data: "prooductID="+${param.productID}+"&quantity="+quantity,
+                    success: function (data, textStatus, jqXHR) {
+                       // alert("Done");
+                       //alert(data);
+                       if (data=="1") {
+                         $("#simpleCart_quantity").html(parseInt($("#simpleCart_quantity").html())+1);
+                            }
+                    }
+                    
+                    
+                });
+                
+            }
                     </script>
-                    <form method="post" action="AddingToCart?prooductID=${param.productID}&categoryID=${param.categoryID}">
-                     
-                    <div class="details-left-info">
+                    <!--<form method="post" action="AddingToCart?prooductID=${param.productID}">-->
+                        <div class="details-left-info">
                         <h3 id = "productName" name="priceProduct"></h3>
                         <h4 id = "categoryName"></h4>
                         <div class="simpleCart_shelfItem">
@@ -209,11 +227,11 @@
 
                             <div class="single-but item_add">
                                 
-                                    <input type="submit" value="add to cart">
+                                <input onclick="addToCart();"  type="submit" value="add to cart">
                                 
                             </div>
                         </div>
-
+                     <!-- </form>-->
                         <p class="desc"></p>
                     </div>
 
@@ -239,7 +257,7 @@
                             <div class="panel-body" id = "productDescription"></div>
                         </div>
                     </div>
-                    </form>
+                   
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h4 class="panel-title">

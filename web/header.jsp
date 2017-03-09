@@ -46,7 +46,7 @@
             <div class="cart box_1">
                 <a href="checkout.jsp">
                 <div class="total"><h3>
-                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</h3></div>
+                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)</h3></div>
                     <img src="images/cart1.png" alt=""/>
                 </a>
                 <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>

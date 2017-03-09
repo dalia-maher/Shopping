@@ -464,20 +464,22 @@ public class DBController implements DBHandler {
 //        }
 //    }
     @Override
-    public boolean addToShoppingCart(int productID, int customerID, int quantity) {
+    public int addToShoppingCart(int productID, int customerID, int quantity) {
       int result = this.checkSameProductInCart(productID,customerID);
-       if(result == -1){
+        System.out.println("--->"+result);
+      if(result == -1){
            try {
             preparedStatement = connection.prepareStatement("INSERT INTO `shoppingcart`(`productID`, `CustomerID`,"
                     + " `quantity`) VALUES (?,?,?)");
             preparedStatement.setInt(1,productID);
             preparedStatement.setInt(2,customerID);
             preparedStatement.setInt(3, quantity);
-            return preparedStatement.executeUpdate() > 0;
+             preparedStatement.executeUpdate() ;
+             return DBHandler.NEW_SHOOPINGITEM;
         } catch (SQLException ex) {
             System.err.println("error in addto cart");
             ex.printStackTrace();
-            return false;
+            return DBHandler.ERROR_IN_ADD;
         }
            
        }else{
@@ -486,9 +488,10 @@ public class DBController implements DBHandler {
 //           }else{
 //               quantity = result-quantity;
 //           }
-           this.updateCartQuantity(productID, customerID, quantity);
+           if(this.updateCartQuantity(productID, customerID, quantity)==true)
+           return DBHandler.EDITED_SHOOPINGITEM;
+           return DBHandler.ERROR_IN_ADD;
        }
-      return true;
     }   
     private int checkSameProductInCart(int productID, int customerID){
         try {
@@ -504,7 +507,7 @@ public class DBController implements DBHandler {
             System.err.println("error in selecting");
             return -1;
         }
-      return 0;
+      return -1;
     } 
     @Override
     public boolean removeFromShoppingCart(Product product, User customer) {

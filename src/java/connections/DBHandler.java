@@ -8,7 +8,9 @@ import java.util.ArrayList;
  * @author TahanyFawzy
  */
 public interface DBHandler {
-
+    int ERROR_IN_ADD=400;
+    int NEW_SHOOPINGITEM=1;
+    int EDITED_SHOOPINGITEM=2;
     //Categories
     
     public boolean insertCategorey(String name);
@@ -59,7 +61,7 @@ public interface DBHandler {
     
     //shopping cart
     
-    public boolean addToShoppingCart(int productID, int customerID, int quantity);
+    public int addToShoppingCart(int productID, int customerID, int quantity);
 
     public boolean removeFromShoppingCart(Product product, User customer);
 
