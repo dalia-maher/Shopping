@@ -167,63 +167,39 @@
                 </div>
                 <div class="col-md-9 cart-items">
                     <h1>My Shopping Cart (<i id="numOfItems"><c:out value="${fn:length(myItems)}"/></i>)</h1>
-                    <c:forEach var="item" items= "${myItems}">
-                        <c:set var="total_price" value="${total_price + item.getQuantity() * item.getProduct().getPrice()}" />
+                    <c:set var="count" value="1" />
+                    <!-- todo: loop on the shoppinglist (var item in myItems) -->
+                    <c:forEach begin="1" end="2" var="count">
+                        <script>
+                            $(document).ready(function(c) {
+                                $('.close' + '${count}').on('click', function(c){
+                                    $('.cart-header' + '${count}').fadeOut('slow', function(c){
+                                        $('.cart-header' + '${count}').remove();
+                                    });
+                                });	  
+                            });
+                        </script>
+                        <div class="cart-header<c:out value='${count}'/>">
+                            <div class="close<c:out value='${count}'/>"> </div>
+                            <div class="cart-sec simpleCart_shelfItem">
+                                <div class="cart-item cyc">
+                                    <img src="images/12.jpg" class="img-responsive" alt=""/>
+                                </div>
+                                <div class="cart-item-info">
+                                    <ul class="qty">
+                                        <li><p>Quantity : <i id="quantity1">1</i></p></li>
+                                        <li><p>Price Per Unit : <i id="price1">100.0 EGP</i></p></li>
+                                    </ul>
+                                    <div class="delivery">
+                                        <p>Price : <i id="sum_price1">100.0 EGP</i></p>
+                                        <span>Delivered in 2-3 business days</span>
+                                        <div class="clearfix"></div>
+                                    </div>	
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
                     </c:forEach>
-                    <script>
-                        $(document).ready(function(c) {
-                            $('#close1').on('click', function(c){
-                                $('#item1').fadeOut('slow', function(c){
-                                    $('.#item1').remove();
-                                });
-                            });	  
-                        });
-                    </script>
-                    <div class="cart-header" id="item1">
-                        <div class="close1" id="close1"> </div>
-                        <div class="cart-sec simpleCart_shelfItem">
-                            <div class="cart-item cyc">
-                                <img src="images/12.jpg" class="img-responsive" alt=""/>
-                            </div>
-                            <div class="cart-item-info">
-                                <ul class="qty">
-                                    <li><p>Quantity : <i id="quantity1">1</i></p></li>
-                                </ul>
-                                <div class="delivery">
-                                    <p>Price : <i id="price1">100.0 EGP</i></p>
-                                    <span>Delivered in 2-3 business days</span>
-                                    <div class="clearfix"></div>
-                                </div>	
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <script>
-                        $(document).ready(function(c) {
-                            $('#close2').on('click', function(c){
-                                $('#item2').fadeOut('slow', function(c){
-                                    $('#item2').remove();
-                                });
-                            });	  
-                        });
-                    </script>
-                    <div class="cart-header2" id="item2">
-                        <div class="close2" id="close2"> </div>
-                        <div class="cart-sec simpleCart_shelfItem">
-                            <div class="cart-item cyc">
-                                <img src="images/13.jpg" class="img-responsive" alt=""/>
-                            </div>
-                            <div class="cart-item-info">
-                                <ul class="qty">
-                                    <li><p>Quantity : <i id="quantity2">1</i></p></li>
-                                </ul>
-                                <div class="delivery">
-                                    <p>Price : <i id="price2">100.0 EGP</i></p>
-                                    <span>Delivered in 2-3 business days</span>
-                                </div>	
-                            </div>
-                        </div>
-                    </div>		
                 </div>
                 <div class="clearfix"> </div>
             </div>
