@@ -1033,7 +1033,7 @@ p.non span{
 	font-size:0.65em;
 	font-weight:400;
 } 
-.close1,.close2{
+.close {
   background: url('../images/close_1.png') no-repeat 0px 0px;
   cursor: pointer;
   width: 28px;
@@ -1047,9 +1047,6 @@ p.non span{
   transition: color 0.2s ease-in-out;
 }
 .cart-header {  
-  position: relative;  
-}
-.cart-header2 {  
   position: relative;  
 }
 a.order {
@@ -3230,7 +3227,7 @@ label.radio {
 	  width: 40%;
 	  float: none;
 	}
-	.close1, .close2 {
+	.close {
 		top: 145px;
 	}
 	.delivery p, .delivery span,.fgh a {

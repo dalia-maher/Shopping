@@ -20,7 +20,7 @@ public class DBController implements DBHandler {
     Connection connection;
     PreparedStatement preparedStatement;
     private static DBController instance = null;
-    
+
     private DBController() {
         try {
             DriverManager.registerDriver(new Driver());
@@ -30,6 +30,7 @@ public class DBController implements DBHandler {
             ex.printStackTrace();
         }
     }
+
     public static DBController getInstance() {
         if (instance == null) {
             instance = new DBController();
@@ -228,7 +229,7 @@ public class DBController implements DBHandler {
         }
         return false;
     }
-    
+
     @Override
     public int getUserID(String email) {
         try {
@@ -331,17 +332,17 @@ public class DBController implements DBHandler {
             return null;
         }
     }
-    
+
     @Override
-    public ArrayList<Product> getProductsCategory(int categoryID){
+    public ArrayList<Product> getProductsCategory(int categoryID) {
         ArrayList<Product> allProducts = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM `product` WHERE categoryID = ?");
             preparedStatement.setInt(1, categoryID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                allProducts.add(new Product(resultSet.getInt("ID"),getCategory(resultSet.getInt("categoryID")),resultSet.getString("name"), resultSet.getString("description"),
-                        resultSet.getDouble("price"),resultSet.getInt("quantity"),resultSet.getString("images")));
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")), resultSet.getString("name"), resultSet.getString("description"),
+                        resultSet.getDouble("price"), resultSet.getInt("quantity"), resultSet.getString("images")));
 
             }
             return allProducts;
@@ -350,7 +351,7 @@ public class DBController implements DBHandler {
             System.err.println("error in selecting all products");
             return null;
         }
-     
+
     }
 
     @Override
@@ -375,16 +376,16 @@ public class DBController implements DBHandler {
         }
     }
 
-    public int getCurrentID(){
-     try {
+    public int getCurrentID() {
+        try {
             preparedStatement = connection.prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'product'");
-            ResultSet myset=preparedStatement.executeQuery();
+            ResultSet myset = preparedStatement.executeQuery();
             if (myset.next()) {
-             return myset.getInt("AUTO_INCREMENT");
-         }
-            else
-           return 0;
-  
+                return myset.getInt("AUTO_INCREMENT");
+            } else {
+                return 0;
+            }
+
         } catch (SQLException ex) {
             System.err.println("error in get Last ID");
             ex.printStackTrace();
@@ -393,12 +394,11 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public ArrayList<Product> searchProduct(String query) 
-    {
-        ArrayList<Product>allProducts = new ArrayList<>();
+    public ArrayList<Product> searchProduct(String query) {
+        ArrayList<Product> allProducts = new ArrayList<>();
         String keyword = "%".concat(query);
         keyword = keyword.concat("%");
-        System.out.println("key = "+keyword);
+        System.out.println("key = " + keyword);
         try {
             preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`, `description`, "
                     + "`quantity`, `price`, `images` FROM `product` WHERE `name` like ? "
@@ -406,10 +406,9 @@ public class DBController implements DBHandler {
             preparedStatement.setString(1, keyword);
             preparedStatement.setString(2, keyword);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) 
-            {
+            while (resultSet.next()) {
 
-                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")), 
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
                         resultSet.getInt("quantity"), resultSet.getString("images")));
 
@@ -423,17 +422,16 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public ArrayList<Product>searchProductByPrice(double price) {
-        ArrayList<Product>allProducts = new ArrayList<>();
+    public ArrayList<Product> searchProductByPrice(double price) {
+        ArrayList<Product> allProducts = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`,"
                     + " `description`, `quantity`, `price`, `images` FROM `product` WHERE `price` <=?");
             preparedStatement.setDouble(1, price);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) 
-            {
+            while (resultSet.next()) {
 
-                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")), 
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
                         resultSet.getInt("quantity"), resultSet.getString("images")));
 
@@ -463,37 +461,40 @@ public class DBController implements DBHandler {
 //            return null;
 //        }
 //    }
+
     @Override
     public int addToShoppingCart(int productID, int customerID, int quantity) {
-      int result = this.checkSameProductInCart(productID,customerID);
-        System.out.println("--->"+result);
-      if(result == -1){
-           try {
-            preparedStatement = connection.prepareStatement("INSERT INTO `shoppingcart`(`productID`, `CustomerID`,"
-                    + " `quantity`) VALUES (?,?,?)");
-            preparedStatement.setInt(1,productID);
-            preparedStatement.setInt(2,customerID);
-            preparedStatement.setInt(3, quantity);
-             preparedStatement.executeUpdate() ;
-             return DBHandler.NEW_SHOOPINGITEM;
-        } catch (SQLException ex) {
-            System.err.println("error in addto cart");
-            ex.printStackTrace();
-            return DBHandler.ERROR_IN_ADD;
-        }
-           
-       }else{
+        int result = this.checkSameProductInCart(productID, customerID);
+        System.out.println("--->" + result);
+        if (result == -1) {
+            try {
+                preparedStatement = connection.prepareStatement("INSERT INTO `shoppingcart`(`productID`, `CustomerID`,"
+                        + " `quantity`) VALUES (?,?,?)");
+                preparedStatement.setInt(1, productID);
+                preparedStatement.setInt(2, customerID);
+                preparedStatement.setInt(3, quantity);
+                preparedStatement.executeUpdate();
+                return DBHandler.NEW_SHOOPINGITEM;
+            } catch (SQLException ex) {
+                System.err.println("error in addto cart");
+                ex.printStackTrace();
+                return DBHandler.ERROR_IN_ADD;
+            }
+
+        } else {
 //           if(quantity >= result ){
 //               quantity = quantity+result;
 //           }else{
 //               quantity = result-quantity;
 //           }
-           if(this.updateCartQuantity(productID, customerID, quantity)==true)
-           return DBHandler.EDITED_SHOOPINGITEM;
-           return DBHandler.ERROR_IN_ADD;
-       }
-    }   
-    private int checkSameProductInCart(int productID, int customerID){
+            if (this.updateCartQuantity(productID, customerID, quantity) == true) {
+                return DBHandler.EDITED_SHOOPINGITEM;
+            }
+            return DBHandler.ERROR_IN_ADD;
+        }
+    }
+
+    private int checkSameProductInCart(int productID, int customerID) {
         try {
             preparedStatement = connection.prepareStatement("SELECT * FROM `shoppingcart` WHERE `productID` =? AND `CustomerID`=?");
             preparedStatement.setInt(1, productID);
@@ -507,15 +508,16 @@ public class DBController implements DBHandler {
             System.err.println("error in selecting");
             return -1;
         }
-      return -1;
-    } 
+        return -1;
+    }
+
     @Override
-    public boolean removeFromShoppingCart(Product product, User customer) {
+    public boolean removeFromShoppingCart(int productID, int customerID) {
         try {
             preparedStatement = connection.prepareStatement("DELETE FROM `shoppingcart` WHERE `productID`=? "
                     + "and `CustomerID`=?");
-            preparedStatement.setInt(1, product.getProductID());
-            preparedStatement.setInt(2, customer.getCustomerID());
+            preparedStatement.setInt(1, productID);
+            preparedStatement.setInt(2, customerID);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in removing from cart");
@@ -717,7 +719,7 @@ public class DBController implements DBHandler {
 
     @Override
     public boolean insertInterests(User user, ArrayList<Integer> interests) {
-        
+
         int id = getUserID(user.getEmail());
         boolean flag = false;
         for (int i = 0; i < interests.size(); i++) {
@@ -765,4 +767,25 @@ public class DBController implements DBHandler {
         return -1;
     }
 
+    @Override
+    public ArrayList<ShoppingCart> getShoppingCart(String userID) {
+        ArrayList<ShoppingCart> cart = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("Select p.*,c.*,s.quantity AS QUANT from shopping.shoppingcart s inner join shopping.product p inner join shopping.customer c \n"
+                    + "on p.id=s.productID and c.customerid=s.CustomerID where s.CustomerID=?");
+            preparedStatement.setString(1, userID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                User x = new User(resultSet.getInt("CustomerID"), resultSet.getString("email"), resultSet.getString("username"), null, resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"), resultSet.getDate("BDate"), resultSet.getString("job"));
+                Product p = new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
+                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
+                        resultSet.getInt("quantity"), resultSet.getString("images"));
+                cart.add(new ShoppingCart(p, x, resultSet.getInt("QUANT")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selecting credits");
+        }
+        return cart;
+    }
 }

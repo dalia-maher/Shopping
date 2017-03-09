@@ -9,9 +9,11 @@ import beans.Category;
 import beans.Product;
 import beans.ShoppingCart;
 import beans.User;
+import com.google.gson.Gson;
 import connections.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -27,7 +29,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddingToCart", urlPatterns = {"/AddingToCart"})
 public class AddingToCart extends HttpServlet {
-
+    
+    ArrayList<ShoppingCart> shoopingList = new ArrayList<>();
     ServletConfig config;
 
     @Override
@@ -84,13 +87,11 @@ public class AddingToCart extends HttpServlet {
                     break;
                 }
             }
-            ArrayList<ShoppingCart> shoopingList = new ArrayList<>();           
             ShoppingCart newProduct = new ShoppingCart(choosenProduct, currentUser, productQuant);
             int ret=DBController.getInstance().addToShoppingCart(choosenProduct.getProductID(), currentUser.getCustomerID(),productQuant);
-            System.out.println(ret);
-            response.getWriter().write(ret);
+         response.getWriter().write(ret);
             shoopingList.add(newProduct);
-            userSession.setAttribute("shoopingList", shoopingList);
+        //    userSession.setAttribute("shoppingList", new Gson().toJson(shoopingList));
         }
     }
 
