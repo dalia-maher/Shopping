@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddingToCart", urlPatterns = {"/AddingToCart"})
 public class AddingToCart extends HttpServlet {
+    ArrayList<ShoppingCart> shoopingList = new ArrayList<>();  
 
     ServletConfig config;
 
@@ -55,6 +56,7 @@ public class AddingToCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        
         HttpSession userSession = request.getSession(false);
         User currentUser = (User) userSession.getAttribute("loggedInUser");
          if (currentUser != null) {
@@ -84,13 +86,14 @@ public class AddingToCart extends HttpServlet {
                     break;
                 }
             }
-            ArrayList<ShoppingCart> shoopingList = new ArrayList<>();           
+                     
             ShoppingCart newProduct = new ShoppingCart(choosenProduct, currentUser, productQuant);
             int ret=DBController.getInstance().addToShoppingCart(choosenProduct.getProductID(), currentUser.getCustomerID(),productQuant);
-            System.out.println(ret);
-            response.getWriter().write(ret);
+            
+            response.getWriter().print(ret);
             shoopingList.add(newProduct);
-            userSession.setAttribute("shoopingList", shoopingList);
+            System.out.println("size of shooping list:"+shoopingList.size());
+            userSession.setAttribute("shoppingList", shoopingList);
         }
     }
 

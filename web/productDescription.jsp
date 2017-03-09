@@ -33,7 +33,7 @@
                 });
             });
 
-
+             
 
         </script>
         <!-- start-smoth-scrolling -->
@@ -200,9 +200,13 @@
                     data: "prooductID="+${param.productID}+"&quantity="+quantity,
                     success: function (data, textStatus, jqXHR) {
                        // alert("Done");
-                       //alert(data);
+                       
                        if (data=="1") {
-                         $("#simpleCart_quantity").html(parseInt($("#simpleCart_quantity").html())+1);
+                           //items = $("#simpleCart_quantity").html(parseInt($("#simpleCart_quantity").html())+1);
+                           //alert(${fn:length(sessionScope.shoppingList)});
+                        $("#simpleCart_quantity").html(${fn:length(sessionScope.shoppingList)});
+                        $("#total_price_carts").html($("#price").val());
+                       // $("#total_price_carts").css("display","block");
                             }
                     }
                     

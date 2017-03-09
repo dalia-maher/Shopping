@@ -40,7 +40,7 @@ function viewProduct(responseTxt, statusTxt, xhr) {
             catName = catName.replace(/\s/g, "");
              
             var path = "images/" + catName + "/" + arr[i] + ".jpg";
-            alert(path);
+            //alert(path);
             /* $("#imgs").append("<li data-thumb='"+path+"'>"+
              "<div class='thumb-image'> <img src='"+path+"' data-imagezoom='true' class='img-responsive'"+
              " alt='' /> </div></li>");*/
