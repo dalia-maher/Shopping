@@ -126,17 +126,17 @@
                         </li>				
 											
                     </ul> 
-                    <div class="search">
                         <form action ="SearchProducts" method ="get">
-                            <input type="text" value="" placeholder="Search..." name = "keyword">
-                            <input type="submit" value="">
+                            <div class="search">
+                                <input type="text" value="" placeholder="Search..." name = "keyword">
+                                <input type="submit" value="">
+                            </div>
                             <select name = searchon>
                                 
                                 <option value="name">Name</option>
                                 <option value="price">Price</option>
                             </select>
                         </form>
-                    </div>
 			<div class="clearfix"></div>
                     </div>
             </div>

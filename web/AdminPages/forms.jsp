@@ -273,7 +273,7 @@
                                     <i class="fa fa-dashboard"></i>  <a href="index.jsp">Dashboard</a>
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-edit"></i> Products
+                                    <i class="fa fa-edit"></i> New Products
                                 </li>
                             </ol>
                         </div>
@@ -323,7 +323,7 @@
 
                             <div class="form-group">
                                 <label for="disabledSelect">New Category</label>
-                                <input class="form-control" id="txtCatgorey" type="text" placeholder="New Catgorey name" >
+                                <input class="form-control" id="txtCatgorey" type="text" placeholder="New Category name" >
                             </div>
 
                             <button onclick="btnAddCatgoreyAction();"  class="btn btn-primary">Save</button>

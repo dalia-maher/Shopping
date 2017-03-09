@@ -55,7 +55,7 @@
                 <a href="forms.jsp"><i class="fa fa-fw fa-edit"></i> Add Product</a>
             </li>
             <li>
-                <a href="blank-page.jsp"><i class="fa fa-fw fa-edit"></i>Products</a>
+                <a href="blank-page.jsp"><i class="fa fa-fw fa-edit"></i>View / Edit Products</a>
             </li>
             <li>
                 <a href="CreditPage.jsp"><i class="fa fa-fw fa-file"></i> Credit Cards</a>
