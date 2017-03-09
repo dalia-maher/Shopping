@@ -222,7 +222,10 @@
                     <h3>Register Now</h3>
                     <p>Welcome, please enter the following details to continue.</p>
                     <p>If you have previously registered with us, you can just login.</p>
+
+                   
                     <form action="Register" method="post" onsubmit="return validateForm();">
+
                         <ul>
                             <li class="text-info">First Name: *</li>
                             <li><input type="text" name="fname" value="" required></li>

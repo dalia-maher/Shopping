@@ -39,14 +39,13 @@
                                         ProName=ProName.replace(/\s/g, "");
                                         var catName = responseTxt[i].category.name;
                                         catName = catName.replace(/\s/g, "");
-                                        // var img = serverPath+"\\\images\\" + ProName + i +".jpg";
-                //console.log(responseTxt[i].category.name);  
-                //console.log(ProName);
-                //console.log(img);
+                                        var data = responseTxt[i].images;
+                                        var arr = data.split("&&");
+                                        alert(arr[0]);
                                         $("#result").append("<div class='products-grd'>" +
                                             "<div class='p-one simpleCart_shelfItem prd' > "+
-                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img src=\"" + "images/"+catName+"/"+ProName+"0.jpg" + "\"alt='Error' class='img-responsive' />" +
+                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"&categoryID="+responseTxt[i].category.categoryID+"'>" +
+                                            "<img src=\"" + "images/"+catName+"/"+arr[0]+".jpg" + "\"alt='Error' class='img-responsive' />" +
                                             "<div class='mask'>" +
                                             "<span>Quick View</span>" +
                                             "</div>" +

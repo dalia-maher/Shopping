@@ -31,11 +31,13 @@ public class CheckCredit extends HttpServlet {
                 out.print("true");
             }
             else {
+
                 int cardValue = DBController.getInstance().getCreditValue(credit);
                 if(cardValue > 0)
                    out.print("true");
                 else
                    out.print("false");
+
             }
         }
     }

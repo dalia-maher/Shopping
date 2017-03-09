@@ -1,18 +1,17 @@
 <%-- 
-    Document   : viewProfile
-    Created on : Mar 3, 2017, 7:31:48 PM
+    Document   : editProfile
+    Created on : Mar 4, 2017, 10:56:29 AM
     Author     : Mrawi
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="beans.User"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="beans.User"%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,12 +27,16 @@
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
         <!-- start-smoth-scrolling -->
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
                 $(".scroll").click(function (event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
+
+
             });
         </script>
         <!-- start-smoth-scrolling -->
@@ -41,19 +44,40 @@
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 
 
-        <script type="text/javascript" src="js/megamenu.js"></script>
-        <script>$(document).ready(function () {
-    $(".megamenu").megamenu();
-});</script>
-        <link rel="stylesheet" href="js/jquery-ui.css">
-
+        <script src="js/menu_jquery.js"></script>
+        <script src="js/simpleCart.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="js/jquery-1.12.4.js"></script>
-        <script src="js/jquery-ui.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-
+        <c:import url="/ShowCategories" />
     </head>
+
     <body>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
+        <script>
+
+            function validatePassword() {
+                var password = $("#pass").val();
+                var confirmPassword = $("#confirm").val();
+                if (password == confirmPassword) {
+                    document.getElementById("validation").innerHTML = "";
+                    return true;
+                } else {
+                    document.getElementById("validation").innerHTML = "passwords don't match";
+                    return false;
+                }
+
+            }
+
+        </script>
+
         <!-- header -->
         <%@ include file="header.jsp" %>
         <!------>
@@ -71,15 +95,8 @@
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
                                 </div>
+                            </div>
                         </li>
                         <li><a class="color1" href="#">catalog</a>
                             <div class="megapanel">
@@ -159,91 +176,89 @@
             </div>
         </div>
         <!---->
-        <!-- profie-form -->
-        
+        <!-- edit-form -->
+
+        <c:import url="/ShowCategories"/>
         <div class="reg-form">
             <div class="container">
                 <div class="reg">
                     <c:if test="${sessionScope.loggedInUser != null}">
-                        <%User userData = (User) session.getAttribute("loggedInUser");%>
-                        <h3>${sessionScope.loggedInUser.getUserName()}</h3>
 
-                    <form action="editProfile.jsp">
-                        <ul>
-                            <li class="text-info">First Name: </li>
-                         
-                            <li><p> ${sessionScope.loggedInUser.getFirstName()}</p></li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">Last Name: </li>
-                             
-                            <li><p>${sessionScope.loggedInUser.getLastName()}</p></li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">Email: </li>
-                            
-                            <li><p>${sessionScope.loggedInUser.getEmail()}</p></li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">Password: </li>
-                            
-                            <li><p>${sessionScope.loggedInUser.getPassword()}</p></li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">Job:</li>
-                            
-                            <li><p>${sessionScope.loggedInUser.getJob()}</p></li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">Address:</li>
-                            
-                            <li><p>${sessionScope.loggedInUser.getAddresse()}</p></li>
 
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">BirthDay Date:</li>
-                            
-                            <li><p>${sessionScope.loggedInUser.getBOD()}</p></li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="text-info">Credit:</li>
-                            
-                            <li><p>EGP ${sessionScope.loggedInUser.getCredit()} </p></li>
-                        </ul>
-                        <hr>
-                       <c:import url="/ViewProfile" />
-                        <ul>
-                            <li class="text-info">Interests:</li>
-                            <li>
-                                <br/>
-                                <ul>
-                                   <c:forEach  items= "${requestScope.userInterest}" var="interest">
+                        <h3>${sessionScope.loggedInUser.userName}</h3>
 
-                                       <li><c:out value="${interest.getName()}"/></li>
-                                        <br>
+                        <form action="SaveEditProfile" method="post" onsubmit="return validatePassword()">
+                            <ul>
+                                <li class="text-info">First Name: </li>
+                                <li><input type="text" name="fname" value="${sessionScope.loggedInUser.getFirstName()}" required></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Last Name: </li>
+                                <li><input type="text" name="lname" value="${sessionScope.loggedInUser.getLastName()}" required></li>
+                            </ul>				 
+                            <!--<ul>
+                                <li class="text-info">Email: </li>
+                                <li><input type="text" name="email" value="${sessionScope.loggedInUser.getEmail()}"></li>
+                            </ul> -->
+                            <ul>
+                                <li class="text-info">Password: </li>
+                                <li><input type="text" name="password" id="pass" value="${sessionScope.loggedInUser.getPassword()}" required></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Re-enter Password:</li>
+                                <li><input type="text" name="repeat"  id="confirm" value="${sessionScope.loggedInUser.getPassword()}" required onchange="validatePassword()"/> </li><label id="validation"></label>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Job:</li>
+                                <li><input type="text" name="job" value="${sessionScope.loggedInUser.getJob()}"></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Address:</li>
+                                <li><input type="text" name="address" value="${sessionScope.loggedInUser.getAddresse()}"></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">BirthDay Date:</li>
+                                <li><input type="text" name="bdate" id="datepicker" value="${sessionScope.loggedInUser.getBOD()}"></li>
+                            </ul>
 
-                                    </c:forEach>
-                                </ul>
-                            </li>
-                        </ul>
-                        <input type="submit" value="Edit Profile">
-                    </form>
+                            <c:import url="/ViewProfile" />
+                            <ul>
+                                <li class="text-info">Interests:</li>
+                                <li>
+                                    <br/>
+                                    <ul>
+                                        <c:set var="numberOfMathched" value="0"/>
+                                        <c:forEach items= "${applicationScope.categoriesList}" var="category">
+
+                                            <li><input id="${category.categoryID}" type="checkbox"  name ="userInterest"  value="<c:out value="${category.getCategoryID()}"/> "></li>
+                                            <li><c:out value="${category.getName()}"/></li>
+                                            <br>
+
+                                        </c:forEach> 
+                                        <script>
+                                            <c:forEach items= "${requestScope.userInterest}" var="interest">
+                                            document.getElementById(${interest.categoryID}).checked = true;
+
+                                            </c:forEach>
+                                        </script>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <script> $("#datepicker").datepicker({
+                                    onSelect: function () {
+                                        var dateObject = $(this).datepicker('getDate');
+                                        console.log(dateObject);
+                                    }
+                                });</script>
+
+                            <input type="submit" value="Save">
+                        </form>
 
                     </c:if>
-                    
                 </div>
             </div>
         </div>
-
         <!-- footer -->
         <%@ include file="footer.html" %>
-
     </body>
 </html>

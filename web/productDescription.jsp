@@ -192,19 +192,31 @@
 
             });
                     </script>
+                    <form method="post" action="AddingToCart?prooductID=${param.productID}&categoryID=${param.categoryID}">
+                     
                     <div class="details-left-info">
-                        <h3 id = "productName"></h3>
+                        <h3 id = "productName" name="priceProduct"></h3>
                         <h4 id = "categoryName"></h4>
                         <div class="simpleCart_shelfItem">
-                            <p><h2><span class="item_price qwe" id = "price"></span></h2></p>
+                            <p><h2><span class="item_price qwe" id = "price" name="priceProduct"></span></h2></p>
+                        <div class="clearfix"> </div>
+                        </div>
+                            <div class="col-rad tyy">
+                                
+                                <div class="clearfix"> </div>
+                            </div>
                             <p class="qty">Quantity :</p><input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+
                             <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
+                                
+                                    <input type="submit" value="add to cart">
+                                
                             </div>
                         </div>
 
                         <p class="desc"></p>
                     </div>
+
                     <div class="clearfix"></div>				 	
                 </div>
 
@@ -218,10 +230,16 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+<!--                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+<<<<<<<
+                            <div name="Description" class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+=======-->
                             <div class="panel-body" id = "productDescription"></div>
                         </div>
                     </div>
+                    </form>
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h4 class="panel-title">

@@ -52,6 +52,7 @@ public class Register extends HttpServlet {
             for (String interest : selectedInterests) {
                 interests.add(Integer.parseInt(interest.trim()));
             }
+
             DBController dbCon = DBController.getInstance();
             boolean added_interests = dbCon.insertInterests(user, interests);
             if(added_interests) {
@@ -61,6 +62,7 @@ public class Register extends HttpServlet {
         }
         else
             response.sendRedirect("register.jsp?failed=1");
+
     }
 
 }

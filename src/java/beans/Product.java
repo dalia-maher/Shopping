@@ -34,7 +34,7 @@ public class Product
         this.description = description;
         this.price = price;
         this.quantity = quantity;
-        //this.images = images;
+       
     }
 
     public Product(Category category, String name, String description, int quantity, double price, String images) {

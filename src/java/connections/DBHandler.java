@@ -55,15 +55,17 @@ public interface DBHandler {
 
     public ArrayList<Product>searchProductByPrice(double price);
     
+    public Product getProduct(int ID);
+    
     //shopping cart
     
-    public boolean addToShoppingCart(Product product, User customer, int quantity);
+    public boolean addToShoppingCart(int productID, int customerID, int quantity);
 
     public boolean removeFromShoppingCart(Product product, User customer);
 
     public boolean resetShoppingCart(User customer);
 
-    public boolean updateCartQuantity(Product product, User customer, int newQuantity);
+    public boolean updateCartQuantity(int productID, int customerID, int newQuantity);
     
     //orders
 
