@@ -36,24 +36,7 @@ public class AddingToCart extends HttpServlet {
         this.config = config;
     }
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,19 +57,19 @@ public class AddingToCart extends HttpServlet {
         //processRequest(request, response);
         HttpSession userSession = request.getSession(false);
         User currentUser = (User) userSession.getAttribute("loggedInUser");
-        if (currentUser != null) {
+         if (currentUser != null) {
             
-            int productID = 0, catId = 0,productQuant=0;
+            int productID = 0,productQuant=0;
             double productPrice = 0.0;
             String ProductId = request.getParameter("prooductID");
-            String categoryId = request.getParameter("categoryID");
+            //String categoryId = request.getParameter("categoryID");
           
             String quantity = request.getParameter("quantity");
-            System.out.println(ProductId+""+categoryId);
+            //System.out.println(ProductId+""+categoryId);
             
-            if (ProductId != null && categoryId != null&& quantity !=null) {
+            if (ProductId != null && quantity !=null) {
                 productID = Integer.parseInt(ProductId);
-                catId = Integer.parseInt(categoryId);
+                //catId = Integer.parseInt(categoryId);
                productQuant = Integer.parseInt(quantity);
            }
             Category productCategory = null;
@@ -94,17 +77,18 @@ public class AddingToCart extends HttpServlet {
 //            product choosenProduct = new Product(productID, productCategory,request.getParameter("productName"),
 //                    request.getParameter("Description") , productPrice, , , );
             ArrayList<Category> categories = (ArrayList<Category>) config.getServletContext().getAttribute("categoriesList");
-            System.out.println(categories.size());
+            //System.out.println(categories.size());
             for (int i = 0; i < categories.size(); i++) {
-                if (categories.get(i).getCategoryID() == catId) {
+                if (categories.get(i).getCategoryID() == choosenProduct.getCategory().getCategoryID()) {
                     productCategory = categories.get(i);
                     break;
                 }
             }
-            ArrayList<ShoppingCart> shoopingList = new ArrayList<>();
-           
+            ArrayList<ShoppingCart> shoopingList = new ArrayList<>();           
             ShoppingCart newProduct = new ShoppingCart(choosenProduct, currentUser, productQuant);
-            DBController.getInstance().addToShoppingCart(choosenProduct.getProductID(), currentUser.getCustomerID(),productQuant);
+            int ret=DBController.getInstance().addToShoppingCart(choosenProduct.getProductID(), currentUser.getCustomerID(),productQuant);
+            System.out.println(ret);
+            response.getWriter().write(ret);
             shoopingList.add(newProduct);
             userSession.setAttribute("shoopingList", shoopingList);
         }

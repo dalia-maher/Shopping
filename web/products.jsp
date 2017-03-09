@@ -41,10 +41,10 @@
                                         catName = catName.replace(/\s/g, "");
                                         var data = responseTxt[i].images;
                                         var arr = data.split("&&");
-                                        alert(arr[0]);
+                                        //alert(arr[0]);
                                         $("#result").append("<div class='products-grd'>" +
                                             "<div class='p-one simpleCart_shelfItem prd' > "+
-                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"&categoryID="+responseTxt[i].category.categoryID+"'>" +
+                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
                                             "<img src=\"" + "images/"+catName+"/"+arr[0]+".jpg" + "\"alt='Error' class='img-responsive' />" +
                                             "<div class='mask'>" +
                                             "<span>Quick View</span>" +
