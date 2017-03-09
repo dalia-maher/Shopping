@@ -63,12 +63,13 @@ public interface DBHandler {
     
     public int addToShoppingCart(int productID, int customerID, int quantity);
 
-    public boolean removeFromShoppingCart(Product product, User customer);
+    public boolean removeFromShoppingCart(int productID, int customerID);
 
     public boolean resetShoppingCart(User customer);
 
     public boolean updateCartQuantity(int productID, int customerID, int newQuantity);
     
+    public ArrayList<ShoppingCart> getShoppingCart(String ID);
     //orders
 
     public boolean insertOrder(Order o);

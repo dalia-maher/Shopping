@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +34,7 @@
                 });
             });
 
-             
+
 
         </script>
         <!-- start-smoth-scrolling -->
@@ -45,13 +46,15 @@
             });</script>
         <!--<script src="js/menu_jquery.js"></script>-->
         <script src="js/simpleCart.min.js"></script>
-        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script>$(document).ready(function () {
+                $(".megamenu").megamenu();
+            });</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <script src="js/viewProduct.js"></script>
     </head>
 
     <body>
-    <!-- header -->
+        <!-- header -->
         <%@ include file="header.jsp" %>
         <!------>
         <div class="mega_nav">
@@ -93,8 +96,8 @@
                                             </ul>	
                                         </div>							
                                     </div>
-                                                                      
-                                    
+
+
                                 </div>
                                 <div class="row">
                                     <div class="col2"></div>
@@ -125,19 +128,19 @@
                     <!--<p id="productID" hidden>${param.productID}</p>-->
                     <input type="text" id="productID" hidden value = "${param.productID}" />
                     <div id="div2" class="col-md-5 zoom-grid flexslider details-lft-inf">
-<!--                        <div class="flexslider" id = "imgs">
-                            <ul class="slides">
-                                <li data-thumb="images/s1.jpg" id="li1">
-                                    <div class="thumb-image"> <img id="img1" src="images/s1.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                </li>
-                                <li data-thumb="images/s2.jpg">
-                                    <div class="thumb-image"> <img src="images/s2.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                </li>
-                                <li data-thumb="images/s3.jpg">
-                                    <div class="thumb-image"> <img src="images/s3.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                </li> 
-                            </ul>
-                        </div>-->
+                        <!--                        <div class="flexslider" id = "imgs">
+                                                    <ul class="slides">
+                                                        <li data-thumb="images/s1.jpg" id="li1">
+                                                            <div class="thumb-image"> <img id="img1" src="images/s1.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                                                        </li>
+                                                        <li data-thumb="images/s2.jpg">
+                                                            <div class="thumb-image"> <img src="images/s2.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                                                        </li>
+                                                        <li data-thumb="images/s3.jpg">
+                                                            <div class="thumb-image"> <img src="images/s3.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+                                                        </li> 
+                                                    </ul>
+                                                </div>-->
                     </div> 
                     <script src="js/imagezoom.js"></script>
                     <!-- FlexSlider -->
@@ -191,161 +194,166 @@
                 getProductDetails();
 
             });
-            
-            function addToCart(){
-               var quantity=document.getElementById("quantity").value;
+
+            function addToCart() {
+                var quantity = document.getElementById("quantity").value;
                 $.ajax({
                     url: "AddingToCart",
                     type: 'POST',
-                    data: "prooductID="+${param.productID}+"&quantity="+quantity,
+                    data: "prooductID=" +${param.productID} + "&quantity=" + quantity,
                     success: function (data, textStatus, jqXHR) {
-                       // alert("Done");
-                       
-                       if (data=="1") {
-                           //items = $("#simpleCart_quantity").html(parseInt($("#simpleCart_quantity").html())+1);
-                           //alert(${fn:length(sessionScope.shoppingList)});
-                        $("#simpleCart_quantity").html(${fn:length(sessionScope.shoppingList)});
-                        $("#total_price_carts").html($("#price").val());
-                       // $("#total_price_carts").css("display","block");
-                            }
+                        // alert("Done");
+
+                        if (data == "1") {
+                            alert();
+                            updateItems();
+                           
+                        }
                     }
-                    
-                    
+
+
                 });
-                
+                function updateItems(){
+                    $.get("CheckOut", function (data) {
+                                 alert(data.size());
+                                $("#simpleCart_quantity").html(data.size());
+
+                            });
+                }
+
             }
                     </script>
                     <!--<form method="post" action="AddingToCart?prooductID=${param.productID}">-->
-                        <div class="details-left-info">
+                    <div class="details-left-info">
                         <h3 id = "productName" name="priceProduct"></h3>
                         <h4 id = "categoryName"></h4>
                         <div class="simpleCart_shelfItem">
                             <p><h2><span class="item_price qwe" id = "price" name="priceProduct"></span></h2></p>
-                        <div class="clearfix"> </div>
+                            <div class="clearfix"> </div>
                         </div>
-                            <div class="col-rad tyy">
-                                
-                                <div class="clearfix"> </div>
-                            </div>
-                            <p class="qty">Quantity :</p><input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        <div class="col-rad tyy">
 
-                            <div class="single-but item_add">
-                                
-                                <input onclick="addToCart();"  type="submit" value="add to cart">
-                                
-                            </div>
+                            <div class="clearfix"> </div>
                         </div>
-                     <!-- </form>-->
-                        <p class="desc"></p>
+                        <p class="qty">Quantity :</p><input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
+
+                        <div class="single-but item_add">
+
+                            <input onclick="addToCart();"  type="submit" value="add to cart">
+
+                        </div>
                     </div>
-
-                    <div class="clearfix"></div>				 	
+                    <!-- </form>-->
+                    <p class="desc"></p>
                 </div>
 
-                <!-- collapse -->
-                <div class="panel-group collpse" id="accordion" role="tablist">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-controls="collapseOne">
-                                    Description
-                                </a>
-                            </h4>
-                        </div>
-<!--                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-<<<<<<<
-                            <div name="Description" class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-=======-->
-                            <div class="panel-body" id = "productDescription"></div>
-                        </div>
+                <div class="clearfix"></div>				 	
+            </div>
+
+            <!-- collapse -->
+            <div class="panel-group collpse" id="accordion" role="tablist">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-controls="collapseOne">
+                                Description
+                            </a>
+                        </h4>
                     </div>
-                   
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-controls="collapseTwo">
-                                    additional information
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-controls="collapseThree">
-                                    reviwes(5)
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                            <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-controls="collapseFour">
-                                    help
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                            <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                        </div>
+                    <!--                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <<<<<<<
+                                                <div name="Description" class="panel-body">
+                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                </div>
+                    =======-->
+                    <div class="panel-body" id = "productDescription"></div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-controls="collapseTwo">
+                            additional information
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                     </div>
                 </div>
-                <!-- collapse -->
-                <!-- related products -->
-                <div class="related-products">
-                    <h3>Related Products</h3>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/19.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/18.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/20.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"> </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-controls="collapseThree">
+                            reviwes(5)
+                        </a>
+                    </h4>
                 </div>
-                <!-- //related products -->
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFour">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-controls="collapseFour">
+                            help
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- single -->
-        <%@ include file="footer.html" %>
-        <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+        <!-- collapse -->
+        <!-- related products -->
+        <div class="related-products">
+            <h3>Related Products</h3>
+            <div class="col-md-4 related products-grid">
+                <img src="images/19.jpg" alt=" " class="img-responsive" />
+                <div class="simpleCart_shelfItem rel">
+                    <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
+                    <div class="single-but item_add">
+                        <input type="submit" value="add to cart">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 related products-grid">
+                <img src="images/18.jpg" alt=" " class="img-responsive" />
+                <div class="simpleCart_shelfItem rel">
+                    <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
+                    <div class="single-but item_add">
+                        <input type="submit" value="add to cart">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 related products-grid">
+                <img src="images/20.jpg" alt=" " class="img-responsive" />
+                <div class="simpleCart_shelfItem rel">
+                    <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
+                    <div class="single-but item_add">
+                        <input type="submit" value="add to cart">
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- //related products -->
+    </div>
+</div>
+<!-- single -->
+<%@ include file="footer.html" %>
+<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 
-        <!-- for bootstrap working -->
-        <!-- //for bootstrap working -->
-    </body>
+<!-- for bootstrap working -->
+<!-- //for bootstrap working -->
+</body>
 </html>
