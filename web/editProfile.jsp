@@ -230,9 +230,10 @@
                                         <c:set var="numberOfMathched" value="0"/>
                                         <c:forEach items= "${applicationScope.categoriesList}" var="category">
 
-                                            <li><input id="${category.categoryID}" type="checkbox"  name ="userInterest"  value="<c:out value="${category.getCategoryID()}"/> "></li>
-                                            <li><c:out value="${category.getName()}"/></li>
-                                            <br>
+                                            <li><input id="${category.categoryID}" type="checkbox"  name ="userInterest"  value="<c:out value="${category.getCategoryID()}"/> ">
+                                            <c:out value="${category.getName()}"/></li>
+                                            <br/>
+                                           
 
                                         </c:forEach> 
                                         <script>

@@ -5,15 +5,12 @@
  */
 package servlets;
 
-import beans.Category;
-
 import beans.User;
-
 import connections.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,29 +20,24 @@ import javax.servlet.http.HttpSession;
  *
  * @author Mrawi
  */
-public class ViewProfile extends HttpServlet {
+@WebServlet(name = "GetLastCredit", urlPatterns = {"/GetLastCredit"})
+public class GetLastCredit extends HttpServlet {
 
-    
-    
+   
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //until we finished the login
-        HttpSession userSession = request.getSession(false);
+             HttpSession userSession = request.getSession(false);
          User currentUser = (User) userSession.getAttribute("loggedInUser");
         if (currentUser != null) {
-          
-            ArrayList<Category> interest = DBController.getInstance().getInterests(currentUser);
-              
-            request.setAttribute("userInterest", interest);
-//            for (int i = 0; i < interest.size(); i++) {
-//                System.out.println(interest.get(i).getName());
-//            }
+            double updatedCredit=DBController.getInstance().getCreditValue(currentUser.getCustomerID());
+            if(updatedCredit != -1)
+            response.getWriter().print(updatedCredit);
+            else
+               response.getWriter().print(updatedCredit); 
         }
-        
     }
 
-  
+   
 }

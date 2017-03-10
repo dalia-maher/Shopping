@@ -29,12 +29,29 @@
         <!-- //js -->
         <!-- start-smoth-scrolling -->
         <script type="text/javascript">
-            jQuery(document).ready(function ($) {
+                 function getLastCredit(){
+                    $.ajax({
+                        url:"GetLastCredit",
+                        type: "GET",
+                        success: function (data, textStatus, jqXHR) {
+                            if(data != -1){
+                                alert(data);
+                                $("#lastCredit").html("EGP "+data);
+                              
+                                
+                            }
+                        }
+                    });
+                }       
+               jQuery(document).ready(function ($) {
                 $(".scroll").click(function (event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
+                
+               //getLastCredit();
             });
+            
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
@@ -44,6 +61,7 @@
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function () {
     $(".megamenu").megamenu();
+     
 });</script>
         <link rel="stylesheet" href="js/jquery-ui.css">
 
@@ -165,7 +183,7 @@
             <div class="container">
                 <div class="reg">
                     <c:if test="${sessionScope.loggedInUser != null}">
-                        <%User userData = (User) session.getAttribute("loggedInUser");%>
+                        
                         <h3>${sessionScope.loggedInUser.getUserName()}</h3>
 
                     <form action="editProfile.jsp">
@@ -215,7 +233,7 @@
                         <ul>
                             <li class="text-info">Credit:</li>
                             
-                            <li><p>EGP ${sessionScope.loggedInUser.getCredit()} </p></li>
+                            <li><p id="lastCredit">EGP ${sessionScope.loggedInUser.getCredit()}</p></li>
                         </ul>
                         <hr>
                        <c:import url="/ViewProfile" />
@@ -234,8 +252,11 @@
                             </li>
                         </ul>
                         <input type="submit" value="Edit Profile">
+                        <a id="btn" type="button" href="userOrders.jsp">My Orders</a>
                     </form>
-
+                        
+                            
+                        
                     </c:if>
                     
                 </div>
