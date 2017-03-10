@@ -23,78 +23,30 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "UdateUserCredit", urlPatterns = {"/UdateUserCredit"})
 public class UdateUserCredit extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UdateUserCredit</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UdateUserCredit at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        
         PrintWriter out = response.getWriter();
         String cardId = request.getParameter("creditID");
-       // int card =0;
-//        if(cardId != null){
-//            card = Integer.parseInt(cardId);
-//        }
+
         HttpSession userSession = request.getSession(false);
-        if (userSession != null) {
-            User currentUser = (User) userSession.getAttribute("loggedInUser");
+        User currentUser = (User) userSession.getAttribute("loggedInUser");
+
+        if (currentUser != null) {
             User oldUser = currentUser;
-            double oldCredit = currentUser.getCredit();
+            double oldCredit = oldUser.getCredit();
+            System.out.println("old Credit --->"+oldCredit);
             double newCrrdit = DBController.getInstance().getCreditValue(cardId);
-            
+            System.out.println("new Credit --->"+oldCredit);
            if (DBController.getInstance().updateCreditCard(cardId,currentUser.getCustomerID())){
                currentUser.setCredit(oldCredit+newCrrdit);
+                
                System.out.println("servlets.UdateUserCredit.doPost()"+currentUser.getCredit());
                userSession.setAttribute("loggedInUser",currentUser);
                DBController.getInstance().updateCustomer(oldUser, currentUser);
-                out.print(currentUser.getCredit());
+               out.print(currentUser.getCredit());
+               System.out.println(" last new Credit --->"+currentUser.getCredit());
            }
            else{
                out.print("false");
@@ -102,14 +54,5 @@ public class UdateUserCredit extends HttpServlet {
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+ 
 }

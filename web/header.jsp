@@ -16,31 +16,36 @@
             getShoppingList();
         });   
     function validateCredit(value) {
-       
+       if($("#credit").val()!=""){
         $.post("CheckCredit", {credit: value},
                 function (response) {
                     if (response == "true") {
+                        $("#addBtn").show();
                         $("#creditValidation").html("");
+                        
                         //return true;
                     } else {
                         $("#creditValidation").html("Invalid Card ID!");
+                         $("#credit").val("");
                         //return false;
                     }
                 });
-
+       }else{
+            $("#creditValidation").html("Please, Enter the Card Code");
+       }
     }
 
     function addCredit(id) {
+        
         $.post("UdateUserCredit", {creditID:id},
                 function (response) {
                     if (response == "false") {
                        
                         $("#wrongAdded").html("Try agin ,Not added successfully!");
                         $("#credit").val("");
-                        $("#myModal").modal("show");
                         $("#creditValidation").hide();
                         $("#wrongAdded").show();
-                       // 
+                        $("#myModal").modal("show");
                         
    
                     } else  {
@@ -48,8 +53,12 @@
                         $("#myModal").modal("hide");
                         $("#validCredit").modal("show");
                          $("#newCredit").html(response);
+                         setTimeout(function(){
+                            $('#validCredit').modal('hide')
+                          }, 3000);
                     }
                 });
+        
     }
     function getShoppingList(){
         $.ajax({
@@ -93,10 +102,10 @@
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
-         Modal content
+         <!--Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add Credit</h4>
             </div>
             <div class="modal-body">
@@ -114,7 +123,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addCredit($('#credit').val())">Add</button>
+                <button type="button" id="addBtn" Style="display:none"class="btn btn-default" data-dismiss="modal" onclick="addCredit($('#credit').val())">Add</button>
             </div>
         </div>
 
@@ -126,7 +135,6 @@
         <!-- Modal content -->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Current Credit</h4>
             </div>
             <div class="modal-body">

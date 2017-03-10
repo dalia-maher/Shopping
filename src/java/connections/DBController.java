@@ -112,16 +112,17 @@ public class DBController implements DBHandler {
         try {
             preparedStatement = connection.prepareStatement("UPDATE `customer` SET `email`=?,"
                     + "`username`=?,`password`=?,`firstname`=?"
-                    + ",`lastname`=?,`addresse`=?,`BDate`=?,`job`=? WHERE `customerID`=?");
+                    + ",`lastname`=?,credit=?,`addresse`=?,`BDate`=?,`job`=? WHERE `customerID`=?");
             preparedStatement.setString(1, neww.getEmail());
             preparedStatement.setString(2, neww.getUserName());
             preparedStatement.setString(3, neww.getPassword());
             preparedStatement.setString(4, neww.getFirstName());
             preparedStatement.setString(5, neww.getLastName());
-            preparedStatement.setString(6, neww.getAddresse());
-            preparedStatement.setDate(7, neww.getBOD());
-            preparedStatement.setString(8, neww.getJob());
-            preparedStatement.setInt(9, old.getCustomerID());
+             preparedStatement.setDouble(6, neww.getCredit());
+            preparedStatement.setString(7, neww.getAddresse());
+            preparedStatement.setDate(8, neww.getBOD());
+            preparedStatement.setString(9, neww.getJob());
+            preparedStatement.setInt(10, old.getCustomerID());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
