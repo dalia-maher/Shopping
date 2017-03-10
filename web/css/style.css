@@ -3281,4 +3281,25 @@ label.radio {
             width: 300px;
             height: 300px;
         }
+        
+
+
+}
+#btn {
+    margin-top: 2em;
+    background:#F65A5B;
+	color: #FFF;
+	font-size: 14px;
+	padding: 8px 30px;
+	transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  cursor: pointer;
+  outline: none;
+  text-transform: capitalize;
+  border: none;
+}
+#btn:hover{
+   background:#204056;  
 }

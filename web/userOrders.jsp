@@ -29,9 +29,6 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
-                $("#serverPath").hide();
-                $("#catId").hide();
-                getProduct();
             });
         </script>
         <!-- start-smoth-scrolling -->
@@ -54,7 +51,7 @@
             });
         </script>
         <!-- //the jScrollPane script -->
-
+        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     </head>
     <body>
         <%@ include file="header.jsp" %>
@@ -111,40 +108,7 @@
                                             </ul>	
                                         </div>							
                                     </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>All Jewellery</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>												
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Seating</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>						
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                </div>
+                                    
                             </div>
                         </li>
 
@@ -166,7 +130,46 @@
                 <div class="products-grids">
                     <div class="col-md-12 products-grid-left">
                         <div id="result" class="products-grid-lft">
-                            
+                            <div class="col-lg-10">
+                                <div class="table-responsive">
+                                    <c:if test="${!empty userOrders}">
+                                        <c:forEach items="${userOrders}" var="order" varStatus="loop">
+                                            <c:if test="${loop.index == 0 || userOrders[loop.index].date != userOrders[loop.index-1].date}">
+                                                <c:set var="total" value="${0}"/>
+                                                <center><table class="table table-bordered table-hover table-striped">
+                                                        <caption>${order.date} (Order: ${order.ordernumber})</caption>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Quantity</th>
+                                                                <th>Unit Price</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </c:if>
+                                                        <c:set var="total" value="${total + order.quantity*order.price}"/>
+                                                        <tr>
+                                                            <td>${order.product.name}</td>
+                                                            <td>${order.quantity}</td>
+                                                            <td>${order.price}</td>
+                                                            <td>${order.quantity * order.price}</td>
+                                                        </tr>
+                                                        <c:if test="${loop.index == fn:length(userOrders)|| userOrders[loop.index].date != userOrders[loop.index+1].date}">
+                                                        <tr>
+                                                            <td colspan="3">Order Total Price</td>
+                                                            <td>${total}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table></center>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="${empty userOrders}">
+                                        You haven't any orders.
+                                    </c:if>  
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

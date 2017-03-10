@@ -68,7 +68,7 @@ public interface DBHandler {
 
     public boolean removeFromShoppingCart(int productID, int customerID);
 
-    public boolean resetShoppingCart(User customer);
+    public boolean resetShoppingCart(int customerID);
 
     public boolean updateCartQuantity(int productID, int customerID, int newQuantity);
     
@@ -93,6 +93,8 @@ public interface DBHandler {
     public ArrayList<CreditCard> getAllCredits();
     
     public int getCreditValue(String cardID);
+    
+     public double getCreditValue(int userID);
 
     public boolean updateCreditCard(String cardID, int customerID);
     

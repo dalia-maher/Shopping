@@ -29,8 +29,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AddingToCart", urlPatterns = {"/AddingToCart"})
 public class AddingToCart extends HttpServlet {
-    
+
     ArrayList<ShoppingCart> shoopingList = new ArrayList<>();
+
     ServletConfig config;
 
     @Override
@@ -58,6 +59,7 @@ public class AddingToCart extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        
         HttpSession userSession = request.getSession(false);
         User currentUser = (User) userSession.getAttribute("loggedInUser");
          if (currentUser != null) {
@@ -87,9 +89,10 @@ public class AddingToCart extends HttpServlet {
                     break;
                 }
             }
+
             ShoppingCart newProduct = new ShoppingCart(choosenProduct, currentUser, productQuant);
             int ret=DBController.getInstance().addToShoppingCart(choosenProduct.getProductID(), currentUser.getCustomerID(),productQuant);
-         response.getWriter().write(ret);
+         response.getWriter().print(ret);
             shoopingList.add(newProduct);
         //    userSession.setAttribute("shoppingList", new Gson().toJson(shoopingList));
         }
