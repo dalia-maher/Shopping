@@ -53,12 +53,14 @@
                         $("#myModal").modal("hide");
                         $("#validCredit").modal("show");
                          $("#newCredit").html(response);
+                         getLastCredit();
                          setTimeout(function(){
                             $('#validCredit').modal('hide')
-                          }, 3000);
+                          }, 2000);
                     }
+                  
                 });
-        
+          
     }
     function getShoppingList(){
         $.ajax({

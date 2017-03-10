@@ -767,7 +767,21 @@ public class DBController implements DBHandler {
         }
         return -1;
     }
-
+    @Override
+    public double getCreditValue(int userID){
+         try {
+            preparedStatement = connection.prepareStatement("SELECT credit FROM `customer` WHERE `customerID` =?");
+            preparedStatement.setInt(1, userID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("credit");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selecting credit");
+        }
+        return -1;
+    }
     @Override
     public ArrayList<ShoppingCart> getShoppingCart(String userID) {
         ArrayList<ShoppingCart> cart = new ArrayList<>();

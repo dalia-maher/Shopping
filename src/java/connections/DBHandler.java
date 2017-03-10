@@ -87,6 +87,8 @@ public interface DBHandler {
     public ArrayList<CreditCard> getAllCredits();
     
     public int getCreditValue(String cardID);
+    
+     public double getCreditValue(int userID);
 
     public boolean updateCreditCard(String cardID, int customerID);
     

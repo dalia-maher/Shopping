@@ -41,9 +41,9 @@
 	
     <body>
         <!-- header -->
-
+    <%@ include file="header.jsp" %>
         <!-- //header -->
-            <%@ include file="header.jsp" %>
+           
         <!------>
         <div class="mega_nav">
             <div class="container">
