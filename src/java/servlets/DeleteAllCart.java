@@ -6,9 +6,9 @@
 package servlets;
 
 import beans.User;
-import com.google.gson.Gson;
 import connections.DBController;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,17 +18,23 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Dalia
+ * @author Mrawi
  */
-@WebServlet(name = "CheckOut", urlPatterns = {"/CheckOut"})
-public class CheckOut extends HttpServlet {
+@WebServlet(name = "DeleteAllCart", urlPatterns = {"/DeleteAllCart"})
+public class DeleteAllCart extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession userSession = req.getSession(false);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HttpSession userSession = request.getSession(false);
         User currentUser = (User) userSession.getAttribute("loggedInUser");
        
-        resp.getWriter().write(new Gson().toJson((DBController.getInstance().getShoppingCart(currentUser.getCustomerID() + ""))));
+        
+        if(DBController.getInstance().resetShoppingCart(currentUser.getCustomerID())){
+            response.getWriter().print("true");
+        }
+
     }
 
 }

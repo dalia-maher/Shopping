@@ -11,7 +11,10 @@
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script>
-        
+     $( document ).ready(function() {
+        //console.log( "ready!" );
+            getShoppingList();
+        });   
     function validateCredit(value) {
        
         $.post("CheckCredit", {credit: value},
@@ -34,10 +37,10 @@
                        
                         $("#wrongAdded").html("Try agin ,Not added successfully!");
                         $("#credit").val("");
+                        $("#myModal").modal("show");
                         $("#creditValidation").hide();
                         $("#wrongAdded").show();
-                        $("#myModal").modal("hide");
-                        $("#myModal").modal("show");
+                       // 
                         
    
                     } else  {
@@ -47,6 +50,42 @@
                          $("#newCredit").html(response);
                     }
                 });
+    }
+    function getShoppingList(){
+        $.ajax({
+                    url: "CheckOut",
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function (data, textStatus, jqXHR) {
+                         var list = data;
+                        //alert(list.length);
+                        var total_price=0;
+                         $("#simpleCart_quantity").html(list.length);
+                         for (var i = 0; i < list.length; i++) {
+                            total_price += list[i].product.price * list[i].quantity;
+                        }
+                         $("#total_price_carts").html("EGP "+total_price);
+                       
+                    }
+         });
+    }
+    
+    function deleteCart(){
+        $.ajax({
+                    url: "DeleteAllCart",
+                    type: 'POST',
+                   
+                    success: function (data, textStatus, jqXHR) {
+                          if(data=="true");
+                        //alert(list.length);
+                       
+                         $("#simpleCart_quantity").html(0);
+  
+                         $("#total_price_carts").html("EGP "+0);
+                       
+                    }
+         });
+        
     }
 </script>
 
@@ -148,7 +187,7 @@
                 </div>
                     <img src="images/cart1.png" alt=""/>
                 </a>
-                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+                <p><a href="javascript:deleteCart();" class="simpleCart_empty">Empty Cart</a></p>
                 <div class="clearfix"> </div>
             </div>				 
         </div>

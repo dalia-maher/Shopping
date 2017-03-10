@@ -202,24 +202,27 @@
                     type: 'POST',
                     data: "prooductID=" +${param.productID} + "&quantity=" + quantity,
                     success: function (data, textStatus, jqXHR) {
-                        // alert("Done");
-
-                        if (data == "1") {
-                            alert();
-                            updateItems();
+                       
+                            //alert(data);
+                        if (data == 1) {
+                            //alert("Done2");
+                            //updateItems();
+                            getShoppingList();
+                            
+                            
                            
                         }
                     }
 
 
                 });
-                function updateItems(){
-                    $.get("CheckOut", function (data) {
-                                 alert(data.size());
-                                $("#simpleCart_quantity").html(data.size());
-
-                            });
-                }
+//                function updateItems(){
+//                    $.get("CheckOut", function(data) {
+//                                 alert(data.size());
+//                                $("#simpleCart_quantity").html(data.size());
+//
+//                            });
+//                }
 
             }
                     </script>

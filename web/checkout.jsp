@@ -48,7 +48,7 @@
             function fillCart() {
                 $.ajax({
                     url: "CheckOut",
-                    type: 'POST',
+                    type: 'GET',
                     dataType: 'JSON',
                     success: function (data, textStatus, jqXHR) {
                         console.log(data);

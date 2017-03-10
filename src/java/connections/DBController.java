@@ -527,10 +527,10 @@ public class DBController implements DBHandler {
     }
 
     @Override
-    public boolean resetShoppingCart(User customer) {
+    public boolean resetShoppingCart(int customerID) {
         try {
-            preparedStatement = connection.prepareStatement("DELETE FROM `shoppingcart` WHERE `CustomerID`=?");
-            preparedStatement.setInt(1, customer.getCustomerID());
+            preparedStatement = connection.prepareStatement("DELETE  FROM `shoppingcart` WHERE `CustomerID`=?");
+            preparedStatement.setInt(1,customerID);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in resetting cart");

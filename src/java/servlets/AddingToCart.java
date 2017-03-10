@@ -92,7 +92,7 @@ public class AddingToCart extends HttpServlet {
 
             ShoppingCart newProduct = new ShoppingCart(choosenProduct, currentUser, productQuant);
             int ret=DBController.getInstance().addToShoppingCart(choosenProduct.getProductID(), currentUser.getCustomerID(),productQuant);
-         response.getWriter().write(ret);
+         response.getWriter().print(ret);
             shoopingList.add(newProduct);
         //    userSession.setAttribute("shoppingList", new Gson().toJson(shoopingList));
         }

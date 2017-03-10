@@ -65,7 +65,7 @@ public interface DBHandler {
 
     public boolean removeFromShoppingCart(int productID, int customerID);
 
-    public boolean resetShoppingCart(User customer);
+    public boolean resetShoppingCart(int customerID);
 
     public boolean updateCartQuantity(int productID, int customerID, int newQuantity);
     
