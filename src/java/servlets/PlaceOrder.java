@@ -5,13 +5,20 @@
  */
 package servlets;
 
+import beans.Order;
+import beans.Product;
+import beans.User;
+import connections.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,19 +38,41 @@ public class PlaceOrder extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PlaceOrder</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PlaceOrder at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        DBController db = DBController.getInstance();
+        String[] products = request.getParameter("productsArr").split(",");
+        String[] quantity = request.getParameter("quantityArr").split(",");
+        float total = Float.parseFloat(request.getParameter("total"));
+        System.out.println("total = " + total);
+        boolean empty;
+        boolean updated_prod;
+        
+        HttpSession userSession = request.getSession(false);
+        User currentUser = (User) userSession.getAttribute("loggedInUser");
+
+        ArrayList<Order> ordersList = new ArrayList<>();
+        int maxOrderNum = db.getMaxOrderNum(currentUser.getCustomerID());
+        maxOrderNum++;
+
+        for (int i = 0; i < products.length; i++) {
+            ordersList.clear();
+            Product product = db.getProduct(Integer.parseInt(products[i]));
+
+            // insert order
+            Calendar currenttime = Calendar.getInstance();
+            Date sqldate = new Date((currenttime.getTime()).getTime());
+            db.insertOrder(new Order(product, currentUser, Integer.parseInt(quantity[i]), sqldate, product.getPrice(), maxOrderNum));
+            
+            // update product's quantity
+            int newQuantity = product.getQuantity() - Integer.parseInt(quantity[i]);
+            updated_prod = db.updateProductQuantity(product.getProductID(), newQuantity);
+            
+            // update user's credit
+            db.updateUserCredit(currentUser, total);
         }
+        
+        // reset shopping cart
+        empty = db.resetShoppingCart(currentUser);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

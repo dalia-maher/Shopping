@@ -4,13 +4,12 @@
     Author     : Dalia
 --%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Checkout :: w3layouts</title>
+        <title>Pendent Store a E-commerce Online Shopping Category Flat Bootstarp Resposive Website Template | Checkout :: w3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,12 +17,14 @@
               Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); } </script>
-        <!-- //for-mobile-apps -->
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <!-- //js -->
+        <!-- //for-mobile-apps -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <!-- start-smoth-scrolling -->
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
@@ -32,7 +33,11 @@
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
             });
-            function hideDiv(id){ 
+            var productsArray = [];
+            var productIDsArray = [];
+            var quantityArray = [];
+            var pricesArray = [];
+            function hideDiv(id, price){ 
                   $.ajax({
                     url: "DeleteItemFromCart",
                     type: 'POST',
@@ -42,13 +47,15 @@
                             $('#item' + (id)).remove();
                         });
                         $('#numOfItems').html(parseInt($('#numOfItems').html()) - 1);
+                        $('#total').html(parseFloat($('#total').html()) - price);
+                        $('#total_price').html(parseFloat($('#total_price').html()) - price);
                     }
                 });
             }
             function fillCart() {
                 $.ajax({
                     url: "CheckOut",
-                    type: 'POST',
+                    type: 'GET',
                     dataType: 'JSON',
                     success: function (data, textStatus, jqXHR) {
                         console.log(data);
@@ -62,17 +69,19 @@
                                 imgName = list[i].product.images.split("&&")[1];
                             }
                             var item = "<div class='cart-header' id='item" + list[i].product.productID + "'>\
-                                 <div class='close' onclick='hideDiv(" + list[i].product.productID + ")'> </div>\
+                                <input type='hidden' value=" + list[i].product.productID + ">\
+                                <div class='close' onclick='hideDiv(" + list[i].product.productID + ", " + (list[i].product.price * list[i].quantity) + ")'> </div>\
                                 <div class='cart-sec simpleCart_shelfItem'>\
                                     <div class='cart-item cyc'>\
                                         <img src='images/" + list[i].product.category.name + "/" + imgName+ ".png" + "' class='img-responsive' alt=''/></div>\
                                     <div class='cart-item-info'>\
+                                        <p>" + list[i].product.name + "</p><br/>\
                                         <ul class='qty'>\
-                                            <li><p>Quantity : <i id='quantity'"  + list[i].product.productID + ">" + list[i].quantity + "</i></p></li>\
+                                            <li><p class='quantity'>Quantity : <i id='quantity'"  + list[i].product.productID + ">" + list[i].quantity + "</i></p></li>\
                                             <li><p>Price Per Unit : <i id='price1'>" + list[i].product.price + "</i></p></li>\
                                         </ul>\
                                         <div class='delivery'>\
-                                            <p>Price : <i id='sum_price'" + list[i].product.productID + ">" + list[i].product.price * list[i].quantity + "</i></p>\
+                                            <p>Price : <i id='sum_price'" + list[i].product.productID + ">" + list[i].product.price * list[i].quantity + "</i> EGP</p>\
                                             <span>Delivered in 2-3 business days</span>\
                                             <div class='clearfix'></div>\
                                         </div>\
@@ -83,10 +92,88 @@
                         }
                         $("#total").html(total_price);
                         total_price += 150;
-                        $("#total_price").html(total_price);
+                        $("#total_price").html(total_price + " EGP");
                     }
                 });
             }
+            function addOrder() {
+                productsArray = [];
+                productIDsArray = [];
+                quantityArray = [];
+                pricesArray = [];
+                $("#showTable").html("<tr><td>Order(s)</td><td>Total Price</td></tr>");
+                $('.cart-item-info > p').each(function() {
+                    if(this.innerHTML != "")
+                        productsArray.push(this.innerHTML);
+                });
+                $('div > input').each(function() {
+                    if(this.value != "")
+                        productIDsArray.push(parseInt(this.value));
+                });
+                $('.delivery > p > i').each(function() {
+                    if(this.innerHTML != "")
+                        pricesArray.push(parseFloat(this.innerHTML));
+                });
+                $('.quantity > i').each(function() {
+                    if(this.innerHTML != "")
+                        quantityArray.push(parseInt(this.innerHTML));
+                });
+                if(productsArray.length > 0) {
+                    $("#modal-save").modal("show");
+                    for (var i = 0; i < productsArray.length; i++) {
+                        $("#showTable").append("<tr><td>" + productsArray[i] + " x " + quantityArray[i] + "</td><td>" + pricesArray[i] + "</td></tr>");
+                    }
+                    $("#showTable").append("<tr><td>Delivery Charges</td><td>150.00</td></tr>");
+                    $("#showTable").append("<tr><td><b>Total Payment</b></td><td><b>" + $("#total_price").html() + "</b></td></tr>");
+                }
+            }
+            
+            function checkCredit(msg, credit) {
+                if(msg == "credit") {
+                    var count = 0;
+                    $('div > input').each(function() {
+                        count++;
+                    });
+                    if(count > 0) {
+                        var currentCredit = parseFloat(credit);
+                        if(currentCredit > parseFloat($("#total_price").html())) {
+                            addOrder();
+                        }
+                        else {
+                            showModal("Sorry, you don't have enough credit!");
+                        }
+                    }
+                    else {
+                        showModal("You don't have items in the shopping cart!");
+                    }
+                } else if(msg == "log") {
+                    showModal("You must log in first to continue!");
+                }
+            }
+
+            function showModal(msg) {
+                $("#msg").html(msg);
+                $("#modal-registerd").modal("show");
+                setTimeout(function () {
+                    $("#modal-registerd").modal("hide");
+                }, 2000);
+            }
+
+            function sendOrder() {
+                console.log(productIDsArray);
+                $.ajax ({
+                    url: 'PlaceOrder',
+                    type: 'POST',
+                    data: 'productsArr=' + productIDsArray + "&quantityArr=" + quantityArray + "&total=" + parseFloat($("#total_price").html()),
+                    success: function (data) {
+                        console.log(data);
+                        $("#modal-save").modal("hide");
+                    },
+                    error: function () {
+                    }
+                });
+            }
+            
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
@@ -198,25 +285,72 @@
             </div>
         </div>
         <!---->
-        <!-- check-out -->
+        <!-- Modal -->
+        <div class="modal fade modal-ext" id="modal-save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" >
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="col-lg-9">
+                            <table class="table" id="showTable">
+                                <tr>
+                                    <td>Number</td>
+                                    <td>value</td> 
+                                </tr>
+                            </table>
+                            <button type="button" class="btn btn-default" onclick="sendOrder()">Submit Order</button>
+                        </div>
+                    </div>
+                    <!--Body-->
+                </div>
+                <!--/.Content-->
+            </div>
 
+        </div>
+                <div class="modal fade modal-ext" id="modal-registerd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 id="msg"><i class="fa fa-user"></i> Registration Done!</h3>
+                    </div>
+                    <!--Body-->
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
+        <!-- check-out -->
         <div class="container">
             <div class="check">
                 <div class="col-md-3 cart-total">
                     <div class="price-details">
                         <h3>Price Details</h3>
                         <span>Total</span>
-                        <span class="total1" id="total"></span>
+                        <span class="total1" id="total">0.00</span>
                         <span>Delivery Charges</span>
                         <span class="total1">150.00</span>
                         <div class="clearfix"></div>		 
                     </div>
                     <ul class="total_price">
-                        <li class="last_price"> <h4>TOTAL</h4></li>
-                        <li class="last_price" id="total_price"><span></span></li>
+                        <li class="last_price"><h4>TOTAL</h4></li>
+                        <li class="last_price"><span id="total_price"></span></li>
                     </ul> 
                     <div class="clearfix"></div>
-                    <a class="order" href="PlaceOrder">Place Order</a>
+                    <c:if test="${sessionScope.loggedInUser != null}">
+                        <a class="order" href="javascript:checkCredit('credit', ${sessionScope.loggedInUser.getCredit()});">Place Order</a>
+                    </c:if>
+                    <c:if test="${sessionScope.loggedInUser == null}">
+                        <a class="order" href="javascript:checkCredit('log', 0);">Place Order</a>
+                    </c:if>
                 </div>
                 <div class="col-md-9 cart-items" id="items">
                     <h1>My Shopping Cart (<i id="numOfItems"></i>)</h1>

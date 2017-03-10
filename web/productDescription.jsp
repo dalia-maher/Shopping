@@ -43,8 +43,6 @@
         <script>$(document).ready(function () {
                 $(".megamenu").megamenu();
             });</script>
-        <!--<script src="js/menu_jquery.js"></script>-->
-        <script src="js/simpleCart.min.js"></script>
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <script src="js/viewProduct.js"></script>

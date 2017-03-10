@@ -8,9 +8,10 @@ import java.util.ArrayList;
  * @author TahanyFawzy
  */
 public interface DBHandler {
-    int ERROR_IN_ADD=400;
-    int NEW_SHOOPINGITEM=1;
-    int EDITED_SHOOPINGITEM=2;
+    int ERROR_IN_ADD = 400;
+    int NEW_SHOOPINGITEM = 1;
+    int EDITED_SHOOPINGITEM = 2;
+    
     //Categories
     
     public boolean insertCategorey(String name);
@@ -53,6 +54,8 @@ public interface DBHandler {
 
     public boolean editProduct(int old, Product neww);
 
+    public boolean updateProductQuantity(int productID, int newQuantity);
+
     public ArrayList<Product> searchProduct(String query);
 
     public ArrayList<Product>searchProductByPrice(double price);
@@ -70,7 +73,10 @@ public interface DBHandler {
     public boolean updateCartQuantity(int productID, int customerID, int newQuantity);
     
     public ArrayList<ShoppingCart> getShoppingCart(String ID);
+    
     //orders
+
+    public int getMaxOrderNum(int customerID);
 
     public boolean insertOrder(Order o);
 
@@ -90,6 +96,8 @@ public interface DBHandler {
 
     public boolean updateCreditCard(String cardID, int customerID);
     
+    public boolean updateUserCredit(User user, double value);
+
     // /Interests
 
     public ArrayList<Category> getInterests(User user);

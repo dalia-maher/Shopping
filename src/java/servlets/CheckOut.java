@@ -24,11 +24,12 @@ import javax.servlet.http.HttpSession;
 public class CheckOut extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession userSession = req.getSession(false);
         User currentUser = (User) userSession.getAttribute("loggedInUser");
-       
-        resp.getWriter().write(new Gson().toJson((DBController.getInstance().getShoppingCart(currentUser.getCustomerID() + ""))));
+        if(currentUser != null) {
+            resp.getWriter().write(new Gson().toJson((DBController.getInstance().getShoppingCart(currentUser.getCustomerID() + ""))));
+        }
     }
 
 }

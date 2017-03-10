@@ -220,8 +220,9 @@
             <div class="container">
                 <div class="reg">
                     <h3>Register Now</h3>
-                    <p>Welcome, please enter the following details to continue.</p>
-                    <p>If you have previously registered with us, you can just login.</p>
+                    <label style="color: red;" id="validationMsg"></label>
+                    <p id='info'>Welcome, please enter the following details to continue.</p>
+                    <p id='info2'>If you have previously registered with us, you can just login.</p>
 
                    
                     <form action="Register" method="post" onsubmit="return validateForm();">
@@ -298,12 +299,13 @@
                        
                         <br/>
                         <input type="submit" value="Register Now"><br/>
-                        <label id="validationMsg"></label>
                         <% 
                             if(request.getParameter("success") != null) {
                         %>
                                 <script>
-                                    document.getElementById("validationMsg").innerHTML = "You're successfully registered!";
+                                    document.getElementById("info").innerHTML = "";
+                                    document.getElementById("info2").innerHTML = "";
+                                    document.getElementById("validationMsg").innerHTML = "You're successfully registered! click <a href='login.jsp'>here</a> to login";
                                 </script>
                         <%
                             } else if(request.getParameter("failed") != null) {
