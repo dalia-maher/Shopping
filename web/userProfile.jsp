@@ -252,8 +252,11 @@
                             </li>
                         </ul>
                         <input type="submit" value="Edit Profile">
+                        <a id="btn" type="button" href="userOrders.jsp">My Orders</a>
                     </form>
-
+                        
+                            
+                        
                     </c:if>
                     
                 </div>
