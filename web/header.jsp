@@ -167,7 +167,7 @@
                         <%User user = (User) session.getAttribute("loggedInUser");%>
                         <li class="top_link">Email:<a href="#"><%=user.getEmail()%></a></li>
                         <li class="top_link"><a href="Logout">Logout</a></li>
-                        <!-- to do: set credit pop-up -->
+                        <li class="top_link"><a href="#">Add Credit</a></li>
                         <li class="top_link"><a href="#" data-toggle="modal" data-target="#myModal">Add Credit</a></li>
                         <li class="top_link"><a href="userOrders.jsp">My Orders</a></li>
                         <li class="top_link"><a href="userProfile.jsp">My Account</a></li>					

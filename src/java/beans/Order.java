@@ -1,5 +1,7 @@
 package beans;
 
+import java.sql.Date;
+
 /**
  *
  * @author TahanyFawzy
@@ -10,9 +12,10 @@ public class Order
     private Product product;
     private User customer;
     private int quantity;
-    private String date;
+    private Date date;
     private double price;
-
+    int ordernumber;
+    
     public Order() {
     }
 
@@ -48,11 +51,11 @@ public class Order
         this.quantity = quantity;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -64,14 +67,22 @@ public class Order
         this.price = price;
     }
 
-    public Order(int orderID, Product product, User customer, int quantity, String date, double price) {
+    public int getOrdernumber() {
+        return ordernumber;
+    }
+
+    public void setOrdernumber(int ordernumber) {
+        this.ordernumber = ordernumber;
+    }
+
+    public Order(int orderID, Product product, User customer, int quantity, Date date, double price, int ordernumber) {
         this.orderID = orderID;
         this.product = product;
         this.customer = customer;
         this.quantity = quantity;
         this.date = date;
         this.price = price;
+        this.ordernumber = ordernumber;
     }
-
     
 }
