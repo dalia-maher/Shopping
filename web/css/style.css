@@ -1865,7 +1865,7 @@ h4.panel-title a {
   font-size: 14px;
 }
 .panel-default > .panel-heading {
-  color: #fff;
+  color:#F65A5B;
   background-color:#f65a5b;
     border-color:#f65a5b;
 }
@@ -2702,6 +2702,7 @@ label.radio {
 	  margin-top: 1em;
 	}
 	h4.panel-title a {
+               
 		font-size: 14px;
 	}
 	.products-grd {
