@@ -72,7 +72,7 @@ public class PlaceOrder extends HttpServlet {
         }
         
         // reset shopping cart
-        empty = db.resetShoppingCart(currentUser);
+        empty = db.resetShoppingCart(currentUser.getCustomerID());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
