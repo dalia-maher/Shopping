@@ -8,7 +8,9 @@ import java.util.ArrayList;
  * @author TahanyFawzy
  */
 public interface DBHandler {
-
+    int ERROR_IN_ADD=400;
+    int NEW_SHOOPINGITEM=1;
+    int EDITED_SHOOPINGITEM=2;
     //Categories
     
     public boolean insertCategorey(String name);
@@ -41,28 +43,33 @@ public interface DBHandler {
     
     public boolean addProduct(Product product);//edit or add the same function
 
-    public boolean deleteProduct(Product product);
+    public boolean deleteProduct(int productID);
+
+    public ArrayList<Product> getAllProducts(int offset, int limit);
 
     public ArrayList<Product> getAllProducts();
     
     public ArrayList<Product>getProductsCategory(int categoryID);
 
-    public boolean editProduct(Product old, Product neww);
+    public boolean editProduct(int old, Product neww);
 
     public ArrayList<Product> searchProduct(String query);
 
     public ArrayList<Product>searchProductByPrice(double price);
     
+    public Product getProduct(int ID);
+    
     //shopping cart
     
-    public boolean addToShoppingCart(Product product, User customer, int quantity);
+    public int addToShoppingCart(int productID, int customerID, int quantity);
 
-    public boolean removeFromShoppingCart(Product product, User customer);
+    public boolean removeFromShoppingCart(int productID, int customerID);
 
-    public boolean resetShoppingCart(User customer);
+    public boolean resetShoppingCart(int customerID);
 
-    public boolean updateCartQuantity(Product product, User customer, int newQuantity);
+    public boolean updateCartQuantity(int productID, int customerID, int newQuantity);
     
+    public ArrayList<ShoppingCart> getShoppingCart(String ID);
     //orders
 
     public boolean insertOrder(Order o);
@@ -79,9 +86,9 @@ public interface DBHandler {
 
     public ArrayList<CreditCard> getAllCredits();
     
-    public int getCreditValue(int cardID);
+    public int getCreditValue(String cardID);
 
-    public boolean updateCreditCard(int cardID, int customerID);
+    public boolean updateCreditCard(String cardID, int customerID);
     
     // /Interests
 

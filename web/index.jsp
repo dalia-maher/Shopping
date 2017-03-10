@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="beans.User"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,11 +40,11 @@
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-        <script src="js/simpleCart.min.js"> </script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         
     </head>
     <body>
+       
         <%@ include file="header.jsp" %>
         <div class="mega_nav">
             <div class="container">
@@ -127,17 +130,17 @@
                         </li>				
 											
                     </ul> 
-                    <div class="search">
                         <form action ="SearchProducts" method ="get">
-                            <input type="text" value="" placeholder="Search..." name = "keyword">
-                            <input type="submit" value="">
+                            <div class="search">
+                                <input type="text" value="" placeholder="Search..." name = "keyword">
+                                <input type="submit" value="">
+                            </div>
                             <select name = searchon>
                                 
                                 <option value="name">Name</option>
                                 <option value="price">Price</option>
                             </select>
                         </form>
-                    </div>
 			<div class="clearfix"></div>
                     </div>
             </div>

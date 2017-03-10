@@ -4,6 +4,7 @@
     Author     : Dalia
 --%>
 
+<%@page import="java.sql.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,7 +36,6 @@
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="js/simpleCart.min.js"></script>
         <link rel="stylesheet" href="css/jquery-ui.css" type="text/css">
         <script src="js/jquery-1.12.4.js"></script>
         <script src="js/jquery-ui.js"></script>
@@ -113,6 +113,7 @@
     <body>
         <script>
             $(function () {
+                console.log("inside function");
                 $("#datepicker").datepicker();
             });
         </script>
@@ -221,35 +222,38 @@
                     <h3>Register Now</h3>
                     <p>Welcome, please enter the following details to continue.</p>
                     <p>If you have previously registered with us, you can just login.</p>
+
+                   
                     <form action="Register" method="post" onsubmit="return validateForm();">
+
                         <ul>
-                            <li class="text-info">First Name: </li>
+                            <li class="text-info">First Name: *</li>
                             <li><input type="text" name="fname" value="" required></li>
                         </ul>
                         <ul>
-                            <li class="text-info">Last Name: </li>
+                            <li class="text-info">Last Name: *</li>
                             <li><input type="text" name="lname" value="" required></li>
                         </ul>				 
                         <ul>
-                            <li class="text-info">User Name: </li>
+                            <li class="text-info">User Name: *</li>
                             <li><input type="text" name="uname" id="uname" value="" onchange="validateForm('uname')" required></li>
                             <li>
                                 <label style="color: red; margin-left: 235px;;" id="unameValidation"></label>
                             </li>
                         </ul>				 
                         <ul>
-                            <li class="text-info">Email: </li>
+                            <li class="text-info">Email: *</li>
                             <li><input type="text" name="email" id="email" value="" onchange="validateForm('email')" required></li>
                             <li>
                                 <label style="color: red; margin-left: 235px;" id="emailValidation"></label>
                             </li>
                         </ul>
                         <ul>
-                            <li class="text-info">Password: </li>
+                            <li class="text-info">Password: *</li>
                             <li><input type="password" id="password" name="password" value="" required></li>
                         </ul>
                         <ul>
-                            <li class="text-info">Re-enter Password:</li>
+                            <li class="text-info">Re-enter Password: *</li>
                             <li><input type="password" id="repeat" name="repeat" value="" onchange="validateForm('password')" required>
                             </li>
                             <li>
@@ -257,16 +261,16 @@
                             </li>
                         </ul>
                         <ul>
-                            <li class="text-info">Job:</li>
+                            <li class="text-info">Job: *</li>
                             <li><input type="text" name="job" value="" required></li>
                         </ul>
                         <ul>
-                            <li class="text-info">Address:</li>
+                            <li class="text-info">Address: *</li>
                             <li><input type="text" name="address" value="" required></li>
                         </ul>
                         <ul>
-                            <li class="text-info">BirthDay Date:</li>
-                            <li><input type="text" name="bdate" id="datepicker" required></li>
+                            <li class="text-info">Birth Date: *</li>
+                            <li><input type="date" name="bdate" required></li>
                         </ul>
                         <ul>
                             <li class="text-info">Credit Card ID:</li>
@@ -287,8 +291,8 @@
                         </ul>
                         <script> $("#datepicker").datepicker({
                             onSelect: function() { 
-                            var dateObject = $(this).datepicker('getDate'); 
-                             console.log(dateObject);
+                                var dateObject = $(this).datepicker('getDate'); 
+                                console.log("date picker = " + dateObject);
                             }
                         });</script>
                        

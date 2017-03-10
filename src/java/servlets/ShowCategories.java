@@ -29,6 +29,7 @@ public class ShowCategories extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.config = config;
+
     }
     
     
@@ -37,7 +38,11 @@ public class ShowCategories extends HttpServlet {
             throws ServletException, IOException {
         
         ArrayList<Category> categories = DBController.getInstance().getAllCategories();
+
+        //request.setAttribute("categoriesList", categories);
         config.getServletContext().setAttribute("categoriesList", categories);
+        
+
     }
 
 }

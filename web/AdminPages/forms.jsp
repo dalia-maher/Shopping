@@ -34,66 +34,126 @@
                 var productPrice = $("#txtProductPrice").val();
                 var productQuantity = $("#txtProductQuantity").val();
                 var productDesc = $("#txtProductDesc").val();
+                var catgorey = $("#selectCatgories option:selected").text();
+                var catgoreyID = $("#selectCatgories option:selected").attr("id");
                 var files = document.getElementById("inputImages").files;
+                if (productname != "" && parseFloat(productPrice) != "NaN" && productDesc != "" && parseInt(catgoreyID) != "NaN") {
+                    var formdata = new FormData();
+                    formdata.append("name", productname);
+                    formdata.append("price", productPrice);
+                    formdata.append("quantity", productQuantity);
+                    formdata.append("desc", productDesc);
+                    formdata.append("imgLength", files.length);
+                    formdata.append("catgorey", catgorey);
+                    formdata.append("catgoreyID", catgoreyID);
 
-
-
-                var formdata = new FormData();
-
-                formdata.append("name", productname);
-                formdata.append("price", productPrice);
-                formdata.append("quantoty", productQuantity);
-                formdata.append("desc", productDesc);
-                formdata.append("imgLength", files.length);
-
-                for (var i = 0; i < files.length; i++)
-                {
-                    formdata.append("file" + i, files[0]);
-                }
-                $.ajax({
-                    url: 'http://localhost:8080/Shopping/ProductServlet',
-                    type: 'POST',
-                    data: formdata,
-                    async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function () {
-                        alert('Form Submitted!');
-                    },
-                    error: function () {
-                        alert("error in ajax form submission");
+                    for (var i = 0; i < files.length; i++)
+                    {
+                        formdata.append("file" + i, files[i]);
                     }
-                });
-
+                    $.ajax({
+                        url: '../ProductServlet',
+                        type: 'POST',
+                        data: formdata,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function () {
+                            showModal("Saved");
+                            $("#reset").click();
+                            getProducts();
+                        },
+                        error: function () {
+                            showModal("Try Again");
+                        }
+                    });
+                } else {
+                            showModal("Data Validation Fails");
+                    //error handle
+                }
+                return false;
 
             }
-
+            function showModal(msg) {
+                $("#msg").html(msg);
+                $("#modal-registerd").modal("show");
+                setTimeout(function () {
+                    $("#modal-registerd").modal("hide");
+                }, 1200);
+            }
             function  btnAddCatgoreyAction() {
                 var catgoreyname = $("#txtCatgorey").val();
                 if (catgoreyname != "") {
-                    $.ajax({url: 'http://localhost:8080/Shopping/AddCatgorey', //servlet url
+                    $.ajax({url: '../AddCatgorey', //servlet url
                         type: 'POST', //servlet request type
                         data: {"name": catgoreyname}, //input data
                         success: function (data, textStatus, jqXHR) {
                             if (data == "true") {
                                 $("#txtCatgorey").val("");
-                                $("#catgoretStatus").html("Saved");
+                                showModal("Saved");
                                 getCatgories();
-
                             } else
                             {
-                                $("#catgoretStatus").html("Error Happened,Please Try Again");
+                                showModal("Error Happened,Please Try Again");
                             }
                         }
                     });
                 }
+            }            
+            function onloadd() {
+                getCatgories();
+                getProducts();
+                $(function () {
+                    $('#search').keyup(function () {
+                        var current_query = $('#search').val();
+                        if (current_query !== "") {
+                            $(".list-group li").hide();
+                            $(".list-group li").each(function () {
+                                var current_keyword = $(this).text();
+                                if (current_keyword.indexOf(current_query) >= 0) {
+                                    $(this).show();
+                                }
+                                ;
+                            });
+                        } else {
+                            $(".list-group li").show();
+                        }
+                        ;
+                    });
+                });
+
             }
-            function getCatgories() {
-                $.ajax({url: 'http://localhost:8080/Shopping/AddCatgorey', //servlet url
+        
+             function delProduct(id){
+                  $.ajax({url: '../DeleteProduct', //servlet url
+                    type: 'POST', //servlet request type
+                    dataType: 'json', //For output type
+                    data: {'id':id},
+                    success: function (data, textStatus, jqXHR) {
+                        getProducts();
+                    }
+                });                 
+            }
+            function getProducts(){                
+                 $.ajax({url: '../ProductServlet', //servlet url
                     type: 'GET', //servlet request type
                     dataType: 'json', //For output type
-
+                    success: function (data, textStatus, jqXHR) {
+                        $("#lstProducts").empty();
+                        for (var i = 0; i < data.length; i++) {
+                            var item="<li class=\"list-group-item \">"+data[i].name+
+                                "<a href=\"javascript:delProduct("+data[i].productID+");\"><span class=\"glyphicon glyphicon-remove pull-right marginitem\"></span></a>"+
+                    "</li>";
+                            $("#lstProducts").append(item);
+                        }
+                    }
+                });                
+            }
+            function getCatgories() {
+                $.ajax({url: '../AddCatgorey', //servlet url
+                    type: 'GET', //servlet request type
+                    dataType: 'json', //For output type
                     success: function (data, textStatus, jqXHR) {
                         $("#selectCatgories").empty();
                         for (var i = 0; i < data.length; i++) {
@@ -101,14 +161,50 @@
                         }
                     }
                 });
-
             }
 
         </script>
-    </head>
-
-    <body onload="getCatgories()">
         <style>
+            
+            
+            .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
             .color{
                 background-color: #f65a5b;
             }
@@ -127,59 +223,41 @@
             .top-nav>li>a {
                 color: #fff;
             }
+
+            .navie{
+                max-height: 250px;
+                overflow-y:scroll; 
+            }
+            .marginitem{
+                
+                    margin-right: 5px;
+    margin-left: 5px;
+
+            }
         </style>
+    </head>
+
+    <body onload="onloadd()">
+        <div class="modal fade modal-ext" id="modal-registerd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 id="msg"><i class="fa fa-user"></i> Registration Done!</h3>
+                    </div>
+                    <!--Body-->
+
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+             
         <div id="wrapper">
-
-            <nav class="navbar navbar-inverse navbar-fixed-top color" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header ">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp">SB Admin</a>
-                </div>
-                <!-- Top Menu Items -->
-
-                <ul class="nav navbar-right top-nav ">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav color">
-                        <li >
-                            <a href="index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                        </li>
-
-                        <li>
-                            <a href="tables.jsp"><i class="fa fa-fw fa-table"></i> Users</a>
-                        </li>
-                        <li class="active">
-                            <a href="forms.jsp"><i class="fa fa-fw fa-edit"></i> Products</a>
-                        </li>
-
-                        <li>
-                            <a href="blank-page.jsp"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </nav>
-
+            <%@ include file="navHeader.jsp" %>
             <div id="page-wrapper">
 
                 <div class="container-fluid">
@@ -195,7 +273,7 @@
                                     <i class="fa fa-dashboard"></i>  <a href="index.jsp">Dashboard</a>
                                 </li>
                                 <li class="active">
-                                    <i class="fa fa-edit"></i> Products
+                                    <i class="fa fa-edit"></i> New Products
                                 </li>
                             </ol>
                         </div>
@@ -205,24 +283,24 @@
                     <div class="row">
                         <div class="col-lg-6">
 
-                            <form role="form" id="addProductForm" enctype="multipart/form-data">
+                            <form onsubmit="return btnSaveProduct(event);" role="form" id="addProductForm" enctype="multipart/form-data">
 
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input class="form-control" id="txtProductName" >
+                                    <input class="form-control" id="txtProductName" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Product Price</label>
-                                    <input class="form-control" type="number" id="txtProductPrice">
+                                    <input class="form-control" type="number" id="txtProductPrice" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Available Quantity</label>
-                                    <input class="form-control" type="number" id="txtProductQuantity">
+                                    <input class="form-control" type="number" id="txtProductQuantity" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea class="form-control" rows="3" id="txtProductDesc"></textarea>
+                                    <textarea class="form-control" rows="3" id="txtProductDesc" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label>Images</label>
@@ -230,28 +308,55 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Catgorey</label>
+                                    <label>Category</label>
                                     <select class="form-control" id="selectCatgories">                                 
                                     </select>
                                 </div>
-                                <button type="submit" id="btnSave" onclick="btnSaveProduct(event);" class="btn btn-default">Save</button>
-                                <button type="reset" class="btn btn-default">Reset</button>
+                                <button type="submit" id="btnSave"  class="btn btn-default">Save</button>
+                                <button type="reset" id="reset" class="btn btn-default">Reset</button>
 
                             </form>
 
                         </div>
-                        <div class="col-lg-6">
-                            <h1>Catogries</h1>
+                        <div class="col-lg-6"> <!-- bdayet al goze2 al ymeeen-->
+                            <h1>Categories</h1>
 
                             <div class="form-group">
-                                <label for="disabledSelect">New Catogrey</label>
-                                <input class="form-control" id="txtCatgorey" type="text" placeholder="New Catgorey name" >
+                                <label for="disabledSelect">New Category</label>
+                                <input class="form-control" id="txtCatgorey" type="text" placeholder="New Category name" >
                             </div>
 
                             <button onclick="btnAddCatgoreyAction();"  class="btn btn-primary">Save</button>
                             <div class="form-group">
                                 <label id="catgoretStatus"></label>
                             </div>
+                        </div>
+                        <div id="custom-search-input">
+                            <div class="input-group ">
+                                <input id="search" type="text" class="form-control input-lg" placeholder="Search" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-lg" type="button">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <ul class="list-group col-lg-6 navie" id="lstProducts">
+
+                                <li class="list-group-item">Cras justo odio
+                                <a href="#"><span class="glyphicon glyphicon-remove pull-right marginitem"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right marginitem"></span></a>
+                                </li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Morbi leo risus</li>
+                                <li class="list-group-item">Porta ac consectetur ac</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
                         </div>
                     </div>
                     <!-- /.row -->

@@ -3,7 +3,7 @@
 //});
 function beginRetrieving()
 {
-    setInterval(getCustomers, 10);
+    setInterval(getCustomers, 2000);
 }
 function getCustomers() {
     console.log("getcustomers");

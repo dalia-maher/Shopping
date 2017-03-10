@@ -1,11 +1,18 @@
+<%-- 
+    Document   : editProfile
+    Created on : Mar 4, 2017, 10:56:29 AM
+    Author     : Mrawi
+--%>
 
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="beans.User"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pendent Store a E-Commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Products :: w3layouts</title>
+        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,89 +26,67 @@
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-        
-         <script>
-                                function getProduct() {
-                                    var catId = $("#catId").text();
-                                    var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                                    +"&categoryID=" + catId;
-                                    $.get(url, displayProduct, 'json');
-
-                                }
-                                function displayProduct(responseTxt, statusTxt, xhr) {
-                                    // var messages = responseTxt.
-                                    serverPath = $("#serverPath").text();
-                                    //serverPath = serverPath.replace(/\\/g, "\\\\");
-                                    if (statusTxt == "success") {
-                                    console.log(responseTxt.length + "size");
-                                    for (i = 0; i < responseTxt.length;i++)
-                                    {   var ProName=responseTxt[i].name;
-                                        ProName=ProName.replace(/\s/g, "");
-                                        var catName = responseTxt[i].category.name;
-                                        catName = catName.replace(/\s/g, "");
-                                        var data = responseTxt[i].images;
-                                        var arr = data.split("&&");
-                                        //alert(arr[0]);
-                                        $("#result").append("<div class='products-grd'>" +
-                                            "<div class='p-one simpleCart_shelfItem prd' > "+
-                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img src=\"" + "images/"+catName+"/"+arr[0]+".jpg" + "\"alt='Error' class='img-responsive' />" +
-                                            "<div class='mask'>" +
-                                            "<span>Quick View</span>" +
-                                            "</div>" +
-                                            "</a>" +
-                                            "<h4>" + responseTxt[i].name + "</h4>" +
-                                            "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
-
-                                            "</div>" +
-                                            "</div>");
-                                    }
-                                }
-                            }
-
-                            </script>
-
+        <!-- start-smoth-scrolling -->
+        <script type="text/javascript" src="js/move-top.js"></script>
+        <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
-jQuery(document).ready(function ($) {
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-    });
-    $("#serverPath").hide();
-    $("#catId").hide();
-    getProduct();
-});
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                });
+
+
+            });
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-        <script type="text/javascript" src="js/megamenu.js"></script>
-        <script>$(document).ready(function () {
-    $(".megamenu").megamenu();
 
-});</script>
-        
+
+        <script src="js/menu_jquery.js"></script>
+        <script src="js/simpleCart.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-        <!-- the jScrollPane script -->
-        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
-        <script type="text/javascript" id="sourcecode">
-$(function () {
-    $('.scroll-pane').jScrollPane();
-});
-        </script>
-        <!-- //the jScrollPane script -->
-
+        <c:import url="/ShowCategories" />
     </head>
+
     <body>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
+        <script>
+
+            function validatePassword() {
+                var password = $("#pass").val();
+                var confirmPassword = $("#confirm").val();
+                if (password == confirmPassword) {
+                    document.getElementById("validation").innerHTML = "";
+                    return true;
+                } else {
+                    document.getElementById("validation").innerHTML = "passwords don't match";
+                    return false;
+                }
+
+            }
+
+        </script>
+
+        <!-- header -->
         <%@ include file="header.jsp" %>
-        <p id="serverPath"><%=getServletContext().getRealPath("")%></p>
-        <p id="catId">${param.categoryID}</p>
+        <!------>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
                     <!-- start header menu -->
                     <ul class="megamenu skyblue">
-                        <li class="grid"><a class="color1" href="index.jsp">Home</a></li>
+                        <li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
                         <li class="grid"><a class="color1" href="#">Category</a>
                             <div class="megapanel">
                                 <div class="row">
@@ -110,15 +95,8 @@ $(function () {
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
                                 </div>
+                            </div>
                         </li>
                         <li><a class="color1" href="#">catalog</a>
                             <div class="megapanel">
@@ -185,8 +163,8 @@ $(function () {
                                 </div>
                             </div>
                         </li>
-                                            						
-                    </ul> 
+                    </ul>
+
                     <div class="search">
                         <form>
                             <input type="text" value="" placeholder="Search...">
@@ -198,20 +176,89 @@ $(function () {
             </div>
         </div>
         <!---->
-        <!-- products -->
-        <div class="products">
+        <!-- edit-form -->
+
+        <c:import url="/ShowCategories"/>
+        <div class="reg-form">
             <div class="container">
-                <div class="products-grids">
-                    <div class="col-md-12 products-grid-left">
-                        <div id="result" class="products-grid-lft">
-                           
-                           
-                        </div>
-                    </div>
+                <div class="reg">
+                    <c:if test="${sessionScope.loggedInUser != null}">
+
+
+                        <h3>${sessionScope.loggedInUser.userName}</h3>
+
+                        <form action="SaveEditProfile" method="post" onsubmit="return validatePassword()">
+                            <ul>
+                                <li class="text-info">First Name: </li>
+                                <li><input type="text" name="fname" value="${sessionScope.loggedInUser.getFirstName()}" required></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Last Name: </li>
+                                <li><input type="text" name="lname" value="${sessionScope.loggedInUser.getLastName()}" required></li>
+                            </ul>				 
+                            <!--<ul>
+                                <li class="text-info">Email: </li>
+                                <li><input type="text" name="email" value="${sessionScope.loggedInUser.getEmail()}"></li>
+                            </ul> -->
+                            <ul>
+                                <li class="text-info">Password: </li>
+                                <li><input type="text" name="password" id="pass" value="${sessionScope.loggedInUser.getPassword()}" required></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Re-enter Password:</li>
+                                <li><input type="text" name="repeat"  id="confirm" value="${sessionScope.loggedInUser.getPassword()}" required onchange="validatePassword()"/> </li><label id="validation"></label>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Job:</li>
+                                <li><input type="text" name="job" value="${sessionScope.loggedInUser.getJob()}"></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">Address:</li>
+                                <li><input type="text" name="address" value="${sessionScope.loggedInUser.getAddresse()}"></li>
+                            </ul>
+                            <ul>
+                                <li class="text-info">BirthDay Date:</li>
+                                <li><input type="text" name="bdate" id="datepicker" value="${sessionScope.loggedInUser.getBOD()}"></li>
+                            </ul>
+
+                            <c:import url="/ViewProfile" />
+                            <ul>
+                                <li class="text-info">Interests:</li>
+                                <li>
+                                    <br/>
+                                    <ul>
+                                        <c:set var="numberOfMathched" value="0"/>
+                                        <c:forEach items= "${applicationScope.categoriesList}" var="category">
+
+                                            <li><input id="${category.categoryID}" type="checkbox"  name ="userInterest"  value="<c:out value="${category.getCategoryID()}"/> "></li>
+                                            <li><c:out value="${category.getName()}"/></li>
+                                            <br>
+
+                                        </c:forEach> 
+                                        <script>
+                                            <c:forEach items= "${requestScope.userInterest}" var="interest">
+                                            document.getElementById(${interest.categoryID}).checked = true;
+
+                                            </c:forEach>
+                                        </script>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <script> $("#datepicker").datepicker({
+                                    onSelect: function () {
+                                        var dateObject = $(this).datepicker('getDate');
+                                        console.log(dateObject);
+                                    }
+                                });</script>
+
+                            <input type="submit" value="Save">
+                        </form>
+
+                    </c:if>
                 </div>
             </div>
         </div>
-        <!-- //products -->
-            <%@ include file="footer.html" %>
+        <!-- footer -->
+        <%@ include file="footer.html" %>
     </body>
 </html>

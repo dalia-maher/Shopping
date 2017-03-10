@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import beans.User;
 import connections.DBController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,33 +14,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Dalia
+ * @author Mrawi
  */
-@WebServlet(name = "CheckCredit", urlPatterns = {"/CheckCredit"})
-public class CheckCredit extends HttpServlet {
+@WebServlet(name = "DeleteAllCart", urlPatterns = {"/DeleteAllCart"})
+public class DeleteAllCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String credit = request.getParameter("credit");
-        try (PrintWriter out = response.getWriter()) {
-            if(credit.trim().equals("")) {
-                out.print("true");
-            }
-            else {
-
-                int cardValue = DBController.getInstance().getCreditValue(credit);
-                if(cardValue > 0)
-                   out.print("true");
-                else
-                   out.print("false");
-
-            }
+        
+        HttpSession userSession = request.getSession(false);
+        User currentUser = (User) userSession.getAttribute("loggedInUser");
+       
+        
+        if(DBController.getInstance().resetShoppingCart(currentUser.getCustomerID())){
+            response.getWriter().print("true");
         }
+
     }
 
 }

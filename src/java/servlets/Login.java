@@ -34,9 +34,10 @@ public class Login extends HttpServlet {
         if(user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", user);
+            System.out.println("from login user credit is :"+ user.getCredit());
             if(user.isType()) {
                 // todo: set admin page
-                response.sendRedirect("adminPage.jsp");
+                response.sendRedirect("AdminPages/index.jsp");
             }
             else {
                 response.sendRedirect("index.jsp");
