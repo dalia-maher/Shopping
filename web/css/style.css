@@ -1865,9 +1865,9 @@ h4.panel-title a {
   font-size: 14px;
 }
 .panel-default > .panel-heading {
-  color:#F65A5B;
-  background-color:#f65a5b;
-    border-color:#f65a5b;
+  color:#fff;
+  background-color:#F65A5B;
+  border-color:#F65A5B;
 }
 .collpse{
 	padding:3em 0 5em;
