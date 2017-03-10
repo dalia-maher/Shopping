@@ -38,27 +38,32 @@ public class Register extends HttpServlet {
         String bdate = request.getParameter("bdate");
         String credit = request.getParameter("credit");
         
+        DBController dbCon = DBController.getInstance();
         String[] selectedInterests = request.getParameterValues("interest");
         LocalDate date = LocalDate.parse(bdate);
         System.out.println("bdate = " + date);
 
-        double creditValue = DBController.getInstance().getCreditValue(credit);
+        double creditValue;
+        if(!credit.equals("")) {
+            creditValue = dbCon.getCreditValue(credit);
+            dbCon.updateCreditCard(credit, dbCon.getUserID(email));
+        }
+        else {
+            creditValue = 0;
+        }
         
         User user = new User(email, userName, password, firstName, lastName, address, creditValue, false, Date.valueOf(date), job);
-        boolean signed_up = DBController.getInstance().signUp(user);
+        boolean signed_up = dbCon.signUp(user);
 
         if(signed_up) {
-            ArrayList<Integer> interests = new ArrayList<>(selectedInterests.length);
-            for (String interest : selectedInterests) {
-                interests.add(Integer.parseInt(interest.trim()));
+            if(selectedInterests != null) {
+                ArrayList<Integer> interests = new ArrayList<>(selectedInterests.length);
+                for (String interest : selectedInterests) {
+                    interests.add(Integer.parseInt(interest.trim()));
+                }
+                boolean added_interests = dbCon.insertInterests(user, interests);
             }
-
-            DBController dbCon = DBController.getInstance();
-            boolean added_interests = dbCon.insertInterests(user, interests);
-            if(added_interests) {
-                DBController.getInstance().updateCreditCard(credit, dbCon.getUserID(email));
-                response.sendRedirect("register.jsp?success=1");
-            }
+            response.sendRedirect("register.jsp?success=1");
         }
         else
             response.sendRedirect("register.jsp?failed=1");

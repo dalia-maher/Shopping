@@ -366,8 +366,22 @@ public class DBController implements DBHandler {
             preparedStatement.setInt(4, neww.getQuantity());
             preparedStatement.setDouble(5, neww.getPrice());
             preparedStatement.setString(6, neww.getImages());
-
             preparedStatement.setInt(7, old);
+
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            System.err.println("error in editiing product");
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateProductQuantity(int productID, int newQuantity) {
+        try {
+            preparedStatement = connection.prepareStatement("UPDATE `product` SET `quantity`=?,"
+                    + "WHERE `ID`=?");
+            preparedStatement.setInt(1, productID);
 
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
@@ -557,6 +571,22 @@ public class DBController implements DBHandler {
     }
 
     @Override
+    public int getMaxOrderNum(int customerID) {
+        try {
+            preparedStatement = connection.prepareStatement("SELECT MAX(`ordernumber`) FROM `order` WHERE `customerID` = ?");
+            preparedStatement.setInt(1, customerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selecting all orders");
+        }
+        return 0;
+    }
+    
+    @Override
     public boolean insertOrder(Order o) {
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO `order`(`productID`, "
@@ -566,7 +596,7 @@ public class DBController implements DBHandler {
             preparedStatement.setInt(3, o.getQuantity());
             preparedStatement.setDate(4, o.getDate());
             preparedStatement.setDouble(5, o.getPrice());
-            preparedStatement.setInt(6,o.getOrdernumber());
+            preparedStatement.setDouble(6, o.getOrderNumber());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in insertorder");
@@ -575,6 +605,7 @@ public class DBController implements DBHandler {
         }
     }
 
+    @Override
     public Product getProduct(int ID) {
         ArrayList<Product> allProducts = getAllProducts();
         for (int i = 0; i < allProducts.size(); i++) {
@@ -590,12 +621,12 @@ public class DBController implements DBHandler {
         ArrayList<Order> allOrders = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, `customerID`, "
-                    + "`quantity`, `date`, `price` , `ordernumber` FROM `order` ");
+                    + "`quantity`, `date`, `price`, `ordernumber` FROM `order` ");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
                         getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getDate("date"), resultSet.getDouble("price") , resultSet.getInt("ordernumber")));
+                        resultSet.getDate("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
             }
             return allOrders;
         } catch (SQLException ex) {
@@ -624,7 +655,7 @@ public class DBController implements DBHandler {
 //            System.err.println("error in selecting all orders by product");
 //            return null;
 //        }
-return null;
+        return null;
     }
 
     @Override
@@ -639,7 +670,7 @@ return null;
             while (resultSet.next()) {
                 allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
                         getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getDate("date"), resultSet.getDouble("price"),resultSet.getInt("ordernumber")));
+                        resultSet.getDate("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
             }
             return allOrders;
         } catch (SQLException ex) {
@@ -682,6 +713,22 @@ return null;
                 System.err.println("error in updating credits");
                 flag = false;
             }
+        }
+        return flag;
+    }
+
+    @Override
+    public boolean updateUserCredit(User user, double value) {
+        boolean flag = false;
+        try {
+            preparedStatement = connection.prepareStatement("UPDATE `customer` SET `credit` = ? WHERE `customerID` = ?");
+            preparedStatement.setDouble(1, user.getCredit() - value);
+            preparedStatement.setInt(2, user.getCustomerID());
+            flag = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in updating credits");
+            flag = false;
         }
         return flag;
     }

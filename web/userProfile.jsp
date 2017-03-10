@@ -238,7 +238,7 @@
                             </li>
                         </ul>
                         <input type="submit" value="Edit Profile">
-                        <a id="btn" type="button" href="userOrders.jsp">My Orders</a>
+                        <a id="btn" type="button" href="GetOrders">My Orders</a>
                     </form>
                         
                             
