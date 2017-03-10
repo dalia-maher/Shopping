@@ -58,7 +58,7 @@
             valuesArray = [];
             amountArray = [];
             var sum = 0;
-            $("#showTable").html("<tr><td>Number O                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              f Cards</td><td>Values</td></tr>");
+            $("#showTable").html("<tr><td>Number Of Cards</td><td>Values</td></tr>");
             $('tr > td > input').each(function() {
                 if(this.value!=""&&parseInt(this.value))
             valuesArray.push(this.value);

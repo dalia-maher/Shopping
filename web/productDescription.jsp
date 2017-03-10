@@ -44,13 +44,37 @@
         <script>$(document).ready(function () {
                 $(".megamenu").megamenu();
             });</script>
-        <!--<script src="js/menu_jquery.js"></script>-->
-        <script src="js/simpleCart.min.js"></script>
-        <script>$(document).ready(function () {
-                $(".megamenu").megamenu();
-            });</script>
+        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <script src="js/viewProduct.js"></script>
+        <style>
+	#slideshow1 {
+		  margin: 10px auto;
+		  position: relative;
+		  width: 332px;
+		  height: 300px;
+		  padding: 10px;
+		  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+		  float: left; 
+		  display: block;
+		}
+            #img1
+            {
+                    width: 90%;
+                    height: 90%;
+                    
+            }
+            #slideshow1 > div {
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+            }
+                #div2{
+                    width: 300px;
+                }
+	</style>
     </head>
 
     <body>
@@ -127,34 +151,6 @@
             <div class="container">
                 <div class="single-page" >
                     <input type="text" id="productID" hidden value = "${param.productID}" />
-                    	<style>
-	#slideshow1 {
-		  margin: 10px auto;
-		  position: relative;
-		  width: 332px;
-		  height: 300px;
-		  padding: 10px;
-		  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-		  float: left; 
-		  display: block;
-		}
-            #img1
-            {
-                    width: 90%;
-                    height: 90%;
-                    
-            }
-            #slideshow1 > div {
-              position: absolute;
-              top: 10px;
-              left: 10px;
-              right: 10px;
-              bottom: 10px;
-            }
-                #div2{
-                    width: 300px;
-                }
-	</style>
         <script>
 		$("#slideshow1 > div:gt(0)").hide();
 
@@ -233,10 +229,10 @@
                     </script>
                     <!--<form method="post" action="AddingToCart?prooductID=${param.productID}">-->
                     <div class="details-left-info">
-                        <h3 id = "productName" name="priceProduct"></h3>
+                        <h3 id = "productName"></h3>
                         <h4 id = "categoryName"></h4>
                         <div class="simpleCart_shelfItem">
-                            <p><h2><span class="item_price qwe" id = "price" name="priceProduct"></span></h2></p>
+                            <p><h2><span class="item_price qwe" id = "price"></span></h2></p>
                             <div class="clearfix"> </div>
 <!--                        </div>
                         <div class="col-rad tyy">-->
