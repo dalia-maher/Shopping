@@ -77,35 +77,7 @@
                                     </div>
                                 </div>
                         </li>
-                        <li><a class="color1" href="#">catalog</a>
-                            <div class="megapanel">
-                                <div class="row">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Popular Brands</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Slave Bracelets</a></li>
-                                                <li><a href="products.jsp">Rings</a></li>
-                                                <li><a href="products.jsp">Necklaces</a></li>
-                                                <li><a href="products.jsp">Chokers</a></li>
-                                                <li><a href="products.jsp">Cuff Links</a></li>									
-                                                <li><a href="products.jsp">Bangles</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                                                      
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                </div>
-                            </div>
-                        </li>				
-
+                       
                     </ul> 
                     <div class="search">
                         <form>
@@ -122,7 +94,6 @@
         <div class="single">
             <div class="container">
                 <div class="single-page" >
-                    <!--<p id="productID" hidden>${param.productID}</p>-->
                     <input type="text" id="productID" hidden value = "${param.productID}" />
                     <div id="div2" class="col-md-5 zoom-grid flexslider details-lft-inf">
 <!--                        <div class="flexslider" id = "imgs">
@@ -144,43 +115,6 @@
                     <script defer src="js/jquery.flexslider.js"></script>
 
                     <script>
-//                                    function viewProduct(responseTxt, statusTxt, xhr){
-//if (statusTxt === "success")
-//{
-//$("#productName").html(responseTxt.name);
-//        $("#categoryName").html(responseTxt.category.name);
-//        $("#price").html(responseTxt.price + "LE");
-//        $("#quantity").attr("max", responseTxt.quantity);
-//        $("#productDescription").html(responseTxt.description);
-//        var images = responseTxt.images;
-//        console.log(images);
-//        var text="";
-//         text="<div class=\"flexslider\" id = \"imgs\">";
-//        text+="<ul class='slides'>";
-//        for (i = 0; i < images ; i++)
-//        {   
-//            var ProName=responseTxt.name;
-//            ProName=ProName.replace(/\s/g,"");
-//            var catName = responseTxt.category.name;
-//            catName = catName.replace(/\s/g, "");
-//            var path = "images/"+catName+"/"+ProName+i+".jpg";
-//           /* $("#imgs").append("<li data-thumb='"+path+"'>"+
-//                                    "<div class='thumb-image'> <img src='"+path+"' data-imagezoom='true' class='img-responsive'"+
-//                                " alt='' /> </div></li>");*/
-//            text+=" <li data-thumb=\""+path+"\">"+
-//                                    "<div class=\"thumb-image\">asdfasdf <img src=\""+path+"\" data-imagezoom=\"true\" class=\"img-responsive\"  /> </div>"
-//                                +"</li>";
-//                                     $("#li1").attr("test",path);
-//
-//
-//            }
-//        text+="</ul></div>";*/
-//        
-            //                    $("#li1").attr("data-a","path");
-
-
-//}
-//}
             // Can also be used with $(document).ready()
             $(window).load(function () {
 

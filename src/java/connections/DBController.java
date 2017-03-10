@@ -460,12 +460,13 @@ public class DBController implements DBHandler {
     public boolean insertOrder(Order o) {
         try {
             preparedStatement = connection.prepareStatement("INSERT INTO `order`(`productID`, "
-                    + "`customerID`, `quantity`, `date`, `price`) VALUES (?,?,?,?,?)");
+                    + "`customerID`, `quantity`, `date`, `price` , `ordernumber`) VALUES (?,?,?,?,?,?)");
             preparedStatement.setInt(1, o.getProduct().getProductID());
             preparedStatement.setInt(2, o.getCustomer().getCustomerID());
             preparedStatement.setInt(3, o.getQuantity());
-            preparedStatement.setString(4, o.getDate());
+            preparedStatement.setDate(4, o.getDate());
             preparedStatement.setDouble(5, o.getPrice());
+            preparedStatement.setInt(6,o.getOrdernumber());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in insertorder");
@@ -489,12 +490,12 @@ public class DBController implements DBHandler {
         ArrayList<Order> allOrders = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, `customerID`, "
-                    + "`quantity`, `date`, `price` FROM `order` ");
+                    + "`quantity`, `date`, `price` , `ordernumber` FROM `order` ");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
                         getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getString("date"), resultSet.getDouble("price")));
+                        resultSet.getDate("date"), resultSet.getDouble("price") , resultSet.getInt("ordernumber")));
             }
             return allOrders;
         } catch (SQLException ex) {
@@ -506,37 +507,39 @@ public class DBController implements DBHandler {
 
     @Override
     public ArrayList<Order> selectAllOrders(Product p) {
-        ArrayList<Order> allOrders = new ArrayList<>();
-        try {
-            preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, "
-                    + "`customerID`, `quantity`, `date`, `price` FROM `order` WHERE `productID` = ?");
-            preparedStatement.setInt(1, p.getProductID());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
-                        getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getString("date"), resultSet.getDouble("price")));
-            }
-            return allOrders;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            System.err.println("error in selecting all orders by product");
-            return null;
-        }
+//        ArrayList<Order> allOrders = new ArrayList<>();
+//        try {
+//            preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, "
+//                    + "`customerID`, `quantity`, `date`, `price` FROM `order` WHERE `productID` = ?");
+//            preparedStatement.setInt(1, p.getProductID());
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            while (resultSet.next()) {
+//                allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
+//                        getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
+//                        resultSet.getString("date"), resultSet.getDouble("price")));
+//            }
+//            return allOrders;
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//            System.err.println("error in selecting all orders by product");
+//            return null;
+//        }
+return null;
     }
 
     @Override
     public ArrayList<Order> selectAllOrders(User m) {
         ArrayList<Order> allOrders = new ArrayList<>();
         try {
-            preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, "
-                    + "`customerID`, `quantity`, `date`, `price` FROM `order` WHERE `customerID` = ?");
+            preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, `customerID`, "
+                    + "`quantity`, `date`, `price`, `ordernumber` FROM `order` where `customerID` = ? "
+                    + "order by `date`DESC");
             preparedStatement.setInt(1, m.getCustomerID());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
                         getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getString("date"), resultSet.getDouble("price")));
+                        resultSet.getDate("date"), resultSet.getDouble("price"),resultSet.getInt("ordernumber")));
             }
             return allOrders;
         } catch (SQLException ex) {
@@ -667,5 +670,4 @@ public class DBController implements DBHandler {
         }
         return -1;
     }
-
 }
