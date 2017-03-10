@@ -26,52 +26,57 @@ function viewProduct(responseTxt, statusTxt, xhr) {
         $("#productDescription").html(responseTxt.description);
        // var images = responseTxt.images;
         var data = responseTxt.images;
-        //var arr = data.split("&&");
+        var arr = data.split("&&");
 //        $("#div2").html("");
+        var ProName = responseTxt.name;
+            ProName = ProName.replace(/\s/g, "");
+            var catName = responseTxt.category.name;
+            catName = catName.replace(/\s/g, "");
         var text = "";
-        text = "<div class=\"flexslider\" id = \"imgs\"></div>";
-        text += "<div class='flex-viewport' style='overflow: hidden; position: relative;'>"+
-                "<ul class='slides' style='width: 1000%; transition-duration: 0.6s; transform: translate3d(-332px, 0px, 0px);'>";
-        for (i = 0; i < images; i++)
-        text = "<div class=\"flexslider\" id = \"imgs\">";
-        text += "<ul>";
-        //for (i = 0; i < arr.length; i++)
+        text = "<div class=\"flexslider\" id=\"slideshow1\">";
+        //text+="";
+                                
+//        text += "<div class='flex-viewport' style='overflow: hidden; position: relative;'>"+
+//                "<ul class='slides' style='width: 1000%; transition-duration: 0s; transform: translate3d(-332px, 0px, 0px);'>";
+//        var defaultpath = "images/" + catName + "/" +arr[arr.length-1]+ ".jpg";
+//        text+="<li data-thumb='"+defaultpath+"'"+
+//                "style='width: 332px; float: left; display: block;' class='clone'><div class='thumb-image'> "+
+//                "<img src='"+defaultpath+"' data-imagezoom='true' class='img-responsive' alt=''"+
+//                "draggable='false'></div></li>";
+        for (i = 0; i < arr.length; i++)
         {
-            var ProName = responseTxt.name;
-            ProName = ProName.replace(/\s/g, "");
-            var catName = responseTxt.category.name;
-            catName = catName.replace(/\s/g, "");
-             
             var path = "images/" + catName + "/" + arr[i] + ".jpg";
-            //alert(path);
-            /* $("#imgs").append("<li data-thumb='"+path+"'>"+
-             "<div class='thumb-image'> <img src='"+path+"' data-imagezoom='true' class='img-responsive'"+
-             " alt='' /> </div></li>");*/
-            text += " <li data-thumb=\"" + path + "\" class='' aria-hidden='true' "+
-                    "style='width: 332px; float: left; display: block;'>" +
-                    "<div class=\"thumb-image\"><img src=\"" + path + "\" data-imagezoom=\"true\" class=\"img-responsive\""+
-                    "alt='' draggable='false'/> </div>"
-                    + "</li>";
+            //text+="<img src='"+path+"' data-imagezoom='true' class='img-responsive' alt>";
+            text+="<div><img id = 'img1' src='"+path+"' data-imagezoom='true' class='img-responsive' alt></div>";
+//            text += " <li data-thumb=\"" + path + "\" aria-hidden='true' ";
+//            if(i===0)
+//                text+="class='flex-active-slide'";
+//            text+="style='width: 332px; float: left; display: block;'>" +
+//                    "<div class=\"thumb-image\"><img src=\"" + path + "\" data-imagezoom=\"true\" class=\"img-responsive\""+
+//                    "alt='' draggable='false'/> </div>"
+//                    + "</li>";
         }
-        var defaultpath = "images/" + catName + "/" + ProName + "0.jpg";
-        text += "<li data-thumb='"+defaultpath+"' class='flex-active-slide' aria-hidden='true' "+
-                "style='width: 332px; float: left; display: block;'><div class='thumb-image'> "+
-                "<img src='"+defaultpath+"' data-imagezoom='true' class='img-responsive' alt=''"+
-                "draggable='false'></div></li></ul></div><ol class='flex-control-nav flex-control-thumbs'>";
-        for (i = 0; i < images; i++)
-        {
-            var ProName = responseTxt.name;
-            ProName = ProName.replace(/\s/g, "");
-            var catName = responseTxt.category.name;
-            catName = catName.replace(/\s/g, "");
-            var path = "images/" + catName + "/" + ProName + i + ".jpg";
-            text+="<li><img src='"+path+"' draggable='false'";
-            if(i===0)
-                text+="class='flex-active'";
-            text+="</li>";
-        }
-        text+="</ol><ul class='flex-direction-nav'><li class='flex-nav-prev'><a class='flex-prev' "+
-                "href='#'>Previous</a></li><li class='flex-nav-next'><a class='flex-next'href='#'>Next</a></li></ul>";
+        
+//        var defaultpath = "images/" + catName + "/" +arr[0]+ ".jpg";
+//        text += "<li data-thumb='"+defaultpath+"' class='clone' aria-hidden='true' "+
+//                "style='width: 332px; float: left; display: block;'><div class='thumb-image'> "+
+//                "<img src='"+defaultpath+"' data-imagezoom='true' class='img-responsive' alt=''"+
+//                "draggable='false'></div></li></ul></div><ol class='flex-control-nav flex-control-thumbs'>";
+//        for (i = 0; i < arr.length; i++)
+//        {
+//            var ProName = responseTxt.name;
+//            ProName = ProName.replace(/\s/g, "");
+//            var catName = responseTxt.category.name;
+//            catName = catName.replace(/\s/g, "");
+//            var path = "images/" + catName + "/" +arr[i]+ ".jpg";
+//            text+="<li><img src='"+path+"' draggable='false'";
+//            if(i===0)
+//                text+="class='flex-active'";
+//            text+="</li>";
+//        }
+//        text+="</ol><ul class='flex-direction-nav'><li class='flex-nav-prev'><a class='flex-prev' "+
+//                "href='#'>Previous</a></li><li class='flex-nav-next'><a class='flex-next'href='#'>Next</a></li></ul>";
+            text+="</div>";
             $("#div2").html(text);
     }
 }
