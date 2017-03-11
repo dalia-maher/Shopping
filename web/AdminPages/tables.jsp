@@ -31,10 +31,10 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/GetCustomerInfo.js"></script>
-        
+
     </head>
 
-    <body onload="beginRetrieving()">
+    <body onload="getCustomers()">
         <style>
             .color{
                 background-color: #f65a5b;
@@ -55,7 +55,7 @@
                 color: #fff;
             }
         </style>
-        
+
         <div id="wrapper">
 
             <!-- Navigation -->

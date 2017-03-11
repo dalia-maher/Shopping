@@ -239,11 +239,13 @@
 
                             <!--<div class="clearfix"> </div>-->
                         
-                        <p class="qty">Quantity :</p><input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small">
-
+                        <p class="qty">Quantity :</p><input type="text" id="quantity" name="quantity" value="1" class="form-control input-small">
+                        <input type="number" hidden id = "qq"/>
+                        <button onclick="increase_by_one('quantity');" id="increase">+</button>
+                         <button onclick="decrease_by_one('quantity');" id="decrease"/>-</button>
                         <div class="single-but item_add">
 
-                            <input onclick="addToCart();"  type="submit" value="add to cart">
+                            <input onclick="addToCart();"  type="submit" value="add to cart" id = "btn">
 
                         </div>
                     </div>
@@ -254,9 +256,16 @@
                 <div class="clearfix"></div>				 	
             </div>
 <!-- collapse -->
+<style>
+    .panel-default>.panel-heading {
+    color: #333;
+    background-color: #ff6e6e;
+    border-color: #ddd;
+}   
+    </style>
 <div class="panel-group collpse" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
+      <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           Description

@@ -1,10 +1,9 @@
 package servlets;
 
-import beans.Order;
+import beans.*;
 import beans.User;
 import connections.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,13 +24,29 @@ public class GetOrders extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("doget from getOrders servlet");
+        String userID = request.getParameter("userID");
+        //System.out.println("usr id = "+userID);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
+        if(userID!=null)
+        {
+            int id = Integer.parseInt(userID);
+            user = DBController.getInstance().getUser(id);
+        }
         ArrayList<Order>allOrders = DBController.getInstance().selectAllOrders(user);
-        if(!allOrders.isEmpty())
-                    request.setAttribute("userOrders", allOrders);
+        //if(!allOrders.isEmpty())
+        request.setAttribute("userOrders", allOrders);
+        request.setAttribute("userName",user.getFirstName()+" "+user.getLastName());
         System.out.println("----"+allOrders.size());
-        RequestDispatcher ds = request.getRequestDispatcher("userOrders.jsp");
+        RequestDispatcher ds = null;
+        if(user.isType())
+        {
+            ds= request.getRequestDispatcher("userOrders.jsp");
+        }
+        else
+        {
+            ds = request.getRequestDispatcher("AdminPages/viewUserOrders.jsp");
+        }
         ds.forward(request, response);
         
     }

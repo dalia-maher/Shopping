@@ -32,10 +32,15 @@ function viewCustomers(responseTxt, statusTxt, xhr)
         {
             for (var i = 0; i < responseTxt.length; i++)
             {
+                var link = document.createElement("a");
+                var path = "../userProfile?userID="+responseTxt[i].customerID;
+                console.log(path);
+                link.setAttribute("href",path);
                 var row = document.createElement("tr");
                 var username = document.createElement("td");
                 var usernameVal = document.createTextNode(responseTxt[i].userName);
-                username.appendChild(usernameVal);
+                link.appendChild(usernameVal);
+                username.appendChild(link);
                 var name = document.createElement("td");
                 var nameVal = document.createTextNode(responseTxt[i].firstName + " " + responseTxt[i].lastName);
                 name.appendChild(nameVal);
@@ -45,10 +50,12 @@ function viewCustomers(responseTxt, statusTxt, xhr)
                 var credit = document.createElement("td");
                 var creditVal = document.createTextNode(responseTxt[i].credit);
                 credit.appendChild(creditVal);
+                
                 row.appendChild(username);
                 row.appendChild(name);
                 row.appendChild(email);
                 row.appendChild(credit);
+                
                 newtbody.appendChild(row);
             }
             newtbody.setAttribute("id","tbody");
