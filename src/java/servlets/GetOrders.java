@@ -1,10 +1,9 @@
 package servlets;
 
-import beans.Order;
+import beans.*;
 import beans.User;
 import connections.DBController;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,19 +24,31 @@ public class GetOrders extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("doget from getOrders servlet");
+        String userID = request.getParameter("userID");
+        //System.out.println("usr id = "+userID);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
-        if(user != null) {
-            ArrayList<Order>allOrders = DBController.getInstance().selectAllOrders(user);
-            if(!allOrders.isEmpty())
-                request.setAttribute("userOrders", allOrders);
-            RequestDispatcher ds = request.getRequestDispatcher("userOrders.jsp");
-            ds.forward(request, response);
+        if(userID!=null)
+        {
+            int id = Integer.parseInt(userID);
+            user = DBController.getInstance().getUser(id);
         }
-        else {
-            RequestDispatcher ds = request.getRequestDispatcher("index.jsp");
-            ds.forward(request, response);
+        ArrayList<Order>allOrders = DBController.getInstance().selectAllOrders(user);
+        //if(!allOrders.isEmpty())
+        request.setAttribute("userOrders", allOrders);
+        request.setAttribute("userName",user.getFirstName()+" "+user.getLastName());
+        System.out.println("----"+allOrders.size());
+        RequestDispatcher ds = null;
+        if(!user.isType())
+        {
+            ds= request.getRequestDispatcher("userOrders.jsp");
         }
+        else
+        {
+            ds = request.getRequestDispatcher("AdminPages/viewUserOrders.jsp");
+        }
+        ds.forward(request, response);
+        
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

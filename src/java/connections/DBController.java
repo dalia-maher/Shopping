@@ -138,8 +138,8 @@ public class DBController implements DBHandler {
         ArrayList<User> allCustomers = new ArrayList<>();
         try {
             preparedStatement = connection.prepareStatement("SELECT `customerID`, `email`, `username`,"
-                    + " `password`, `firstname`, `lastname`, `credit`, `addresse`, `type`, `BDate`, "
-                    + "`job` FROM `customer`");
+                    + "`password`, `firstname`, `lastname`, `credit`, `addresse`, `type`, `BDate`, `job` "
+                    + "FROM `customer` where `type` = 0");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allCustomers.add(new User(resultSet.getInt("customerID"), resultSet.getString("email"),

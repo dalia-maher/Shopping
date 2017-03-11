@@ -7,8 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="beans.User"%>
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,6 +22,7 @@
         <!-- //for-mobile-apps -->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
@@ -35,17 +34,18 @@
                         type: "GET",
                         success: function (data, textStatus, jqXHR) {
                             if(data != -1){
+                                //alert(data);
                                 $("#lastCredit").html("EGP "+data);
                             }
                         }
                     });
                 }       
                jQuery(document).ready(function ($) {
+                $(".megamenu").megamenu();
                 $(".scroll").click(function (event) {
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
-                
                 getLastCredit();
             });
             
@@ -53,20 +53,11 @@
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-
-
         <script type="text/javascript" src="js/megamenu.js"></script>
-        <script>$(document).ready(function () {
-    $(".megamenu").megamenu();
-     
-});</script>
-        <link rel="stylesheet" href="js/jquery-ui.css">
 
-        <link rel="stylesheet" href="/resources/demos/style.css">
         <script src="js/jquery-1.12.4.js"></script>
         <script src="js/jquery-ui.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-
+       
     </head>
     <body>
         <!-- header -->
@@ -82,19 +73,12 @@
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
-                                        <div class="h_nav">
+                                        <div class="h_nav">                                            
                                             <%@ include file="categoryItems.jsp" %>
-                                        </div>							
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
                         </li>
                         <li><a class="color1" href="#">catalog</a>
                             <div class="megapanel">
@@ -160,9 +144,9 @@
                                     <div class="col1"></div>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </li>				
 
+                    </ul> 
                     <div class="search">
                         <form>
                             <input type="text" value="" placeholder="Search...">
@@ -173,7 +157,7 @@
                 </div>
             </div>
         </div>
-        <!---->
+        <!---->        
         <!-- profie-form -->
         
         <div class="reg-form">

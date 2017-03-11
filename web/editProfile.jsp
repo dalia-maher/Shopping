@@ -8,11 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="beans.User"%>
-
+ <c:import url="/ShowCategories" />
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Pendent Store a E-Commerce Online Shopping Category Flat Bootstrap Responsive Website Template | Products :: w3layouts</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,44 +24,33 @@
         <!-- //for-mobile-apps -->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-        <!-- start-smoth-scrolling -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $(".scroll").click(function (event) {
-                    event.preventDefault();
-                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-                });
-
-
-            });
-        </script>
-        <!-- start-smoth-scrolling -->
-        <!-- start menu -->
-        <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-
-
-        <script src="js/menu_jquery.js"></script>
-        <script src="js/simpleCart.min.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-        <c:import url="/ShowCategories" />
-    </head>
-
-    <body>
-        <script>
+         <!-- the jScrollPane script -->
+        <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
+        <script type="text/javascript" id="sourcecode">
             $(function () {
-                $("#datepicker").datepicker();
+            $('.scroll-pane').jScrollPane();
             });
         </script>
+        <!-- //the jScrollPane script -->
 
+        <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".megamenu").megamenu();
+            $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+    });
+   
+});
+        </script>
+      <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+        <script type="text/javascript" src="js/megamenu.js"></script>
+     
         <script>
 
             function validatePassword() {
@@ -77,10 +67,13 @@
             }
 
         </script>
+ 
+       
+    </head>
 
+    <body>
         <!-- header -->
         <%@ include file="header.jsp" %>
-        <!------>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
@@ -91,9 +84,9 @@
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
-                                        <div class="h_nav">
+                                        <div class="h_nav">                                            
                                             <%@ include file="categoryItems.jsp" %>
-                                        </div>							
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -162,9 +155,9 @@
                                     <div class="col1"></div>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </li>				
 
+                    </ul> 
                     <div class="search">
                         <form>
                             <input type="text" value="" placeholder="Search...">
@@ -218,7 +211,7 @@
                             </ul>
                             <ul>
                                 <li class="text-info">BirthDay Date:</li>
-                                <li><input type="text" name="bdate" id="datepicker" value="${sessionScope.loggedInUser.getBOD()}"></li>
+                                <li><input type="date" name="bdate"  value="${sessionScope.loggedInUser.getBOD()}"></li>
                             </ul>
 
                             <c:import url="/ViewProfile" />
@@ -243,13 +236,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <script> $("#datepicker").datepicker({
-                                    onSelect: function () {
-                                        var dateObject = $(this).datepicker('getDate');
-                                        console.log(dateObject);
-                                    }
-                                });</script>
-
+                           
                             <input type="submit" value="Save">
                         </form>
 

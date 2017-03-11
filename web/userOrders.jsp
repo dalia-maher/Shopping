@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +52,7 @@
             });
         </script>
         <!-- //the jScrollPane script -->
-        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+      
     </head>
     <body>
         <%@ include file="header.jsp" %>
@@ -157,7 +158,7 @@
                                                         </tr>
                                                         <c:if test="${loop.index == fn:length(userOrders)|| userOrders[loop.index].orderNumber != userOrders[loop.index+1].orderNumber}">
                                                         <tr>
-                                                            <td colspan="3">Order Total Price</td>
+                                                            <td colspan="3"><b>Order Total Price</b></td>
                                                             <td>${total}</td>
                                                         </tr>
                                                         </tbody>
