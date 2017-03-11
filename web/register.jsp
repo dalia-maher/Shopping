@@ -23,10 +23,12 @@
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
+         <script type="text/javascript" src="js/megamenu.js"></script>
         <!-- //js -->
         <!-- start-smoth-scrolling -->
         <script type="text/javascript">
             jQuery(document).ready(function($) {
+                $(".megamenu").megamenu();
                 $(".scroll").click(function(event){		
                     event.preventDefault();
                     $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
@@ -111,12 +113,7 @@
     </head>
 
     <body>
-        <script>
-            $(function () {
-                console.log("inside function");
-                $("#datepicker").datepicker();
-            });
-        </script>
+        
         <!-- header -->
         <%@ include file="header.jsp" %>
         <!------>

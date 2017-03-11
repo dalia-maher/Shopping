@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +52,7 @@
             });
         </script>
         <!-- //the jScrollPane script -->
-        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+      
     </head>
     <body>
         <%@ include file="header.jsp" %>

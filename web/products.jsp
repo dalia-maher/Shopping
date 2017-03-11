@@ -40,12 +40,16 @@
                                         var catName = responseTxt[i].category.name;
                                         catName = catName.replace(/\s/g, "");
                                         var data = responseTxt[i].images;
-                                        var arr = data.split("&&");
-                                        //alert(arr[0]);
+                                       // var arr = data.split("&&");
+                                        var img=data.split("&&")[0];
+                                        if(img==""){
+                                          img=data.split("&&")[1]; 
+                                        }
+                                         alert(img);
                                         $("#result").append("<div class='products-grd'>" +
                                             "<div class='p-one simpleCart_shelfItem prd' > "+
                                             "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img src=\"" + "images/"+catName+"/"+arr[0]+".jpg" + "\"alt='Error' class='img-responsive' />" +
+                                            "<img src=\"" + "images/"+catName+"/"+img+".jpg" + "\"alt='Error' class='img-responsive' />" +
                                             "<div class='mask'>" +
                                             "<span>Quick View</span>" +
                                             "</div>" +
