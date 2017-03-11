@@ -27,13 +27,17 @@ public class GetOrders extends HttpServlet {
         System.out.println("doget from getOrders servlet");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
-        ArrayList<Order>allOrders = DBController.getInstance().selectAllOrders(user);
-        if(!allOrders.isEmpty())
-                    request.setAttribute("userOrders", allOrders);
-        System.out.println("----"+allOrders.size());
-        RequestDispatcher ds = request.getRequestDispatcher("userOrders.jsp");
-        ds.forward(request, response);
-        
+        if(user != null) {
+            ArrayList<Order>allOrders = DBController.getInstance().selectAllOrders(user);
+            if(!allOrders.isEmpty())
+                request.setAttribute("userOrders", allOrders);
+            RequestDispatcher ds = request.getRequestDispatcher("userOrders.jsp");
+            ds.forward(request, response);
+        }
+        else {
+            RequestDispatcher ds = request.getRequestDispatcher("index.jsp");
+            ds.forward(request, response);
+        }
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -44,7 +44,7 @@ public class Register extends HttpServlet {
         System.out.println("bdate = " + date);
 
         double creditValue;
-        if(!credit.equals("")) {
+        if(!credit.trim().equals("")) {
             creditValue = dbCon.getCreditValue(credit);
             dbCon.updateCreditCard(credit, dbCon.getUserID(email));
         }

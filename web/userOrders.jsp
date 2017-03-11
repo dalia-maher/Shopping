@@ -134,10 +134,10 @@
                                 <div class="table-responsive">
                                     <c:if test="${!empty userOrders}">
                                         <c:forEach items="${userOrders}" var="order" varStatus="loop">
-                                            <c:if test="${loop.index == 0 || userOrders[loop.index].date != userOrders[loop.index-1].date}">
+                                            <c:if test="${loop.index == 0 || userOrders[loop.index].orderNumber != userOrders[loop.index-1].orderNumber}">
                                                 <c:set var="total" value="${0}"/>
                                                 <center><table class="table table-bordered table-hover table-striped">
-                                                        <caption>${order.date} (Order: ${order.ordernumber})</caption>
+                                                        <caption>${order.date} (Order: ${order.orderNumber})</caption>
                                                         <thead>
                                                             <tr>
                                                                 <th>Product</th>
@@ -155,7 +155,7 @@
                                                             <td>${order.price}</td>
                                                             <td>${order.quantity * order.price}</td>
                                                         </tr>
-                                                        <c:if test="${loop.index == fn:length(userOrders)|| userOrders[loop.index].date != userOrders[loop.index+1].date}">
+                                                        <c:if test="${loop.index == fn:length(userOrders)|| userOrders[loop.index].orderNumber != userOrders[loop.index+1].orderNumber}">
                                                         <tr>
                                                             <td colspan="3">Order Total Price</td>
                                                             <td>${total}</td>
@@ -166,7 +166,7 @@
                                             </c:forEach>
                                         </c:if>
                                         <c:if test="${empty userOrders}">
-                                        You haven't any orders.
+                                        You have no orders.
                                     </c:if>  
                                 </div>
                             </div>

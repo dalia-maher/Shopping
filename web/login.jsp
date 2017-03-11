@@ -4,6 +4,7 @@
     Author     : Dalia
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -157,21 +158,14 @@
                             <label style="color:red;" id="loginValidation"></label><br/><br/>
                             <input type="submit" value="Login">
                         </form>
-                        <% String attempt = request.getParameter("attempt");
-                           if(attempt != null) {
-                        %>
-                                <script>
-                                    document.getElementById("loginValidation").innerHTML = "Invalid user credentials!";
-                                </script>
-                        <%
+                        <script>
+                            var msg = '<c:out value="${requestScope.attempt}"/>';
+                            if(msg != "") {
+                                document.getElementById("loginValidation").innerHTML = "Invalid user credentials!";
                             } else {
-                        %>
-                                <script>
-                                    document.getElementById("loginValidation").innerHTML = "";
-                                </script>
-                        <%
+                                document.getElementById("loginValidation").innerHTML = "";
                             }
-                        %>
+                        </script>
                     </div>
                     <div class="col-md-6 login-right">
                         <h3>New Registration</h3>
