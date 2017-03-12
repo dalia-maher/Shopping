@@ -76,8 +76,6 @@
                             function setDefault(item){
                                 item.src='images/noImage.png';
                                 item.className="img-responsive";
-                                
-                                
                             }
 
                             </script>

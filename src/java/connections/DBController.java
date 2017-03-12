@@ -438,6 +438,31 @@ public class DBController implements DBHandler {
             return null;
         }
     }
+       public ArrayList<Product> searchProduct(String keyword,String catID,int maxP,int minP) {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`, `description`, "
+                    + "`quantity`, `price`, `images` FROM `product` where name like ? or description like ? or categoryID=? and price between ? and ?");
+            preparedStatement.setString(1, "%"+keyword+"%");
+           preparedStatement.setString(2,"%"+keyword+"%");
+     preparedStatement.setInt(3, Integer.parseInt(catID));
+           preparedStatement.setInt(4, minP);
+            preparedStatement.setInt(5, maxP);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
+                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
+                        resultSet.getInt("quantity"), resultSet.getString("images")));
+
+            }
+            return allProducts;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in searching product");
+            return null;
+        }
+    }
 
     @Override
     public ArrayList<Product> searchProductByPrice(double price) {
