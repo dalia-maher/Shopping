@@ -25,60 +25,59 @@
                 height: 300px;
             }
             img {
-    max-width: 200px;
-    max-height: 200px;
-}
-
+                max-width: 200px;
+                max-height: 200px;
+            }
         </style>
          <script>
-                                function getProduct() {
-                                    var catId = $("#catId").text();
-                                    var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                                    +"&categoryID=" + catId;
-                                    $.get(url, displayProduct, 'json');
+            function getProduct() {
+                var catId = $("#catId").text();
+                var url = "displayProduct?numberOfPro=" + $("#result").children().length
+                +"&categoryID=" + catId;
+                $.get(url, displayProduct, 'json');
+
 
                                 }
-                                function displayProduct(responseTxt, statusTxt, xhr) {
-                                    // var messages = responseTxt.
-                                    serverPath = $("#serverPath").text();
-                                    //serverPath = serverPath.replace(/\\/g, "\\\\");
-                                    if (statusTxt == "success") {
-                                    console.log(responseTxt.length + "size");
-                                    for (i = 0; i < responseTxt.length;i++)
-                                    {   var ProName=responseTxt[i].name;
-                                        ProName=ProName.replace(/\s/g, "");
-                                        var catName = responseTxt[i].category.name;
-                                        catName = catName.replace(/\s/g, "");
-                                        var data = responseTxt[i].images;
-                                       // var arr = data.split("&&");
-                                        var img=data.split("&&")[0];
-                                        if(img==""){
-                                          img=data.split("&&")[1]; 
-                                        }
-                                         //alert(img);
+            function displayProduct(responseTxt, statusTxt, xhr) {
+                // var messages = responseTxt.
+                serverPath = $("#serverPath").text();
+                //serverPath = serverPath.replace(/\\/g, "\\\\");
+                if (statusTxt == "success") {
+                console.log(responseTxt.length + "size");
+                for (i = 0; i < responseTxt.length;i++)
+                {   var ProName=responseTxt[i].name;
+                    ProName=ProName.replace(/\s/g, "");
+                    var catName = responseTxt[i].category.name;
+                    var data = responseTxt[i].images;
+                   // var arr = data.split("&&");
+                    var img=data.split("&&")[0];
+                    if(img==""){
+                      img=data.split("&&")[1]; 
+                    }
+                     //alert(img);
                                          
-                                        $("#result").append("<div class='products-grd'>" +
-                                            "<div class='p-one simpleCart_shelfItem prd sizeW'   > "+
-                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img  src=\"" + "images/"+catName+"/"+img+".png" + "\"alt='Error' class='img-responsive' onerror='setDefault(this)'  />" +
-                                            "<div class='mask'>" +
-                                            "<span>Quick View</span>" +
-                                            "</div>" +
-                                            "</a>" +
-                                            "<h4>" + responseTxt[i].name + "</h4>" +
-                                            "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
+                    $("#result").append("<div class='products-grd'>" +
+                        "<div class='p-one simpleCart_shelfItem prd sizeW'   > "+
+                        "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
+                        "<img  src=\"" + "images/"+catName+"/"+img+".png" + "\"alt='Error' class='img-responsive' onerror='setDefault(this)'  />" +
+                        "<div class='mask'>" +
+                        "<span>Quick View</span>" +
+                        "</div>" +
+                        "</a>" +
+                        "<h4>" + responseTxt[i].name + "</h4>" +
+                        "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
 
-                                            "</div>" +
-                                            "</div>");
-                                    }
-                                }
-                            }
-                            function setDefault(item){
-                                item.src='images/noImage.png';
-                                item.className="img-responsive";
-                            }
+                        "</div>" +
+                        "</div>");
+                    }
+                }
+            }
+        function setDefault(item){
+            item.src='images/noImage.png';
+            item.className="img-responsive";
+        }
 
-                            </script>
+        </script>
 
         <script type="text/javascript">
 jQuery(document).ready(function ($) {
@@ -129,82 +128,9 @@ $(function () {
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
-                                </div>
-                        </li>
-                        <li><a class="color1" href="#">catalog</a>
-                            <div class="megapanel">
-                                <div class="row">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Popular Brands</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Slave Bracelets</a></li>
-                                                <li><a href="products.jsp">Rings</a></li>
-                                                <li><a href="products.jsp">Necklaces</a></li>
-                                                <li><a href="products.jsp">Chokers</a></li>
-                                                <li><a href="products.jsp">Cuff Links</a></li>									
-                                                <li><a href="products.jsp">Bangles</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Style Zone</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Men</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>All Jewellery</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>												
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Seating</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>						
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
                                 </div>
                             </div>
                         </li>
-                                            						
                     </ul> 
                     <div class="search">
                         <form>

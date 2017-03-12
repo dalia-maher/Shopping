@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import xml.Msg;
 
 /**
  *
@@ -35,7 +34,6 @@ import xml.Msg;
  */
 @WebServlet(name = "GenerateCredits", urlPatterns = {"/GenerateCredits"})
 public class GenerateCredits extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -71,7 +69,6 @@ public class GenerateCredits extends HttpServlet {
         }
 
     }
-
     protected static String getRandomCard() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
