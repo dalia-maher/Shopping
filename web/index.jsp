@@ -63,86 +63,19 @@
                                 </div>
                             </div>
 			</li>
-			<li><a class="color1" href="#">catalog</a>
-                            <div class="megapanel">
-                                <div class="row">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Popular Brands</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Slave Bracelets</a></li>
-                                                <li><a href="products.jsp">Rings</a></li>
-                                                <li><a href="products.jsp">Necklaces</a></li>
-                                                <li><a href="products.jsp">Chokers</a></li>
-                                                <li><a href="products.jsp">Cuff Links</a></li>									
-                                                <li><a href="products.jsp">Bangles</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Style Zone</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Men</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>All Jewellery</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>												
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Seating</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>						
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                </div>
-                            </div>
-                        </li>				
-											
                     </ul> 
-                        <form action ="SearchProducts" method ="get">
-                            <div class="search">
-                                <input type="text" value="" placeholder="Search..." name = "keyword">
-                                <input type="submit" value="">
-                            </div>
-                            <select name = searchon>
-                                
-                                <option value="name">Name</option>
-                                <option value="price">Price</option>
-                            </select>
-                        </form>
-			<div class="clearfix"></div>
-                    </div>
+                    <form action ="SearchProducts" method ="get">
+                        <div class="search">
+                            <input type="text" value="" placeholder="Search..." name = "keyword">
+                            <input type="submit" value="">
+                        </div>
+                        <select name = searchon>                                
+                            <option value="name">Name</option>
+                            <option value="price">Price</option>
+                        </select>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
 <!---->
