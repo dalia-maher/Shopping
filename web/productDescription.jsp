@@ -15,40 +15,6 @@ Author     : Dalia
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-<<<<<<< HEAD
-<meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-      Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-    function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- js -->
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-         $(".megamenu").megamenu();
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-        });
-    });
-
-
-
-</script>
-<!-- start-smoth-scrolling -->
-<!-- start menu -->
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
-
-<link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-<script src="js/viewProduct.js"></script>
-</head>
- 
-=======
         <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
               Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
@@ -73,7 +39,6 @@ Author     : Dalia
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
             });
-
             function addToCart() {
                 var quantity = document.getElementById("quantity").value;
                 $.ajax({
@@ -90,7 +55,6 @@ Author     : Dalia
                     }
                 });
             }
-
         </script>
 
         <!-- start-smoth-scrolling -->
@@ -158,13 +122,6 @@ Author     : Dalia
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -179,76 +136,12 @@ Author     : Dalia
                 </div>
             </div>
         </div>
-
-    </div>
-</div>
-<!---->
-<!-- single-page -->
-<div class="single">
-    <div class="container">
-        <div class="single-page" >
-            <input type="text" id="productID" hidden value = "${param.productID}" />
-            <style>
-                #slideshow1 {
-                    margin: 10px auto;
-                    position: relative;
-                    width: 332px;
-                    height: 300px;
-                    padding: 10px;
-                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-                    float: left; 
-                    display: block;
-                }
-                #img1
-                {
-                    width: 90%;
-                    height: 90%;
-
-                }
-                #slideshow1 > div {
-                    position: absolute;
-                    top: 10px;
-                    left: 10px;
-                    right: 10px;
-                    bottom: 10px;
-                }
-                #div2{
-                    width: 300px;
-                }
-            </style>
-            <script>
-    $("#slideshow1 > div:gt(0)").hide();
-
-    setInterval(function () {
-        $('#slideshow1 > div:first')
-                .fadeOut()
-                .next()
-                .fadeIn()
-                .end()
-                .appendTo('#slideshow1');
-    }, 5000);
-            </script>
-            <div id="div2" class="col-md-5 zoom-grid flexslider details-lft-inf">                                            
-                <!--                        <div class="flexslider" id = "imgs">
-                                            <ul class="slides">
-                                                <li data-thumb="images/s1.jpg" id="li1">
-                                                    <div class="thumb-image"> <img id="img1" src="images/s1.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                                </li>
-                                                <li data-thumb="images/s2.jpg">
-                                                    <div class="thumb-image"> <img src="images/s2.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                                </li>
-                                                <li data-thumb="images/s3.jpg">
-                                                    <div class="thumb-image"> <img src="images/s3.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                                </li> 
-                                            </ul>
-=======
         <!---->
         <!-- single-page -->
         <div class="single">
             <div class="container">
                 <div class="single-page" >
                     <input type="text" id="productID" hidden value = "${param.productID}" />
->>>>>>> ef406e606930f31fa14e63b4a49b467c02e79c6d
 
                     <div id="div2" class="col-md-5 zoom-grid flexslider details-lft-inf">                                            
                         <!--                        <div class="flexslider" id = "imgs">
@@ -273,85 +166,6 @@ Author     : Dalia
 
                     <!---->
 
-<<<<<<< HEAD
-        <!---->
-        <!-- single-page -->
-        <div class="single">
-            <div class="container">
-                <div class="single-page" >
-                    <input type="text" id="productID" hidden value = "${param.productID}" />
-        <script>
-		$("#slideshow1 > div:gt(0)").hide();
-
-	setInterval(function() {
-	  $('#slideshow1 > div:first')
-		.fadeOut()
-		.next()
-		.fadeIn()
-		.end()
-		.appendTo('#slideshow1');
-	}, 5000);
-	</script>
-                    <div id="div2" class="col-md-5 zoom-grid flexslider details-lft-inf">                                            
-<!--                        <div class="flexslider" id = "imgs">
-                            <ul class="slides">
-                                <li data-thumb="images/s1.jpg" id="li1">
-                                    <div class="thumb-image"> <img id="img1" src="images/s1.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                </li>
-                                <li data-thumb="images/s2.jpg">
-                                    <div class="thumb-image"> <img src="images/s2.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                </li>
-                                <li data-thumb="images/s3.jpg">
-                                    <div class="thumb-image"> <img src="images/s3.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
-                                </li> 
-                            </ul>
-                            
-                        </div>-->
-                    </div> 
-        
-                    <script src="js/imagezoom.js"></script>
-                    <!-- FlexSlider -->
-                    <script defer src="js/jquery.flexslider.js"></script>
-
-                    <script>
-            // Can also be used with $(document).ready()
-            $(window).load(function () {
-
-                $('.flexslider').flexslider({
-                    animation: "slide",
-                    controlNav: "thumbnails"
-                });
-                getProductDetails();
-
-            });
-
-            function addToCart() {
-                var quantity = document.getElementById("quantity").value;
-                $.ajax({
-                    url: "AddingToCart",
-                    type: 'POST',
-                    data: "prooductID=" +${param.productID} + "&quantity=" + quantity,
-                    success: function (data, textStatus, jqXHR) {
-                       
-                            //alert(data);
-                        if (data == 1) {
-                            //alert("Done2");
-                            //updateItems();
-                            getShoppingList();
-                            
-  
-                        }
-                    }
-
-
-                });
-             }
-
-
-    
-                    </script>
-                    <!--<form method="post" action="AddingToCart?prooductID=${param.productID}">-->
-=======
                     <script>
                 $("#slideshow1 > div:gt(0)").hide();
                 setInterval(function () {
@@ -365,7 +179,6 @@ Author     : Dalia
                     </script>
 
  <!--<form method="post" action="AddingToCart?prooductID=${param.productID}">-->
->>>>>>> ef406e606930f31fa14e63b4a49b467c02e79c6d
                     <div class="details-left-info">
                         <h3 id = "productName"></h3>
                         <h4 id = "categoryName"></h4>
@@ -419,49 +232,6 @@ Author     : Dalia
                             </div>
                         </div>
                     </div>
-<<<<<<< HEAD
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            reviwes(5)
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingFour">
-                    <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            help
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- collapse -->
-        <!-- related products -->
-        <div class="related-products">
-            <h3>Related Products</h3>
-            <div class="col-md-4 related products-grid">
-                <img src="images/19.jpg" alt=" " class="img-responsive" />
-                <div class="simpleCart_shelfItem rel">
-                    <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                    <div class="single-but item_add">
-                        <input type="submit" value="add to cart">
-=======
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingThree">
                             <h4 class="panel-title">
@@ -475,7 +245,6 @@ Author     : Dalia
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                             </div>
                         </div>
->>>>>>> ef406e606930f31fa14e63b4a49b467c02e79c6d
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingFour">
