@@ -112,6 +112,13 @@ setInterval(function () {
             .appendTo('#slideshow1');
 }, 5000);
         </script>
+        <style>
+            .panel-default>.panel-heading {
+                color: #333;
+                background-color: #ff6e6e;
+                border-color: #ddd;
+            }   
+        </style>
     </head>
 
     <body>
@@ -140,8 +147,8 @@ setInterval(function () {
                                         <div class="col1"></div>
                                     </div>
                                 </div>
+                            </div>
                         </li>
-
                         <li><a class="color1" href="#">catalog</a>
                             <div class="megapanel">
                                 <div class="row">
@@ -158,24 +165,55 @@ setInterval(function () {
                                             </ul>	
                                         </div>							
                                     </div>
-
-
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Style Zone</h4>
+                                            <ul>
+                                                <li><a href="products.jsp">Men</a></li>
+                                                <li><a href="products.jsp">Women</a></li>
+                                                <li><a href="products.jsp">Brands</a></li>
+                                                <li><a href="products.jsp">Kids</a></li>
+                                                <li><a href="products.jsp">Accessories</a></li>
+                                                <li><a href="products.jsp">Style Videos</a></li>
+                                            </ul>	
+                                        </div>							
+                                    </div>
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>All Jewellery</h4>
+                                            <ul>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">commodi consequatur</a></li>
+                                                <li><a href="products.jsp">illum qui dolorem</a></li>
+                                                <li><a href="products.jsp">nihil molestiae</a></li>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">consequatur eum</a></li>
+                                            </ul>	
+                                        </div>												
+                                    </div>
+                                    <div class="col1">
+                                        <div class="h_nav">
+                                            <h4>Seating</h4>
+                                            <ul>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">commodi consequatur</a></li>
+                                                <li><a href="products.jsp">illum qui dolorem</a></li>
+                                                <li><a href="products.jsp">nihil molestiae</a></li>
+                                                <li><a href="products.jsp">eum fugiat</a></li>
+                                                <li><a href="products.jsp">consequatur eum</a></li>
+                                            </ul>	
+                                        </div>						
+                                    </div>
                                 </div>
-
+                                <div class="row">
+                                    <div class="col2"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                    <div class="col1"></div>
+                                </div>
                             </div>
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col2"></div>
-                                <div class="col1"></div>
-                                <div class="col1"></div>
-                                <div class="col1"></div>
-                                <div class="col1"></div>
-                            </div>
-                            </div>
-                        </li>				
-
+                        </li>
                     </ul> 
                     <div class="search">
                         <form>
@@ -215,8 +253,6 @@ setInterval(function () {
                     <!-- FlexSlider -->
                     <script defer src="js/jquery.flexslider.js"></script>
 
-
-
                     <!---->
 
                     <script>
@@ -237,7 +273,7 @@ setInterval(function () {
                         <h3 id = "productName"></h3>
                         <h4 id = "categoryName"></h4>
                         <div class="simpleCart_shelfItem">
-                            <p><h2><span class="item_price qwe" id = "price"></span></h2></p>
+                            <p><span class="item_price qwe" id="price"></span></p>
                             <div class="clearfix"> </div>
 
                             <!--<div class="clearfix"> </div>-->
@@ -259,18 +295,11 @@ setInterval(function () {
                 </div>
 
                 <!-- collapse -->
-                <style>
-                    .panel-default>.panel-heading {
-                        color: #333;
-                        background-color: #ff6e6e;
-                        border-color: #ddd;
-                    }   
-                </style>
-                <div class="panel-group collpse" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group collpse" id="accordion" role="tablist">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-controls="collapseOne">
                                     Description
                                 </a>
                             </h4>
@@ -284,7 +313,7 @@ setInterval(function () {
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-controls="collapseTwo">
                                     additional information
                                 </a>
                             </h4>
@@ -298,7 +327,7 @@ setInterval(function () {
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingThree">
                             <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-controls="collapseThree">
                                     reviwes(5)
                                 </a>
                             </h4>
@@ -312,7 +341,7 @@ setInterval(function () {
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingFour">
                             <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-controls="collapseFour">
                                     help
                                 </a>
                             </h4>

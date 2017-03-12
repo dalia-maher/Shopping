@@ -230,7 +230,7 @@
                             </li>
                         </ul>
                         <input type="submit" value="Edit Profile" formaction="editProfile.jsp"/>
-                        <input type="submit" value="My Orders" formaction="GetOrders"/>
+                        <input type="submit" id="btn" value="My Orders" formaction="GetOrders"/>
                     </form>
                     </c:if>
                     

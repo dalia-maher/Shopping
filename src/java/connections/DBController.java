@@ -848,7 +848,7 @@ public class DBController implements DBHandler {
             preparedStatement.setString(1, userID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User x = new User(resultSet.getInt("CustomerID"), resultSet.getString("email"), resultSet.getString("username"), null, resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"), resultSet.getDate("BDate"), resultSet.getString("job"));
+                User x = new User(resultSet.getInt("customerID"), resultSet.getString("email"), resultSet.getString("username"), null, resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"), resultSet.getDate("BDate"), resultSet.getString("job"));
                 Product p = new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
                         resultSet.getInt("quantity"), resultSet.getString("images"));
