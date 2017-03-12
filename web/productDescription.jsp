@@ -94,24 +94,16 @@ Author     : Dalia
             }
         </style>
         <script>
-$("#slideshow1 > div:gt(0)").hide();
-
-setInterval(function () {
-    $('#slideshow1 > div:first')
-            .fadeOut()
-            .next()
-            .fadeIn()
-            .end()
-            .appendTo('#slideshow1');
-}, 5000);
+            $("#slideshow1 > div:gt(0)").hide();
+            setInterval(function () {
+                $('#slideshow1 > div:first')
+                    .fadeOut()
+                    .next()
+                    .fadeIn()
+                    .end()
+                    .appendTo('#slideshow1');
+            }, 5000);
         </script>
-        <style>
-            .panel-default>.panel-heading {
-                color: #333;
-                background-color: #ff6e6e;
-                border-color: #ddd;
-            }   
-        </style>
     </head>
 
     <body>
@@ -384,6 +376,13 @@ setInterval(function () {
         <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 
         <!-- for bootstrap working -->
+        <style>
+            .panel-default>.panel-heading {
+                color: #333;
+                background-color: #ff6e6e;
+                border-color: #ddd;
+            }   
+        </style>
         <!-- //for bootstrap working -->
     </body>
 </html>

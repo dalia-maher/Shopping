@@ -25,7 +25,7 @@ public class DBController implements DBHandler {
     private DBController() {
         try {
             DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Shopping", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Shopping", "root", "");
             System.out.println("Connected");
         } catch (SQLException ex) {
             ex.printStackTrace();

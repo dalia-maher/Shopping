@@ -28,8 +28,10 @@ public class GetOrders extends HttpServlet {
         //System.out.println("usr id = "+userID);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
+        boolean admin = false;
         if(userID!=null)
         {
+            admin = true;
             int id = Integer.parseInt(userID);
             user = DBController.getInstance().getUser(id);
         }
@@ -39,7 +41,7 @@ public class GetOrders extends HttpServlet {
         request.setAttribute("userName",user.getFirstName()+" "+user.getLastName());
         System.out.println("----"+allOrders.size());
         RequestDispatcher ds = null;
-        if(!user.isType())
+        if(!admin)
         {
             ds= request.getRequestDispatcher("userOrders.jsp");
         }
