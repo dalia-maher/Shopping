@@ -27,6 +27,10 @@ public class Stats extends HttpServlet {
             if (req.getParameter("type").equals("order")) {
             resp.getWriter().write(new Gson().toJson(DBController.getInstance().selectTodayOrders()));
         }
+            else if (req.getParameter("type").equals("contact")) {
+            resp.getWriter().write(new Gson().toJson(DBController.getInstance().selectTodayOrders()));
+        }
+            
     }
 
     @Override

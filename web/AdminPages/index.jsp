@@ -103,10 +103,32 @@
                  <td>"+data[i].quantity+"</td><td>"+data[i].price+"</td><td>"+data[i].price*data[i].quantity+"</td></tr></thead>");
                         }
                        $("#datadiv").append("</table>");
+
                     }
                 });
-
             }
+              function getMessages() {
+                $.ajax({
+                    url: "../Stats",
+                    type: 'POST',
+                    data: "type=contact",
+                    dataType: 'JSON',
+                    success: function (data, textStatus, jqXHR) {
+                        $("#datadiv").html("");
+                         $("#datadiv").append("<table class='table'><tr><th>Name</th><th>EMail</th><th>Telephone</th>\n\
+                 <th>Message</th></tr></thead>");
+
+                        for (var i = 0; i < data.length; i++) {
+                             $("#datadiv").append("<table class='table'><tr><td>"+data[i].name+"</td><td ><a href=\"mailto:"+data[i].email+"\">"+data[i].email+
+                                     "</a></td><td>"+data[i].telephone+"</td>\n\
+                 <td>"+data[i].message+"</td></tr></thead>");
+                        }
+                       $("#datadiv").append("</table>");
+
+                    }
+                });
+            }
+            
             window.onload = function () {
                 getStats();
             }
@@ -215,7 +237,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="javascript:getMessages()">
                                     <div class="panel-footer">
                                         <span class="pull-left">View Details</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
