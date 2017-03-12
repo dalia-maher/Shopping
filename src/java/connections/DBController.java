@@ -21,17 +21,29 @@ public class DBController implements DBHandler {
     Connection connection;
     PreparedStatement preparedStatement;
     private static DBController instance = null;
+    private String username="root";
+    private String password="root";
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     private DBController() {
-        try {
+      
+    }
+    public void initConnection(){
+      try {
             DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Shopping", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Shopping", username, password);
             System.out.println("Connected");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-
     public static DBController getInstance() {
         if (instance == null) {
             instance = new DBController();
