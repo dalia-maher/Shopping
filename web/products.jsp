@@ -19,79 +19,83 @@
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-        
-         <script>
-                                function getProduct() {
-                                    var catId = $("#catId").text();
-                                    var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                                    +"&categoryID=" + catId;
-                                    $.get(url, displayProduct, 'json');
 
-                                }
-                                function displayProduct(responseTxt, statusTxt, xhr) {
-                                    // var messages = responseTxt.
-                                    serverPath = $("#serverPath").text();
-                                    //serverPath = serverPath.replace(/\\/g, "\\\\");
-                                    if (statusTxt == "success") {
-                                    console.log(responseTxt.length + "size");
-                                    for (i = 0; i < responseTxt.length;i++)
-                                    {   var ProName=responseTxt[i].name;
-                                        ProName=ProName.replace(/\s/g, "");
-                                        var catName = responseTxt[i].category.name;
-                                        catName = catName.replace(/\s/g, "");
-                                        var data = responseTxt[i].images;
-                                       // var arr = data.split("&&");
-                                        var img=data.split("&&")[0];
-                                        if(img==""){
-                                          img=data.split("&&")[1]; 
-                                        }
-                                         alert(img);
-                                        $("#result").append("<div class='products-grd'>" +
-                                            "<div class='p-one simpleCart_shelfItem prd' > "+
-                                            "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img src=\"" + "images/"+catName+"/"+img+".jpg" + "\"alt='Error' class='img-responsive' />" +
-                                            "<div class='mask'>" +
-                                            "<span>Quick View</span>" +
-                                            "</div>" +
-                                            "</a>" +
-                                            "<h4>" + responseTxt[i].name + "</h4>" +
-                                            "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
+        <script>
+            function getProduct() {
+                var catId = $("#catId").text();
+                var url = "displayProduct?numberOfPro=" + $("#result").children().length
+                        + "&categoryID=" + catId;
+                $.get(url, displayProduct, 'json');
 
-                                            "</div>" +
-                                            "</div>");
-                                    }
-                                }
+            }
+            function displayProduct(responseTxt, statusTxt, xhr) {
+                // var messages = responseTxt.
+                serverPath = $("#serverPath").text();
+                //serverPath = serverPath.replace(/\\/g, "\\\\");
+                if (statusTxt == "success") {
+                    if (responseTxt.length <= 0) {
+                        $("#result").append("<p><h2>No avaliable products in this category</h2></p>");
+                    } else {
+                        console.log(responseTxt.length + "size");
+                        for (i = 0; i < responseTxt.length; i++)
+                        {
+                            var ProName = responseTxt[i].name;
+                            ProName = ProName.replace(/\s/g, "");
+                            var catName = responseTxt[i].category.name;
+                            catName = catName.replace(/\s/g, "");
+                            var data = responseTxt[i].images;
+                            // var arr = data.split("&&");
+                            var img = data.split("&&")[0];
+                            if (img == "") {
+                                img = data.split("&&")[1];
                             }
+                            alert(img);
+                            $("#result").append("<div class='products-grd'>" +
+                                    "<div class='p-one simpleCart_shelfItem prd' > " +
+                                    "<a href='productDescription.jsp?productID=" + responseTxt[i].productID + "'>" +
+                                    "<img src=\"" + "images/" + catName + "/" + img + ".jpg" + "\"alt='Error' class='img-responsive' />" +
+                                    "<div class='mask'>" +
+                                    "<span>Quick View</span>" +
+                                    "</div>" +
+                                    "</a>" +
+                                    "<h4>" + responseTxt[i].name + "</h4>" +
+                                    "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
+                                    "</div>" +
+                                    "</div>");
+                        }
+                    }
+                }
+            }
 
-                            </script>
+        </script>
 
         <script type="text/javascript">
-jQuery(document).ready(function ($) {
-    $(".scroll").click(function (event) {
-        event.preventDefault();
-        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-    });
-    $("#serverPath").hide();
-    $("#catId").hide();
-    getProduct();
-});
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+                });
+                $("#serverPath").hide();
+                $("#catId").hide();
+                getProduct();
+            });
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function () {
-    $(".megamenu").megamenu();
+                $(".megamenu").megamenu();
 
-});</script>
-        
+            });</script>
+
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <!-- the jScrollPane script -->
         <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
         <script type="text/javascript" id="sourcecode">
-$(function () {
-    $('.scroll-pane').jScrollPane();
-});
+            $(function () {
+                $('.scroll-pane').jScrollPane();
+            });
         </script>
         <!-- //the jScrollPane script -->
 
@@ -189,7 +193,7 @@ $(function () {
                                 </div>
                             </div>
                         </li>
-                                            						
+
                     </ul> 
                     <div class="search">
                         <form>
@@ -208,14 +212,14 @@ $(function () {
                 <div class="products-grids">
                     <div class="col-md-12 products-grid-left">
                         <div id="result" class="products-grid-lft">
-                           
-                           
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- //products -->
-            <%@ include file="footer.html" %>
+        <%@ include file="footer.html" %>
     </body>
 </html>

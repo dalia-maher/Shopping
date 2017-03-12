@@ -33,7 +33,53 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
                 });
+                getProduct();
             });
+            
+             function getProduct() {
+                
+                var url = "ViewHomeProducts";
+                $.get(url, displayProduct, 'json');
+
+            }
+            function displayProduct(responseTxt, statusTxt, xhr) {
+                
+                if (statusTxt == "success") {
+                    
+                        console.log(responseTxt.length + "size");
+                        for (i = 0; i < responseTxt.length; i++)
+                        {
+//                            var ProPrice = responseTxt[i].price;
+//                            ProPrice = ProPrice.replace(/\s/g, "");
+                             var item = responseTxt[Math.floor(Math.random()*responseTxt.length)];
+                            var catName =item.category.name;
+                            catName = catName.replace(/\s/g, "");
+                            alert(catName);
+                            var data =item.images;
+                            // var arr = data.split("&&");
+                            var img = data.split("&&")[0];
+                            if (img == "") {
+                                img = data.split("&&")[1];
+                            }
+                            alert(img);
+                            $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
+                                    "<div class='p-one simpleCart_shelfItem jwe'> " +
+                                    "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
+                                    "<img src=\"" + "images/" + catName + "/" + img + ".jpg" + "\"alt='Error' class='img-responsive' />" +
+                                    "<div class='mask'>" +
+                                    "<span>Quick View</span>" +
+                                    "</div>" +
+                                    "</a>" +
+                                    "<div class='product-left-cart'>" +
+                                    "<div class='product-left-cart-l'>"+
+                                    "<p><p class='item_add'><i></i> <span class='item_price valsa'> EGP  " + item.price + "</span></p></p>" +
+                                    "</div><div class='clearfix'></div></div> </div>" +
+                                    "</div>");
+                        }
+                    
+                }
+            }
+
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
@@ -309,238 +355,9 @@
 <!-- banner-bottom -->
 	<div class="banner-bottom">
             <div class="container">
-                <div class="product-one">
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/1-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/3-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/2-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/4-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/5-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/6-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="product-one">
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">							
-                            <a href="productDescription.jsp">
-                                <img src="images/7-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                            </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/13-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/9-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/10-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">							
-                            <a href="productDescription.jsp">
-                                <img src="images/11-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 product-left"> 
-                        <div class="p-one simpleCart_shelfItem jwe">
-                            <a href="productDescription.jsp">
-                                <img src="images/12-.jpg" alt="" class="img-responsive" />
-                                <div class="mask">
-                                    <span>Quick View</span>
-                                </div>
-                            </a>
-                            <div class="product-left-cart">
-                                <div class="product-left-cart-l">
-                                    <p><a class="item_add" href="#"><i></i> <span class=" item_price">$729</span></a></p>
-                                </div>
-                                <div class="product-left-cart-r">
-                                    <a href="#"> </a>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="product-one" id="randomProduct">
+                    
+                    
                     <div class="clearfix"> </div>
                 </div>
             </div>
