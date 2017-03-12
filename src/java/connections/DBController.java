@@ -663,6 +663,26 @@ public class DBController implements DBHandler {
             return null;
         }
     }
+    
+    
+        public ArrayList<Order> selectTodayOrders() {
+        ArrayList<Order> allOrders = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT `orderID`, `productID`, `customerID`, "
+                    + "`quantity`, `date`, `price`, `ordernumber` FROM `order` where DATE(`date`) = CURDATE()");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
+                        getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
+                        resultSet.getTimestamp("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
+            }
+            return allOrders;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selecting all orders");
+            return null;
+        }
+    }
 
     @Override
     public ArrayList<Order> selectAllOrders(Product p) {
@@ -847,6 +867,19 @@ public class DBController implements DBHandler {
             System.err.println("error in selecting credits");
         }
         return -1;
+    }
+    public String getValue(String query,String colname){
+      try {
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString(colname);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in selecting credits");
+        }
+    return null;
     }
     @Override
     public double getCreditValue(int userID){

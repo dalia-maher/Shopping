@@ -60,7 +60,6 @@ function viewProduct(responseTxt, statusTxt, xhr) {
         var ProName = responseTxt.name;
         ProName = ProName.replace(/\s/g, "");
         catName = responseTxt.category.name;
-        catName = catName.replace(/\s/g, "");
         var item="<div class=\"flexslider\">\
   <ul class=\"slides\">";
         var hasImage=false;

@@ -48,7 +48,6 @@
                                     {   var ProName=responseTxt[i].name;
                                         ProName=ProName.replace(/\s/g, "");
                                         var catName = responseTxt[i].category.name;
-                                        catName = catName.replace(/\s/g, "");
                                         var data = responseTxt[i].images;
                                        // var arr = data.split("&&");
                                         var img=data.split("&&")[0];
