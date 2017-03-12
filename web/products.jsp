@@ -19,7 +19,17 @@
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
-        
+        <style>
+            .sizeW{
+                width: 300px;
+                height: 300px;
+            }
+            img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+        </style>
          <script>
                                 function getProduct() {
                                     var catId = $("#catId").text();
@@ -45,11 +55,12 @@
                                         if(img==""){
                                           img=data.split("&&")[1]; 
                                         }
-                                         alert(img);
+                                         //alert(img);
+                                         
                                         $("#result").append("<div class='products-grd'>" +
-                                            "<div class='p-one simpleCart_shelfItem prd' > "+
+                                            "<div class='p-one simpleCart_shelfItem prd sizeW'   > "+
                                             "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
-                                            "<img src=\"" + "images/"+catName+"/"+img+".jpg" + "\"alt='Error' class='img-responsive' />" +
+                                            "<img  src=\"" + "images/"+catName+"/"+img+".png" + "\"alt='Error' class='img-responsive' onerror='setDefault(this)'  />" +
                                             "<div class='mask'>" +
                                             "<span>Quick View</span>" +
                                             "</div>" +
@@ -61,6 +72,12 @@
                                             "</div>");
                                     }
                                 }
+                            }
+                            function setDefault(item){
+                                item.src='images/noImage.png';
+                                item.className="img-responsive";
+                                
+                                
                             }
 
                             </script>
