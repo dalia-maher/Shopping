@@ -24,56 +24,6 @@
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
 
-        <script>
-            function getProduct() {
-                var catId = $("#catId").text();
-                var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                        + "&categoryID=" + catId;
-                $.get(url, displayProduct, 'json');
-
-            }
-            function displayProduct(responseTxt, statusTxt, xhr) {
-                // var messages = responseTxt.
-                serverPath = $("#serverPath").text();
-                //serverPath = serverPath.replace(/\\/g, "\\\\");
-                if (statusTxt == "success") {
-                    console.log(responseTxt.length + "size");
-                    for (i = 0; i < responseTxt.length; i++)
-                    {
-                        var ProName = responseTxt[i].name;
-                        ProName = ProName.replace(/\s/g, "");
-                        var catName = responseTxt[i].category.name;
-                        catName = catName.replace(/\s/g, "");
-                         alert();
-                        $("#result").append("<div class='products-grd'>" +
-                                "<div class='p-one simpleCart_shelfItem prd' > " +
-                                "<a href='productDescription.jsp?productID=" + responseTxt[i].productID + "'>" +
-                                "<img src=\"" + "images/" + catName + "/" + ProName + "0.png" + "\"alt='Error' class='img-responsive' />" +
-                                "<div class='mask'>" +
-                                "<span>Quick View</span>" +
-                                "</div>" +
-                                "</a>" +
-                                "<h4>" + responseTxt[i].name + "</h4>" +
-                                "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
-                                "</div>" +
-                                "</div>");
-                    }
-                }
-            }
-
-        </script>
-
-        <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                $(".scroll").click(function (event) {
-                    event.preventDefault();
-                    $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
-                });
-                $("#serverPath").hide();
-                $("#catId").hide();
-                getProduct();
-            });
-        </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
@@ -98,7 +48,7 @@
     </head>
     <body>
         <%@ include file="header.jsp" %>
-        <div class="mega_nav">
+        <div class="mega_nav wrapper">
             <div class="container">
                 <div class="menu_sec">
                     <!-- start header menu -->
@@ -206,27 +156,39 @@
                 <div class="products-grids">
                     <div class="col-md-12 products-grid-left">
                         <div id="result" class="products-grid-lft">
-                            <c:if test="${!empty searchResults}">
-                                <c:forEach items="${searchResults}" var="product">
-                                    <div class='products-grd'>
-                                        <div class='p-one simpleCart_shelfItem prd' >
-                                            <a href='productDescription.jsp?productID="${product.productID}"'>
-                                                <img src="images/${product.category.name}/${product.name}0.jpg" alt='Error' class='img-responsive'/>
-                                                <div class='mask'>
-                                                    <span>Quick View</span>
-                                                </div>
-                                            </a>
-                                            <h4>${product.name}</h4>
-                                            <p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> ${product.price}</span></a></p>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </c:if>
-                            <c:if test="${empty searchResults}">
-                                <center>
-                                    <h3><c:out value="no search data."/></h3>
-                                </center>
-                            </c:if>
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
                         </div>
                     </div>
                 </div>
