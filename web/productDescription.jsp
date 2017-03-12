@@ -45,23 +45,17 @@ Author     : Dalia
                 $.ajax({
                     url: "AddingToCart",
                     type: 'POST',
-            data: "prooductID=" +${param.productID} + "&quantity=" + quantity,
+                    data: "prooductID=" + ${param.productID} + "&quantity=" + quantity,
                     success: function (data, textStatus, jqXHR) {
-
                         //alert(data);
                         if (data == 1) {
                             //alert("Done2");
                             //updateItems();
                             getShoppingList();
-
-
                         }
                     }
-
-
                 });
             }
-
 
         </script>
 
@@ -87,7 +81,6 @@ Author     : Dalia
             {
                 width: 90%;
                 height: 90%;
-
             }
             #slideshow1 > div {
                 position: absolute;
@@ -257,14 +250,13 @@ setInterval(function () {
 
                     <script>
                 $("#slideshow1 > div:gt(0)").hide();
-
                 setInterval(function () {
                     $('#slideshow1 > div:first')
-                            .fadeOut()
-                            .next()
-                            .fadeIn()
-                            .end()
-                            .appendTo('#slideshow1');
+                        .fadeOut()
+                        .next()
+                        .fadeIn()
+                        .end()
+                        .appendTo('#slideshow1');
                 }, 5000);
                     </script>
 
@@ -284,10 +276,8 @@ setInterval(function () {
                             <button onclick="decrease_by_one('quantity');" id="decrease"/>-</button>
                             <div class="single-but item_add">
 
-                                <input onclick="addToCart();"  type="submit" value="add to cart" id = "btn">
+                            <input onclick="addToCart();"  type="submit" value="add to cart" id = "btn">
                             </div>
-
-
                         </div>
                         <!-- </form>-->
                     </div>

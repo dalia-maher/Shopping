@@ -88,7 +88,7 @@
 
                             <c:if test="${!empty User}">
                                 <h2>${User.userName}</h2>
-                                <a id="btn" type="button" href="GetOrders?userID=${User.customerID}">The Orders</a>
+                                <a id="btn" href="GetOrders?userID=${User.customerID}">The Orders</a>
                                 <div class="table-responsive">
                                     <ul>
                                         <li class="text-info">First Name: </li>
@@ -146,10 +146,7 @@
                                             <br/>
                                             <ul>
                                                 <c:forEach  items= "${requestScope.userInterest}" var="interest">
-
                                                     <li><c:out value="${interest.getName()}"/></li>
-                                                    <br>
-
                                                 </c:forEach>
                                             </ul>
                                         </li>
