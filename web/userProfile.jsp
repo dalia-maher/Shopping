@@ -36,8 +36,6 @@
                             if(data != -1){
                                 //alert(data);
                                 $("#lastCredit").html("EGP "+data);
-                              
-                                
                             }
                         }
                     });
@@ -48,8 +46,7 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
-                
-               getLastCredit();
+                getLastCredit();
             });
             
         </script>
@@ -170,7 +167,7 @@
                         
                         <h3>${sessionScope.loggedInUser.getUserName()}</h3>
 
-                    <form action="editProfile.jsp">
+                    <form>
                         <ul>
                             <li class="text-info">First Name: </li>
                          
@@ -227,20 +224,14 @@
                                 <br/>
                                 <ul>
                                    <c:forEach  items= "${requestScope.userInterest}" var="interest">
-
                                        <li><c:out value="${interest.getName()}"/></li>
-                                        <br>
-
                                     </c:forEach>
                                 </ul>
                             </li>
                         </ul>
-                        <input type="submit" value="Edit Profile">
-                        <a id="btn" type="button" href="GetOrders">My Orders</a>
+                        <input type="submit" value="Edit Profile" formaction="editProfile.jsp"/>
+                        <input type="submit" id="btn" value="My Orders" formaction="GetOrders"/>
                     </form>
-                        
-                            
-                        
                     </c:if>
                     
                 </div>

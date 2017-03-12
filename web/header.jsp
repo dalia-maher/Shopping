@@ -5,7 +5,6 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="beans.User"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- top-header -->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,87 +15,76 @@
             getShoppingList();
         });   
     function validateCredit(value) {
-       if($("#credit").val()!=""){
+       if($("#credit").val() != ""){
         $.post("CheckCredit", {credit: value},
-                function (response) {
-                    if (response == "true") {
-                        $("#addBtn").show();
-                        $("#creditValidation").html("");
-                        
-                        //return true;
-                    } else {
-                        $("#creditValidation").html("Invalid Card ID!");
-                         $("#credit").val("");
-                        //return false;
-                    }
-                });
-       }else{
+            function (response) {
+                if (response == "true") {
+                    $("#addBtn").show();
+                    $("#creditValidation").html("");
+                    //return true;
+                } else {
+                    $("#creditValidation").html("Invalid Card ID!");
+                     $("#credit").val("");
+                    //return false;
+                }
+            });
+        } else {
             $("#creditValidation").html("Please, Enter the Card Code");
-       }
+        }
     }
 
     function addCredit(id) {
         
-        $.post("UdateUserCredit", {creditID:id},
-                function (response) {
-                    if (response == "false") {
-                       
-                        $("#wrongAdded").html("Try agin ,Not added successfully!");
-                        $("#credit").val("");
-                        $("#creditValidation").hide();
-                        $("#wrongAdded").show();
-                        $("#myModal").modal("show");
-                        
-   
-                    } else  {
-                        
-                        $("#myModal").modal("hide");
-                        $("#validCredit").modal("show");
-                         $("#newCredit").html(response);
-                         getLastCredit();
-                         setTimeout(function(){
-                            $('#validCredit').modal('hide')
-                          }, 2000);
-                    }
-                  
-                });
-          
+        $.post("UdateUserCredit", {creditID: id},
+        function (response) {
+            if (response == "false") {
+                $("#wrongAdded").html("Try agin, Not added successfully!");
+                $("#credit").val("");
+                $("#creditValidation").hide();
+                $("#wrongAdded").show();
+                $("#myModal").modal("show");
+            
+            } else  {
+                $("#myModal").modal("hide");
+                $("#validCredit").modal("show");
+                $("#newCredit").html(response);
+                getLastCredit();
+                setTimeout(function(){
+                    $('#validCredit').modal('hide')
+                }, 2000);
+            }
+        });          
     }
     function getShoppingList(){
         $.ajax({
-                    url: "CheckOut",
-                    type: 'GET',
-                    dataType: 'JSON',
-                    success: function (data, textStatus, jqXHR) {
-                         var list = data;
-                        //alert(list.length);
-                        var total_price=0;
-                         $("#simpleCart_quantity").html(list.length);
-                         for (var i = 0; i < list.length; i++) {
-                            total_price += list[i].product.price * list[i].quantity;
-                        }
-                         $("#total_price_carts").html("EGP "+total_price);
-                       
-                    }
-         });
+            url: "CheckOut",
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data, textStatus, jqXHR) {
+                var list = data;
+                //alert(list.length);
+                var total_price=0;
+                $("#simpleCart_quantity").html(list.length);
+                for (var i = 0; i < list.length; i++) {
+                    total_price += list[i].product.price * list[i].quantity;
+                }
+                $("#total_price_carts").html("EGP " + total_price);
+            }
+        });
     }
     
     function deleteCart(){
         $.ajax({
-                    url: "DeleteAllCart",
-                    type: 'POST',
-                   
-                    success: function (data, textStatus, jqXHR) {
-                          if(data=="true");
-                        //alert(list.length);
-                       
-                         $("#simpleCart_quantity").html(0);
-  
-                         $("#total_price_carts").html("EGP "+0);
-                       
-                    }
-         });
-        
+            url: "DeleteAllCart",
+            type: 'POST',
+            success: function (data, textStatus, jqXHR) {
+                if(data=="true");
+                //alert(list.length);
+
+                $("#simpleCart_quantity").html(0);
+                $("#total_price_carts").html("EGP " + 0);
+            }
+        });
     }
 </script>
 
@@ -115,7 +103,7 @@
                     <ul>
                         <li class="text-info">Credit Card Code:</li>
                         <li><input type="text" name="credit" id="credit" onblur="validateCredit($('#credit').val())"></li>
-                        <p id="wrongAdded"></p>
+                        <li><p id="wrongAdded"></p></li>
                         <li>
                             <label id="creditValidation" style="color:red;"></label>
                         </li>
@@ -125,7 +113,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" id="addBtn" Style="display:none"class="btn btn-default btn btn-outline-secondary btn-md" data-dismiss="modal" onclick="addCredit($('#credit').val())">Add</button>
+                <button type="button" id="addBtn" Style="display:none" class="btn btn-default btn btn-outline-secondary btn-md" data-dismiss="modal" onclick="addCredit($('#credit').val())">Add</button>
             </div>
         </div>
 
@@ -142,7 +130,7 @@
             <div class="modal-body">
                 <div class="reg">
                     <ul>
-                        <li class="text-info">Your credit now is</li>
+                        <li class="text-info">Your credit now is </li>
                         <li id="newCredit"></li>
                     </ul>
                 </div>
@@ -153,7 +141,7 @@
 
     </div>
 </div>
- <div class="top_bg">
+<div class="top_bg">
     <div class="container">
         <div class="header_top-sec">
             <div class="top_right">
@@ -164,11 +152,10 @@
             <div class="top_left">
                 <ul>
                     <c:if test="${sessionScope.loggedInUser != null}">
-                        <%User user = (User) session.getAttribute("loggedInUser");%>
-                        <li class="top_link">Email:<a href="#"><%=user.getEmail()%></a></li>
+                        <c:set var="loggedInUser" value="${sessionScope.loggedInUser}"/>
+                        <li class="top_link">Email:<a href="#"><c:out value="${loggedInUser.getEmail()}"/></a></li>
                         <li class="top_link"><a href="Logout">Logout</a></li>
                         <li class="top_link"><a href="#" data-toggle="modal" data-target="#myModal">Add Credit</a></li>
-<!--                        <li class="top_link"><a href="userOrders.jsp">My Orders</a></li>-->
                         <li class="top_link"><a href="userProfile.jsp">My Account</a></li>					
                     </c:if>
                     <c:if test="${sessionScope.loggedInUser == null}">

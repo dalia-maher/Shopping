@@ -167,7 +167,7 @@
                                             </c:forEach>
                                         </c:if>
                                         <c:if test="${empty userOrders}">
-                                        You haven't any orders.
+                                        You have no orders.
                                     </c:if>  
                                 </div>
                             </div>

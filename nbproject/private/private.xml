@@ -4,31 +4,17 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/connections/DBHandler.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/index.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/xml/ObjectFactory.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/AdminPages/index.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/servlets/Login.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/AdminServlets/ProductServlet.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/AdminPages/forms.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/xml/Msg.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/AdminPages/CreditPage.jsp</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/checkout.jsp</file>
             <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/servlets/Register.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/AdminServlets/GetCustomers.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/productDescription.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/AdminServlets/ProductEditServlet.java</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/editProfile.jsp</file>
             <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/connections/DBController.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/AdminPages/js/GetCustomerInfo.js</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/AdminPages/navHeader.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/js/bootstrap.js</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/AdminServlets/AddCatgorey.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/AdminServlets/GenerateCredits.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/AdminServlets/GetProducts.java</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/userOrders.jsp</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/servlets/CheckOut.java</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/servlets/PlaceOrder.java</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/servlets/AddingToCart.java</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/header.jsp</file>
+            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/productDescription.jsp</file>
             <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/register.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/beans/User.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/categoryItems.jsp</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/src/java/servlets/ShowCategories.java</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/js/imagezoom.js</file>
-            <file>file:/C:/Users/Dalia/Documents/NetBeansProjects/Shopping/web/AdminPages/tables.jsp</file>
         </group>
     </open-files>
 </project-private>

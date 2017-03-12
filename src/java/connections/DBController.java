@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -379,10 +380,12 @@ public class DBController implements DBHandler {
     @Override
     public boolean updateProductQuantity(int productID, int newQuantity) {
         try {
-            preparedStatement = connection.prepareStatement("UPDATE `product` SET `quantity`=?,"
+//            System.out.println("prodID = " + productID);
+//            System.out.println("quantity = " + newQuantity);
+            preparedStatement = connection.prepareStatement("UPDATE `product` SET `quantity`=? "
                     + "WHERE `ID`=?");
-            preparedStatement.setInt(1, productID);
-
+            preparedStatement.setInt(1, newQuantity);
+            preparedStatement.setInt(2, productID);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException ex) {
             System.err.println("error in editiing product");
@@ -423,6 +426,31 @@ public class DBController implements DBHandler {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
+                allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
+                        resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
+                        resultSet.getInt("quantity"), resultSet.getString("images")));
+
+            }
+            return allProducts;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("error in searching product");
+            return null;
+        }
+    }
+       public ArrayList<Product> searchProduct(String keyword,String catID,int maxP,int minP) {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        try {
+            preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`, `description`, "
+                    + "`quantity`, `price`, `images` FROM `product` where name like ? or description like ? or categoryID=? and price between ? and ?");
+            preparedStatement.setString(1, "%"+keyword+"%");
+           preparedStatement.setString(2,"%"+keyword+"%");
+     preparedStatement.setInt(3, Integer.parseInt(catID));
+           preparedStatement.setInt(4, minP);
+            preparedStatement.setInt(5, maxP);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
                 allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
                         resultSet.getInt("quantity"), resultSet.getString("images")));
@@ -594,7 +622,7 @@ public class DBController implements DBHandler {
             preparedStatement.setInt(1, o.getProduct().getProductID());
             preparedStatement.setInt(2, o.getCustomer().getCustomerID());
             preparedStatement.setInt(3, o.getQuantity());
-            preparedStatement.setDate(4, o.getDate());
+            preparedStatement.setTimestamp(4, new Timestamp(o.getDate().getTime()));
             preparedStatement.setDouble(5, o.getPrice());
             preparedStatement.setDouble(6, o.getOrderNumber());
             return preparedStatement.executeUpdate() > 0;
@@ -626,7 +654,7 @@ public class DBController implements DBHandler {
             while (resultSet.next()) {
                 allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
                         getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getDate("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
+                        resultSet.getTimestamp("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
             }
             return allOrders;
         } catch (SQLException ex) {
@@ -670,7 +698,7 @@ public class DBController implements DBHandler {
             while (resultSet.next()) {
                 allOrders.add(new Order(resultSet.getInt("orderID"), getProduct(resultSet.getInt("productID")),
                         getUser(resultSet.getInt("customerID")), resultSet.getInt("quantity"),
-                        resultSet.getDate("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
+                        resultSet.getTimestamp("date"), resultSet.getDouble("price"), resultSet.getInt("ordernumber")));
             }
             return allOrders;
         } catch (SQLException ex) {
@@ -721,10 +749,13 @@ public class DBController implements DBHandler {
     public boolean updateUserCredit(User user, double value) {
         boolean flag = false;
         try {
-            preparedStatement = connection.prepareStatement("UPDATE `customer` SET `credit` = ? WHERE `customerID` = ?");
-            preparedStatement.setDouble(1, user.getCredit() - value);
-            preparedStatement.setInt(2, user.getCustomerID());
-            flag = preparedStatement.executeUpdate() > 0;
+            PreparedStatement stmt = connection.prepareStatement("UPDATE `customer` SET `credit` = ? WHERE `customerID` = ?");
+            double newCredit = getCreditValue(user.getCustomerID()) - value;
+            System.out.println("new = " + newCredit);
+            stmt.setDouble(1, newCredit);
+            stmt.setInt(2, user.getCustomerID());
+            flag = stmt.executeUpdate() > 0;
+            stmt.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("error in updating credits");
@@ -819,13 +850,14 @@ public class DBController implements DBHandler {
     }
     @Override
     public double getCreditValue(int userID){
-         try {
+        try {
             preparedStatement = connection.prepareStatement("SELECT credit FROM `customer` WHERE `customerID` =?");
             preparedStatement.setInt(1, userID);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt("credit");
             }
+            preparedStatement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println("error in selecting credit");
@@ -841,7 +873,7 @@ public class DBController implements DBHandler {
             preparedStatement.setString(1, userID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User x = new User(resultSet.getInt("CustomerID"), resultSet.getString("email"), resultSet.getString("username"), null, resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"), resultSet.getDate("BDate"), resultSet.getString("job"));
+                User x = new User(resultSet.getInt("customerID"), resultSet.getString("email"), resultSet.getString("username"), null, resultSet.getString("firstName"), resultSet.getString("lastName"), resultSet.getString("addresse"), resultSet.getDouble("credit"), resultSet.getBoolean("type"), resultSet.getDate("BDate"), resultSet.getString("job"));
                 Product p = new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
                         resultSet.getInt("quantity"), resultSet.getString("images"));

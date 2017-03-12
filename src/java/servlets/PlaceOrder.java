@@ -10,7 +10,7 @@ import beans.Product;
 import beans.User;
 import connections.DBController;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.servlet.ServletException;
@@ -59,17 +59,18 @@ public class PlaceOrder extends HttpServlet {
             Product product = db.getProduct(Integer.parseInt(products[i]));
 
             // insert order
-            Calendar currenttime = Calendar.getInstance();
-            Date sqldate = new Date((currenttime.getTime()).getTime());
-            db.insertOrder(new Order(product, currentUser, Integer.parseInt(quantity[i]), sqldate, product.getPrice(), maxOrderNum));
+//            Calendar currenttime = Calendar.getInstance();
+//            Date sqldate = new Date((currenttime.getTime()).getTime());
+            Date now = new Date();
+            db.insertOrder(new Order(product, currentUser, Integer.parseInt(quantity[i]), now, product.getPrice(), maxOrderNum));
             
             // update product's quantity
             int newQuantity = product.getQuantity() - Integer.parseInt(quantity[i]);
             updated_prod = db.updateProductQuantity(product.getProductID(), newQuantity);
             
-            // update user's credit
-            db.updateUserCredit(currentUser, total);
         }
+        // update user's credit
+        db.updateUserCredit(currentUser, total);
         
         // reset shopping cart
         empty = db.resetShoppingCart(currentUser.getCustomerID());

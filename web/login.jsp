@@ -4,6 +4,7 @@
     Author     : Dalia
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,16 @@
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
+        <script>
+        function validateCookies() {
+            if(navigator.cookieEnabled) {
+                return true;
+            } else {
+                document.getElementById("loginValidation").innerHTML = "You must enable cookies in your browser to log in.";
+                return false;
+            }
+        }
+        </script>
     </head>
 	
     <body>
@@ -149,7 +160,7 @@
                         <div class="strip"></div>
                         <p>Welcome, please enter the following to continue.</p>
                         <p>If you have previously registered with us, you can just log in.</p>
-                        <form method="post" action="Login">
+                        <form method="post" action="Login" onsubmit="return validateCookies();">
                             <h5>Email:</h5>	
                             <input name="email" type="text" value="" required>
                             <h5>Password:</h5>
@@ -157,21 +168,14 @@
                             <label style="color:red;" id="loginValidation"></label><br/><br/>
                             <input type="submit" value="Login">
                         </form>
-                        <% String attempt = request.getParameter("attempt");
-                           if(attempt != null) {
-                        %>
-                                <script>
-                                    document.getElementById("loginValidation").innerHTML = "Invalid user credentials!";
-                                </script>
-                        <%
+                        <script>
+                            var msg = '<c:out value="${requestScope.attempt}"/>';
+                            if(msg != "") {
+                                document.getElementById("loginValidation").innerHTML = "Invalid user credentials!";
                             } else {
-                        %>
-                                <script>
-                                    document.getElementById("loginValidation").innerHTML = "";
-                                </script>
-                        <%
+                                document.getElementById("loginValidation").innerHTML = "";
                             }
-                        %>
+                        </script>
                     </div>
                     <div class="col-md-6 login-right">
                         <h3>New Registration</h3>
