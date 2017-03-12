@@ -28,7 +28,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getFirstName() + " " + user.getLastName()%> <b class="caret"></b></a>
             </c:if>
             <c:if test="${sessionScope.loggedInUser == null}">
-                <a href="login.jsp" ><i class="fa fa-user"></i> Login <b class="caret"></b></a>
+                <a href="../login.jsp" ><i class="fa fa-user"></i> Login <b class="caret"></b></a>
             </c:if>
             <ul class="dropdown-menu">
                 <li>

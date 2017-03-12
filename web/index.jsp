@@ -61,11 +61,11 @@
                             if (img == "") {
                                 img = data.split("&&")[1];
                             }
-                            alert(img);
+                           // alert(img);
                             $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
                                     "<div class='p-one simpleCart_shelfItem jwe'> " +
                                     "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
-                                    "<img src=\"" + "images/" + catName + "/" + img + ".jpg" + "\"alt='Error' class='img-responsive' />" +
+                                    "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' class='img-responsive' />" +
                                     "<div class='mask'>" +
                                     "<span>Quick View</span>" +
                                     "</div>" +
