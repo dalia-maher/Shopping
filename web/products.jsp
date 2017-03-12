@@ -36,7 +36,8 @@
                 +"&categoryID=" + catId;
                 $.get(url, displayProduct, 'json');
 
-            }
+
+                                }
             function displayProduct(responseTxt, statusTxt, xhr) {
                 // var messages = responseTxt.
                 serverPath = $("#serverPath").text();
@@ -47,7 +48,6 @@
                 {   var ProName=responseTxt[i].name;
                     ProName=ProName.replace(/\s/g, "");
                     var catName = responseTxt[i].category.name;
-                    catName = catName.replace(/\s/g, "");
                     var data = responseTxt[i].images;
                    // var arr = data.split("&&");
                     var img=data.split("&&")[0];
@@ -55,7 +55,7 @@
                       img=data.split("&&")[1]; 
                     }
                      //alert(img);
-
+                                         
                     $("#result").append("<div class='products-grd'>" +
                         "<div class='p-one simpleCart_shelfItem prd sizeW'   > "+
                         "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +

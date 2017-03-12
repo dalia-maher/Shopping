@@ -60,39 +60,41 @@
             var sum = 0;
             $("#showTable").html("<tr><td>Number Of Cards</td><td>Values</td></tr>");
             $('tr > td > input').each(function() {
-                if(this.value!=""&&parseInt(this.value))
-            valuesArray.push(this.value);
+            if (this.value != "" && parseInt(this.value))
+                    valuesArray.push(this.value);
             });
             $('tr > td > select option:selected').each(function() {
             amountArray.push(this.value);
             });
-            if(valuesArray.length>0)
+            if (valuesArray.length > 0)
             {
             $("#modal-save").modal("show");
-
             for (var i = 0; i < valuesArray.length; i++) {
             sum += parseInt(valuesArray[i]) * parseInt(amountArray[i]);
             $("#showTable").append("<tr><td>" + valuesArray[i] + "</td><td>" + amountArray[i] + "</td></tr>");
             }
             $("#showTable").append("<tr><td>Total Payment</td><td>" + sum + "</td></tr>");
-    
-                     }
+            }
             }
             function sendData(){
-                console.log(valuesArray);
-                    $.ajax({
-                        url: '../GenerateCredits',
-                        type: 'POST',
-                        data: 'firstarr='+valuesArray+"&secondarr="+amountArray,
-                        dataType: 'json',
-                         success: function (data) {
-                         console.log(data);
-                                        $("#modal-save").modal("hide");
+            $.ajax({
+            url: '../GenerateCredits',
+                    type: 'POST',
+                    data: 'firstarr=' + valuesArray + "&secondarr=" + amountArray,
+                    dataType: 'json',
+                    success: function (data) {
+                    console.log(data);
+                    $("#modal-save").modal("hide");
+                    $("#modal-Credit").modal("show");
+                    $("#showTableCredit").html("<tr><td>Number</td><td>value</td> </tr>");
+                    for (var i = 0; i < data.length; i++) {
+                    $("#showTableCredit").append("<tr><td>" + data[i].cardID + "</td><td>" + data[i].cardValue + "</td></tr>");
+                    }
 
-                        },
-                        error: function () {
-                        }
-                    });
+                    },
+                    error: function () {
+                    }
+            });
             }
         </script>
         <style>
@@ -129,10 +131,6 @@
                         </button>
                         <div class="col-lg-9">
                             <table class="table" id="showTable">
-                                <tr>
-                                    <td>Number</td>
-                                    <td>value</td> 
-                                </tr>
                             </table>
                             <button type="button" class="btn btn-default" onclick="sendData()">Approve</button>
                         </div>
@@ -145,6 +143,34 @@
                 <!--/.Content-->
             </div>
         </div>
+
+        <div class="modal fade modal-ext" id="modal-Credit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document" >
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="col-lg-9">
+                            <table class="table" id="showTableCredit">
+                                <tr>
+                                    <td>Number</td>
+                                    <td>value</td> 
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <!--Body-->
+
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
         <div id="wrapper">
 
             <%@ include file="navHeader.jsp" %>
