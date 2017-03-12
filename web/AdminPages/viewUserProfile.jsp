@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<%@page import="beans.User"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
     <head>
@@ -31,8 +33,6 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="AdminPages/js/bootstrap.min.js"></script>
 
-        <%@page contentType="text/html" pageEncoding="UTF-8"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     </head>
     <body>
         <style>
@@ -59,7 +59,64 @@
         <div id="wrapper">
 
             <!-- Navigation -->
-            <%@ include file="navHeader.jsp" %>
+            <%--<%@ include file="navHeader.jsp" %>--%>
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand colorwhite" href="index.jsp">SB Admin</a>
+                </div>
+                <!-- Top Menu Items -->
+
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <c:if test="${sessionScope.loggedInUser != null}">
+                            <%User user1 = (User) session.getAttribute("loggedInUser");%>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user1.getFirstName() + " " + user1.getLastName()%> <b class="caret"></b></a>
+                            </c:if>
+                            <c:if test="${sessionScope.loggedInUser == null}">
+                            <a href="AdminPages/login.jsp" ><i class="fa fa-user"></i> Login <b class="caret"></b></a>
+                            </c:if>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="../AdminPages/Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse color">
+                    <ul class="nav navbar-nav side-nav color">
+                        <li class="active">
+                            <a href="AdminPages/index.jsp"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        </li >
+
+                        <li >
+                            <a href="AdminPages/tables.jsp"><i class="fa fa-fw fa-table"></i> Users</a>
+                        </li>
+                        <li>
+                            <a href="AdminPages/forms.jsp"><i class="fa fa-fw fa-edit"></i> Add Product</a>
+                        </li>
+                        <li>
+                            <a href="AdminPages/blank-page.jsp"><i class="fa fa-fw fa-edit"></i>View / Edit Products</a>
+                        </li>
+                        <li>
+                            <a href="AdminPages/CreditPage.jsp"><i class="fa fa-fw fa-file"></i> Credit Cards</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
 
             <div id="page-wrapper">
 
@@ -73,12 +130,12 @@
                                 <h1 class="page-header">
                                     ${User.userName}
                                 </h1>
-                                <h3><a class="btn" style="float:right;"type="button" href="GetOrders?userID=${User.customerID}">The Orders</a></h3>
+                                <h3><a class="btn" style="float:right;" type="button" href="GetOrders?userID=${User.customerID}">The Orders</a></h3>
                             </c:if>
 
                             <ol class="breadcrumb">
                                 <li>
-                                    <i class="fa fa-dashboard"></i>  <a href="index.jsp">Dashboard</a>
+                                    <i class="fa fa-dashboard"></i>  <a href="AdminPages/index.jsp">Dashboard</a>
                                 </li>
                                 <li class="active">
                                     <i class="fa fa-table"></i> Tables
