@@ -38,6 +38,16 @@
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
+        <script>
+        function validateCookies() {
+            if(navigator.cookieEnabled) {
+                return true;
+            } else {
+                document.getElementById("loginValidation").innerHTML = "You must enable cookies in your browser to log in.";
+                return false;
+            }
+        }
+        </script>
     </head>
 	
     <body>
@@ -150,7 +160,7 @@
                         <div class="strip"></div>
                         <p>Welcome, please enter the following to continue.</p>
                         <p>If you have previously registered with us, you can just log in.</p>
-                        <form method="post" action="Login">
+                        <form method="post" action="Login" onsubmit="return validateCookies();">
                             <h5>Email:</h5>	
                             <input name="email" type="text" value="" required>
                             <h5>Password:</h5>
