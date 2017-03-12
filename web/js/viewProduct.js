@@ -28,6 +28,8 @@ function getProductDetails() {
         success: viewProduct
     });
 }
+var catname;
+var arr;
 function viewProduct(responseTxt, statusTxt, xhr) {
     if (statusTxt === "success")
     {
@@ -52,11 +54,12 @@ function viewProduct(responseTxt, statusTxt, xhr) {
         }
         $("#productDescription").html(responseTxt.description);
 
+        // var images = responseTxt.images;
         var data = responseTxt.images;
-        var arr = data.split("&&");
+        arr = data.split("&&");
         var ProName = responseTxt.name;
         ProName = ProName.replace(/\s/g, "");
-        var catName = responseTxt.category.name;
+        catName = responseTxt.category.name;
         catName = catName.replace(/\s/g, "");
         var item="<div class=\"flexslider\">\
   <ul class=\"slides\">";
@@ -64,12 +67,12 @@ function viewProduct(responseTxt, statusTxt, xhr) {
         for (var i = 0; i < arr.length; i++) {
             if (arr[i]!="") {
                 item+="<li data-thumb='images/" + catName + "/" + arr[i] + ".png'><img data-imagezoom='true' src='images/" + catName + "/" + arr[i] + ".png' /></li>";
-           hasImage=true;
+          hasImage=true;
             }
-        } 
-    }
-      if (!hasImage) {
-         item+="<li data-thumb='images/noImage.png'><img data-imagezoom='true' src='images/noImage.png' /></li>";
+        }
+        if (!hasImage) {
+        item+="<li data-thumb='images/noImage.png'><img data-imagezoom='true' src='images/noImage.png' /></li>";
+        }
         item+=" </ul></div>";
          $("#div2").html(item);
   $('.flexslider').flexslider({
