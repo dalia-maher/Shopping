@@ -57,6 +57,10 @@ Author     : Dalia
                     }
                 });
             }
+             function setDefault(item){
+            item.src='images/noImage.png';
+            item.className="img-responsive";
+        }
         </script>
 
         <!-- start-smoth-scrolling -->
@@ -274,7 +278,7 @@ Author     : Dalia
                             <c:set var="img" value="${fn:split(rProduct.images,'&&')}"/>
                               <div class="col-md-4 related products-grid">
                               <a href='productDescription.jsp?productID=${rProduct.getProductID()}'>
-                                   <img src="images/${rProduct.getCategory().getName()}/${img[0]}.png" alt=" " class="img-responsive" />
+                                   <img src="images/${rProduct.getCategory().getName()}/${img[0]}.png" alt=" " class="img-responsive" onerror='setDefault(this)' />
                                          <div class='mask'> 
                                             <span>View Details</span> 
                                         </div>
