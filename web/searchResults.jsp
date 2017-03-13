@@ -135,10 +135,11 @@
                         <div id="result" class="products-grid-lft">
                             <c:if test="${!empty searchResults}">
                                 <c:forEach items="${searchResults}" var="product">
+                                    <c:set var="img" value="${fn:split(product.images,'&&')}"/>
                                     <div class='products-grd'>
                                         <div class='p-one simpleCart_shelfItem prd' >
                                             <a href='productDescription.jsp?productID="${product.productID}"'>
-                                                <img src="images/${product.category.name}/${product.name}0.jpg" alt='Error' class='img-responsive'/>
+                                                <img src="images/${product.getCategory().getName()}/${img[0]}.png" alt='Error' class='img-responsive'/>
                                                 <div class='mask'>
                                                     <span>Quick View</span>
                                                 </div>
