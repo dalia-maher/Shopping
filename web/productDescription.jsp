@@ -5,6 +5,8 @@ Author     : Dalia
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +41,6 @@ Author     : Dalia
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
             });
-
             function addToCart() {
                 var quantity = document.getElementById("quantity").value;
                 $.ajax({
@@ -56,7 +57,6 @@ Author     : Dalia
                     }
                 });
             }
-
         </script>
 
         <!-- start-smoth-scrolling -->
@@ -124,78 +124,6 @@ Author     : Dalia
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li><a class="color1" href="#">catalog</a>
-                            <div class="megapanel">
-                                <div class="row">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Popular Brands</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Slave Bracelets</a></li>
-                                                <li><a href="products.jsp">Rings</a></li>
-                                                <li><a href="products.jsp">Necklaces</a></li>
-                                                <li><a href="products.jsp">Chokers</a></li>
-                                                <li><a href="products.jsp">Cuff Links</a></li>									
-                                                <li><a href="products.jsp">Bangles</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Style Zone</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Men</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>All Jewellery</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>												
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Seating</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">commodi consequatur</a></li>
-                                                <li><a href="products.jsp">illum qui dolorem</a></li>
-                                                <li><a href="products.jsp">nihil molestiae</a></li>
-                                                <li><a href="products.jsp">eum fugiat</a></li>
-                                                <li><a href="products.jsp">consequatur eum</a></li>
-                                            </ul>	
-                                        </div>						
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col2"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
-                                    <div class="col1"></div>
                                 </div>
                             </div>
                         </li>
@@ -337,35 +265,31 @@ Author     : Dalia
                 </div>
                 <!-- collapse -->
                 <!-- related products -->
-                <div class="related-products">
+                <div class="related-products" id="relatedProducts">
                     <h3>Related Products</h3>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/19.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
+                   
+                    <c:import url="/RelatedProducts" />
+                    <c:if test="${fn:length(requestScope.peroductList) gt 0}">
+                        <c:forEach  begin="1" end="3" items= "${requestScope.peroductList}" var="rProduct">
+                            <c:set var="img" value="${fn:split(rProduct.images,'&&')}"/>
+                              <div class="col-md-4 related products-grid">
+                              <a href='productDescription.jsp?productID=${rProduct.getProductID()}'>
+                                   <img src="images/${rProduct.getCategory().getName()}/${img[0]}.png" alt=" " class="img-responsive" />
+                                         <div class='mask'> 
+                                            <span>View Details</span> 
+                                        </div>
+                                    </a>    
+                           
+                            <div class="simpleCart_shelfItem rel">
+                                <p><span class="item_price val"> EGP <c:out value="${rProduct.getPrice()}"/></span></p>
+                           
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/18.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/20.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
+                         </c:forEach>
+                    </c:if>
+
+
+                    
                     <div class="clearfix"> </div>
                 </div>
                 <!-- //related products -->

@@ -70,49 +70,9 @@
                                             <%@ include file="categoryItems.jsp" %>
                                         </div>							
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col2"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                        <div class="col1"></div>
-                                    </div>
                                 </div>
-                        </li>
-                        <li><a class="color1" href="#">catalog</a>
-                            <div class="megapanel">
-                                <div class="row">
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Popular Brands</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Slave Bracelets</a></li>
-                                                <li><a href="products.jsp">Rings</a></li>
-                                                <li><a href="products.jsp">Necklaces</a></li>
-                                                <li><a href="products.jsp">Chokers</a></li>
-                                                <li><a href="products.jsp">Cuff Links</a></li>									
-                                                <li><a href="products.jsp">Bangles</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    <div class="col1">
-                                        <div class="h_nav">
-                                            <h4>Style Zone</h4>
-                                            <ul>
-                                                <li><a href="products.jsp">Men</a></li>
-                                                <li><a href="products.jsp">Women</a></li>
-                                                <li><a href="products.jsp">Brands</a></li>
-                                                <li><a href="products.jsp">Kids</a></li>
-                                                <li><a href="products.jsp">Accessories</a></li>
-                                                <li><a href="products.jsp">Style Videos</a></li>
-                                            </ul>	
-                                        </div>							
-                                    </div>
-                                    
                             </div>
                         </li>
-
                     </ul> 
                     <div class="search">
                         <form>

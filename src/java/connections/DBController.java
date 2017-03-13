@@ -22,7 +22,7 @@ public class DBController implements DBHandler {
     PreparedStatement preparedStatement;
     private static DBController instance = null;
     private String username="root";
-    private String password="root";
+    private String password="";
 
     public void setUsername(String username) {
         this.username = username;
@@ -38,7 +38,7 @@ public class DBController implements DBHandler {
     public void initConnection(){
       try {
             DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Shopping", username, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Shopping", username, password );
             System.out.println("Connected");
         } catch (SQLException ex) {
             ex.printStackTrace();
