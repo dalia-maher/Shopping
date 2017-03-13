@@ -5,6 +5,8 @@ Author     : Dalia
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +41,6 @@ Author     : Dalia
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
             });
-
             function addToCart() {
                 var quantity = document.getElementById("quantity").value;
                 $.ajax({
@@ -56,7 +57,6 @@ Author     : Dalia
                     }
                 });
             }
-
         </script>
 
         <!-- start-smoth-scrolling -->
@@ -128,15 +128,13 @@ Author     : Dalia
                             </div>
                         </li>
                     </ul> 
-                    <div class="search">
-                        <form action ="SearchProducts" method ="get">
-                            <div class="search">
-                                <input type="text" value="" placeholder="Search..." name = "keyword">
-                                <input type="submit" value="">
-                            </div><br/>
-                            <a href="searchPage.jsp" >Advanced Search</a>
-                        </form>
-                    </div>
+                    <form action ="SearchProducts" method ="get">
+                        <div class="search">
+                            <input type="text" value="" placeholder="Search..." name = "keyword">
+                            <input type="submit" value="">
+                        </div><br/>
+                        <a href="searchPage.jsp" >Advanced Search</a>
+                    </form>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -268,35 +266,31 @@ Author     : Dalia
                 </div>
                 <!-- collapse -->
                 <!-- related products -->
-                <div class="related-products">
+                <div class="related-products" id="relatedProducts">
                     <h3>Related Products</h3>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/19.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
+                   
+                    <c:import url="/RelatedProducts" />
+                    <c:if test="${fn:length(requestScope.peroductList) gt 0}">
+                        <c:forEach  begin="1" end="3" items= "${requestScope.peroductList}" var="rProduct">
+                            <c:set var="img" value="${fn:split(rProduct.images,'&&')}"/>
+                              <div class="col-md-4 related products-grid">
+                              <a href='productDescription.jsp?productID=${rProduct.getProductID()}'>
+                                   <img src="images/${rProduct.getCategory().getName()}/${img[0]}.png" alt=" " class="img-responsive" />
+                                         <div class='mask'> 
+                                            <span>View Details</span> 
+                                        </div>
+                                    </a>    
+                           
+                            <div class="simpleCart_shelfItem rel">
+                                <p><span class="item_price val"> EGP <c:out value="${rProduct.getPrice()}"/></span></p>
+                           
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/18.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 related products-grid">
-                        <img src="images/20.jpg" alt=" " class="img-responsive" />
-                        <div class="simpleCart_shelfItem rel">
-                            <p><span class="overline">$ 1000</span> <span class="item_price val">$ 729</span></p>
-                            <div class="single-but item_add">
-                                <input type="submit" value="add to cart">
-                            </div>
-                        </div>
-                    </div>
+                         </c:forEach>
+                    </c:if>
+
+
+                    
                     <div class="clearfix"> </div>
                 </div>
                 <!-- //related products -->

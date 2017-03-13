@@ -8,6 +8,14 @@
         <param-name>Password</param-name>
         <param-value></param-value>
     </context-param>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>AccessFilter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/AdminPages/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>displayProduct</servlet-name>
         <servlet-class>servlets.DisplayProducts</servlet-class>

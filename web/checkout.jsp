@@ -243,7 +243,8 @@
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>
             $(document).ready(function () {
-                $(".megamenu").megamenu();});
+                $(".megamenu").megamenu();
+            });
         </script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <style type="text/css">
@@ -254,7 +255,6 @@
     <body onload="fillCart()">
         <!-- header -->
         <%@ include file="header.jsp" %>
-        <!------>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
@@ -273,13 +273,13 @@
                             </div>
                         </li>
                     </ul> 
-                    <div class="search">
-                        <form>
-                            <input type="text" value="" placeholder="Search...">
+                    <form action ="SearchProducts" method ="get">
+                        <div class="search">
+                            <input type="text" value="" placeholder="Search..." name = "keyword">
                             <input type="submit" value="">
-                        </form>
-                    </div>
-                    <a href="searchPage.jsp">Advanced Search</a>
+                        </div><br/>
+                        <a href="searchPage.jsp" >Advanced Search</a>
+                    </form>
                     <div class="clearfix"></div>
                 </div>
             </div>
