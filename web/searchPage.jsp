@@ -50,6 +50,7 @@
                     dataType: 'json', //For output type
                     success: function (data, textStatus, jqXHR) {
                         $("#selectCatgories").empty();
+                        $("#selectCatgories").append($("<option></option>").attr("id", "-1").text("All"));
                         for (var i = 0; i < data.length; i++) {
                             $("#selectCatgories").append($("<option></option>").attr("id", data[i].categoryID).text(data[i].name));
                         }
@@ -163,17 +164,17 @@
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="sr-only" for="checkin">Minimum Price</label>
+                                                            <label class="sr-only" for="checkin">Min Price</label>
                                                             <div class="input-group">
-                                                                <input type="number" id="txtMinPrice" class="form-control" id="checkin" placeholder="Minimum Price">
+                                                                <input type="number" id="txtMinPrice" class="form-control" id="checkin" placeholder="Min Price">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
-                                                            <label class="sr-only" for="checkout">Maximum Price</label>
+                                                            <label class="sr-only" for="checkout">Max Price</label>
                                                             <div class="input-group">
-                                                                <input type="number" id="txtMaxPrice" class="form-control" id="checkout" placeholder="Maxmiunm Price">
+                                                                <input type="number" id="txtMaxPrice" class="form-control" id="checkout" placeholder="Max Price">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,7 +193,7 @@
                                                 <div class="row">
                                                     <!--Products-->
                                                     <div class="products">
-                                                        <div class="container">
+                                                        <div class="">
                                                             <div class="products-grids">
                                                                 <div class="col-md-12 products-grid-left">
                                                                     <div id="result" class="products-grid-lft">

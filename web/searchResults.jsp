@@ -24,48 +24,6 @@
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
 
-        <script>
-            function getProduct() {
-                var catId = $("#catId").text();
-                var url = "displayProduct?numberOfPro=" + $("#result").children().length
-                        + "&categoryID=" + catId;
-                $.get(url, displayProduct, 'json');
-
-            }
-            function displayProduct(responseTxt, statusTxt, xhr) {
-                // var messages = responseTxt.
-                serverPath = $("#serverPath").text();
-                //serverPath = serverPath.replace(/\\/g, "\\\\");
-                if (statusTxt == "success") {
-                    console.log(responseTxt.length + "size");
-                    for (i = 0; i < responseTxt.length; i++)
-                    {
-                        var ProName = responseTxt[i].name;
-                        ProName = ProName.replace(/\s/g, "");
-                        var catName = responseTxt[i].category.name;
-                        catName = catName.replace(/\s/g, "");
-                         alert();
-                        $("#result").append("<div class='products-grd'>" +
-                            "<div class='p-one simpleCart_shelfItem prd' > " +
-                            "<a href='productDescription.jsp?productID=" + responseTxt[i].productID + "'>" +
-                            "<img src=\"" + "images/" + catName + "/" + ProName + "0.png" + "\"alt='Error' class='img-responsive' />" +
-                            "<div class='mask'>" +
-                            "<span>Quick View</span>" +
-                            "</div>" +
-                            "</a>" +
-                            "<h4>" + responseTxt[i].name + "</h4>" +
-                            "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
-                            "</div>" +
-                            "</div>");
-                    }
-                }
-            }
-             function setDefault(item){
-            item.src='images/noImage.png';
-            item.className="img-responsive";
-        }
-
-        </script>
 
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
@@ -73,10 +31,12 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
-                $("#serverPath").hide();
-                $("#catId").hide();
-                getProduct();
             });
+            
+             function setDefault(item){
+            item.src='images/noImage.png';
+            item.className="img-responsive";
+        }
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
@@ -120,12 +80,14 @@
                             </div>
                         </li>
                     </ul> 
-                    <div class="search">
-                        <form>
-                            <input type="text" value="" placeholder="Search...">
+                                        
+                    <form action ="SearchProducts" method ="get">
+                        <div class="search">
+                            <input type="text" value="" placeholder="Search..." name = "keyword">
                             <input type="submit" value="">
-                        </form>
-                    </div>
+                        </div><br/>
+                        <a href="searchPage.jsp" >Advanced Search</a>
+                    </form>
                     <div class="clearfix"></div>
                 </div>
             </div>

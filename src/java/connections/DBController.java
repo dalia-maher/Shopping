@@ -431,10 +431,8 @@ public class DBController implements DBHandler {
         System.out.println("key = " + keyword);
         try {
             preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`, `description`, "
-                    + "`quantity`, `price`, `images` FROM `product` WHERE `name` like ? "
-                    + "or `categoryID`in (select ID from category where name like ?)");
+                    + "`quantity`, `price`, `images` FROM `product` WHERE `name` like ? ");
             preparedStatement.setString(1, keyword);
-            preparedStatement.setString(2, keyword);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
@@ -450,23 +448,23 @@ public class DBController implements DBHandler {
             return null;
         }
     }
-       public ArrayList<Product> searchProduct(String keyword,String catID,int maxP,int minP) {
+    public ArrayList<Product> searchProduct(String keyword, String catID, Double minP, Double maxP) {
         ArrayList<Product> allProducts = new ArrayList<>();
         try {
+            String isProduct = "";
+            if(Integer.parseInt(catID) != -1)
+                isProduct = "AND `categoryID`=" + catID;
             preparedStatement = connection.prepareStatement("SELECT `ID`, `categoryID`, `name`, `description`, "
-                    + "`quantity`, `price`, `images` FROM `product` where name like ? or description like ? or categoryID=? and price between ? and ?");
-            preparedStatement.setString(1, "%"+keyword+"%");
-           preparedStatement.setString(2,"%"+keyword+"%");
-     preparedStatement.setInt(3, Integer.parseInt(catID));
-           preparedStatement.setInt(4, minP);
-            preparedStatement.setInt(5, maxP);
-
+                    + "`quantity`, `price`, `images` FROM `product` WHERE (`name` LIKE ? OR `description` LIKE ?) " + isProduct + " AND (`price` BETWEEN ? AND ?)");
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2,"%" + keyword + "%");
+            preparedStatement.setDouble(3, minP);
+            preparedStatement.setDouble(4, maxP);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 allProducts.add(new Product(resultSet.getInt("ID"), getCategory(resultSet.getInt("categoryID")),
                         resultSet.getString("name"), resultSet.getString("description"), resultSet.getDouble("price"),
                         resultSet.getInt("quantity"), resultSet.getString("images")));
-
             }
             return allProducts;
         } catch (SQLException ex) {
