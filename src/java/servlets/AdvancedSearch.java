@@ -25,8 +25,8 @@ public class AdvancedSearch extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String keyword=req.getParameter("keyword");
-        int minPrice=Integer.parseInt(req.getParameter("minP"));
-        int maxPrince=Integer.parseInt(req.getParameter("maxP"));
+        double minPrice=Double.parseDouble(req.getParameter("minP"));
+        double maxPrince=Double.parseDouble(req.getParameter("maxP"));
         String catgoreyID=req.getParameter("catgoreyID");       
         if (maxPrince==0) {
             maxPrince=Integer.MAX_VALUE;

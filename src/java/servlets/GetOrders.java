@@ -25,7 +25,6 @@ public class GetOrders extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("doget from getOrders servlet");
         String userID = request.getParameter("userID");
-        //System.out.println("usr id = "+userID);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("loggedInUser");
         boolean admin = false;

@@ -22,37 +22,36 @@ public class SearchProducts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("searchon");
+       // String search = request.getParameter("searchon");
         String keyword = request.getParameter("keyword");
-        ArrayList<Product>allProducts = new ArrayList<>();
+        
         RequestDispatcher ds = null;
-        switch (search) 
-        {
-            case "price":
-                System.out.println("post in search using price");
-                double price = Double.parseDouble(keyword);
-                allProducts = DBController.getInstance().searchProductByPrice(price);
-                System.out.println("all = "+allProducts.size());
-                if(!allProducts.isEmpty())
-                    request.setAttribute("searchResults", allProducts);
-                ds = request.getRequestDispatcher("searchResults.jsp");
-		ds.forward(request,response);
-                break;
-            case "category":
-                System.out.println("post in search using category");
-                break;
-            case "name":
+//        switch (search) 
+//        {
+//            case "price":
+//                System.out.println("post in search using price");
+//                double price = Double.parseDouble(keyword);
+//                allProducts = DBController.getInstance().searchProductByPrice(price);
+//                System.out.println("all = "+allProducts.size());
+//                if(!allProducts.isEmpty())
+//                    request.setAttribute("searchResults", allProducts);
+//                ds = request.getRequestDispatcher("searchResults.jsp");
+//		ds.forward(request,response);
+//                break;
+//            case "category":
+//                System.out.println("post in search using category");
+//                break;
+//            case "name":
                 System.out.println("post in search using name");
-                allProducts = DBController.getInstance().searchProduct(keyword);
-                System.out.println("all = "+allProducts.size());
+                ArrayList<Product>allProducts = DBController.getInstance().searchProduct(keyword);
                 if(!allProducts.isEmpty())
                         request.setAttribute("searchResults", allProducts);
                 ds = request.getRequestDispatcher("searchResults.jsp");
 		ds.forward(request,response);
-                break;
-            default:
-                break;
-        }
+//                break;
+//            default:
+//                break;
+//        }
     }
 
     @Override

@@ -133,9 +133,12 @@ $(function () {
                         </li>
                     </ul> 
                     <div class="search">
-                        <form>
-                            <input type="text" value="" placeholder="Search...">
-                            <input type="submit" value="">
+                        <form action ="SearchProducts" method ="get">
+                            <div class="search">
+                                <input type="text" value="" placeholder="Search..." name = "keyword">
+                                <input type="submit" value="">
+                            </div><br/>
+                            <a href="searchPage.jsp" >Advanced Search</a>
                         </form>
                     </div>
                     <div class="clearfix"></div>

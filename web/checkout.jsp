@@ -279,6 +279,7 @@
                             <input type="submit" value="">
                         </form>
                     </div>
+                    <a href="searchPage.jsp">Advanced Search</a>
                     <div class="clearfix"></div>
                 </div>
             </div>

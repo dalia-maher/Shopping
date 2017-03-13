@@ -135,14 +135,16 @@
                             </div>
                         </li>
                     </ul>
-
-                        <div class="search">
-                            <form>
-                                <input type="text" value="" placeholder="Search...">
+                    <div class="search">
+                        <form action ="SearchProducts" method ="get">
+                            <div class="search">
+                                <input type="text" value="" placeholder="Search..." name = "keyword">
                                 <input type="submit" value="">
-                            </form>
-                        </div>
-                        <div class="clearfix"></div>
+                            </div><br/>
+                            <a href="searchPage.jsp" >Advanced Search</a>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

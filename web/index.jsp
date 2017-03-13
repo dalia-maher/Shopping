@@ -68,11 +68,8 @@
                         <div class="search">
                             <input type="text" value="" placeholder="Search..." name = "keyword">
                             <input type="submit" value="">
-                        </div>
-                        <select name = searchon>                                
-                            <option value="name">Name</option>
-                            <option value="price">Price</option>
-                        </select>
+                        </div><br/>
+                        <a href="searchPage.jsp" >Advanced Search</a>
                     </form>
                     <div class="clearfix"></div>
                 </div>
