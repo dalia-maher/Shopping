@@ -43,7 +43,7 @@ public class DisplayProducts extends HttpServlet {
             System.out.println("servlets.DisplayProduct.doGet()"+"///cat Id"+ CategoryID);
             numberNewproduct = Integer.parseInt(productNo);
         }
-        String path = request.getServletContext().getRealPath("");
+        //String path = request.getServletContext().getRealPath("");
       
           ArrayList<Product> allProducts = db.getProductsCategory(CategoryIDInt);
           

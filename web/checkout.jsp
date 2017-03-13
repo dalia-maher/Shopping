@@ -243,7 +243,8 @@
         <script type="text/javascript" src="js/megamenu.js"></script>
         <script>
             $(document).ready(function () {
-                $(".megamenu").megamenu();});
+                $(".megamenu").megamenu();
+            });
         </script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
         <style type="text/css">
@@ -254,7 +255,6 @@
     <body onload="fillCart()">
         <!-- header -->
         <%@ include file="header.jsp" %>
-        <!------>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">

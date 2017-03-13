@@ -86,6 +86,9 @@
             }
         });
     }
+    function previewModal(){
+        $('#myModal').modal('show');
+    }
 </script>
 
  <!--Modal--> 
@@ -155,7 +158,7 @@
                         <c:set var="loggedInUser" value="${sessionScope.loggedInUser}"/>
                         <li class="top_link">Email:<a href="#"><c:out value="${loggedInUser.getEmail()}"/></a></li>
                         <li class="top_link"><a href="Logout">Logout</a></li>
-                        <li class="top_link"><a href="#" data-toggle="modal" data-target="#myModal">Add Credit</a></li>
+                        <li class="top_link"><a href="javascript:previewModal();" >Add Credit</a></li>
                         <li class="top_link"><a href="userProfile.jsp">My Account</a></li>					
                     </c:if>
                     <c:if test="${sessionScope.loggedInUser == null}">

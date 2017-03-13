@@ -54,18 +54,18 @@
                              var item = responseTxt[Math.floor(Math.random()*responseTxt.length)];
                             var catName =item.category.name;
                             catName = catName.replace(/\s/g, "");
-                            alert(catName);
+                            //alert(catName);
                             var data =item.images;
                             // var arr = data.split("&&");
                             var img = data.split("&&")[0];
                             if (img == "") {
                                 img = data.split("&&")[1];
                             }
-                           // alert(img);
+                           
                             $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
                                     "<div class='p-one simpleCart_shelfItem jwe'> " +
                                     "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
-                                    "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' class='img-responsive' />" +
+                                    "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' onerror='setDefault(this)' class='img-responsive' />" +
                                     "<div class='mask'>" +
                                     "<span>Quick View</span>" +
                                     "</div>" +
@@ -75,10 +75,17 @@
                                     "<p><p class='item_add'><i></i> <span class='item_price valsa'> EGP  " + item.price + "</span></p></p>" +
                                     "</div><div class='clearfix'></div></div> </div>" +
                                     "</div>");
+                            // alert(item.name);
+                            responseTxt.splice(i,1);
                         }
                     
                 }
             }
+            
+             function setDefault(item){
+            item.src='images/noImage.png';
+            item.className="img-responsive";
+        }
 
         </script>
         <!-- start-smoth-scrolling -->

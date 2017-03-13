@@ -63,11 +63,11 @@
                         "<a href='productDescription.jsp?productID="+responseTxt[i].productID+"'>" +
                         "<img  src=\"" + "images/"+catName+"/"+img+".png" + "\"alt='Error' class='img-responsive' onerror='setDefault(this)'  />" +
                         "<div class='mask'>" +
-                        "<span>Quick View</span>" +
+                        "<span>View Details</span>" +
                         "</div>" +
                         "</a>" +
                         "<h4>" + responseTxt[i].name + "</h4>" +
-                        "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> $" + responseTxt[i].price + "</span></a></p>" +
+                        "<p><a class='item_add' href='#'><i></i> <span class=' item_price valsa'> EGP " + responseTxt[i].price + "</span></a></p>" +
 
                         "</div>" +
                         "</div>");
@@ -113,7 +113,6 @@
     </head>
     <body>
         <%@ include file="header.jsp" %>
-        <p id="serverPath"><%=getServletContext().getRealPath("")%></p>
         <p id="catId">${param.categoryID}</p>
         <div class="mega_nav">
             <div class="container">
