@@ -277,9 +277,13 @@ Author     : Dalia
                     <c:if test="${fn:length(requestScope.peroductList) gt 0}">
                         <c:forEach  begin="1" end="3" items= "${requestScope.peroductList}" var="rProduct">
                             <c:set var="img" value="${fn:split(rProduct.images,'&&')}"/>
+                            <c:set var="imgName" value="${img[0]}"/>
+                                   <c:if test="${imgName eq null}">
+                                        <c:set var="imgName" value="${img[1]}" />
+                                    </c:if>
                               <div class="col-md-4 related products-grid">
                               <a href='productDescription.jsp?productID=${rProduct.getProductID()}'>
-                                   <img src="images/${rProduct.getCategory().getName()}/${img[0]}.png" alt=" " class="img-responsive" onerror='setDefault(this)' />
+                                   <img src="images/${rProduct.getCategory().getName()}/${imgName}.png" alt=" " class="img-responsive" onerror='setDefault(this)' />
                                          <div class='mask'> 
                                             <span>View Details</span> 
                                         </div>

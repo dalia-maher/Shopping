@@ -102,13 +102,14 @@
                             <c:if test="${!empty searchResults}">
                                 <c:forEach items="${searchResults}" var="product">
                                     <c:set var="img" value="${fn:split(product.images,'&&')}"/>
-                                    <c:if test="${img[0]eq null}">
-                                        <c:set var="img" value="${img[1]}" />
+                                    <c:set var="imgName" value="${img[0]}"/>
+                                   <c:if test="${imgName eq null}">
+                                        <c:set var="imgName" value="${img[1]}" />
                                     </c:if>
                                     <div class='products-grd'>
                                         <div class='p-one simpleCart_shelfItem prd' >
                                             <a href='productDescription.jsp?productID="${product.productID}"'>
-                                                <img src="images/${product.getCategory().getName()}/${img}.png" alt='Error' class='img-responsive' onerror='setDefault(this)'/>
+                                                <img src="images/${product.getCategory().getName()}/${imgName}.png" alt='Error' class='img-responsive' onerror='setDefault(this)'/>
                                                 <div class='mask'>
                                                     <span>Quick View</span>
                                                 </div>
