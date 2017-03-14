@@ -76,7 +76,9 @@
                                     "</div><div class='clearfix'></div></div> </div>" +
                                     "</div>");
                             // alert(item.name);
-                            responseTxt.splice(i,1);
+                            //var index = responseTxt.indexOf(item); 
+                            responseTxt.splice(responseTxt.indexOf(item),1);
+                            //alert(value[i].name);
                         }
                     
                 }
