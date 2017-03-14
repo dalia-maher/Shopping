@@ -24,6 +24,7 @@
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
 
+
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
                 $(".scroll").click(function (event) {
@@ -31,6 +32,11 @@
                     $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
                 });
             });
+            
+             function setDefault(item){
+            item.src='images/noImage.png';
+            item.className="img-responsive";
+        }
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
@@ -96,10 +102,14 @@
                             <c:if test="${!empty searchResults}">
                                 <c:forEach items="${searchResults}" var="product">
                                     <c:set var="img" value="${fn:split(product.images,'&&')}"/>
+                                    <c:set var="imgName" value="${img[0]}"/>
+                                   <c:if test="${imgName eq null}">
+                                        <c:set var="imgName" value="${img[1]}" />
+                                    </c:if>
                                     <div class='products-grd'>
                                         <div class='p-one simpleCart_shelfItem prd' >
                                             <a href='productDescription.jsp?productID="${product.productID}"'>
-                                                <img src="images/${product.getCategory().getName()}/${img[0]}.png" alt='Error' class='img-responsive'/>
+                                                <img src="images/${product.getCategory().getName()}/${imgName}.png" alt='Error' class='img-responsive' onerror='setDefault(this)'/>
                                                 <div class='mask'>
                                                     <span>Quick View</span>
                                                 </div>
