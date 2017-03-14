@@ -40,6 +40,10 @@ public class Login extends HttpServlet {
                 response.sendRedirect("AdminPages/index.jsp");
             }
             else {
+                String lastvis=request.getSession().getAttribute("lastVisited").toString();
+                if(lastvis!=null&&lastvis!="")
+                response.sendRedirect(lastvis);
+                else
                 response.sendRedirect("index.jsp");
             }
         } else {
