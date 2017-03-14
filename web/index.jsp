@@ -17,9 +17,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-        Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-                        function hideURLbar(){ window.scrollTo(0,1); } </script>
+            function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -28,86 +28,92 @@
         <!-- //js -->
         <!-- start-smoth-scrolling -->
         <script type="text/javascript">
-            jQuery(document).ready(function($) {
-                $(".scroll").click(function(event){		
-                    event.preventDefault();
-                    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-                });
-                getProduct();
-            });
-            
-             function getProduct() {
-                
-                var url = "ViewHomeProducts";
-                $.get(url, displayProduct, 'json');
+jQuery(document).ready(function ($) {
+    $(".scroll").click(function (event) {
+        event.preventDefault();
+        $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+    });
+    getProduct();
+});
 
-            }
-            function displayProduct(responseTxt, statusTxt, xhr) {
-                
-                if (statusTxt == "success") {
-                    
-                        console.log(responseTxt.length + "size");
-                        for (i = 0; i < responseTxt.length; i++)
-                        {
+function getProduct() {
+
+    var url = "ViewHomeProducts";
+    $.get(url, displayProduct, 'json');
+
+}
+function displayProduct(responseTxt, statusTxt, xhr) {
+
+    if (statusTxt == "success") {
+
+        console.log(responseTxt.length + "size");
+        for (i = 0; i < responseTxt.length; i++)
+        {
 //                            var ProPrice = responseTxt[i].price;
 //                            ProPrice = ProPrice.replace(/\s/g, "");
-                             var item = responseTxt[Math.floor(Math.random()*responseTxt.length)];
-                            var catName =item.category.name;
-                            catName = catName.replace(/\s/g, "");
-                            //alert(catName);
-                            var data =item.images;
-                            // var arr = data.split("&&");
-                            var img = data.split("&&")[0];
-                            if (img == "") {
-                                img = data.split("&&")[1];
-                            }
-                           
-                            $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
-                                    "<div class='p-one simpleCart_shelfItem jwe'> " +
-                                    "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
-                                    "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' onerror='setDefault(this)' class='img-responsive' />" +
-                                    "<div class='mask'>" +
-                                    "<span>Quick View</span>" +
-                                    "</div>" +
-                                    "</a>" +
-                                    "<div class='product-left-cart'>" +
-                                    "<div class='product-left-cart-l'>"+
-                                    "<p><p class='item_add'><i></i> <span class='item_price valsa'> EGP  " + item.price + "</span></p></p>" +
-                                    "</div><div class='clearfix'></div></div> </div>" +
-                                    "</div>");
-                            // alert(item.name);
-                            //var index = responseTxt.indexOf(item); 
-                            responseTxt.splice(responseTxt.indexOf(item),1);
-                            //alert(value[i].name);
-                        }
-                    
-                }
-            }
+
+            var item = responseTxt[Math.floor(Math.random() * responseTxt.length)];
+            var catName = item.category.name;
+            //alert(catName);
+            var data = item.images;
+            // var arr = data.split("&&");
+            var arr = data.split("&&");
+            var img = arr[0];
+
             
-             function setDefault(item){
-            item.src='images/noImage.png';
-            item.className="img-responsive";
+            for (var i = 1; i < arr.length; i++) {
+                if (img == "") {
+                    img = arr[i];
+                } 
+            }
+
+
+            $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
+                    "<div class='p-one simpleCart_shelfItem jwe'> " +
+                    "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
+                    "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' onerror='setDefault(this)' class='img-responsive' />" +
+                    "<div class='mask'>" +
+                    "<span>Quick View</span>" +
+                    "</div>" +
+                    "</a>" +
+                    "<div class='product-left-cart'>" +
+                    "<div class='product-left-cart-l'>" +
+                    "<p><p class='item_add'><i></i> <span class='item_price valsa'> EGP  " + item.price + "</span></p></p>" +
+                    "</div><div class='clearfix'></div></div> </div>" +
+                    "</div>");
+            // alert(item.name);
+             responseTxt.splice(responseTxt.indexOf(item),1);
         }
+
+    }
+}
+
+function setDefault(item) {
+    item.src = 'images/noImage.png';
+    item.className = "img-responsive";
+}
 
         </script>
         <!-- start-smoth-scrolling -->
         <!-- start menu -->
         <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="js/megamenu.js"></script>
-        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script>$(document).ready(function () {
+    $(".megamenu").megamenu();
+});</script>
         <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-        
+
     </head>
     <body>
-       
+
         <%@ include file="header.jsp" %>
         <div class="mega_nav">
             <div class="container">
                 <div class="menu_sec">
                     <!-- start header menu -->
                     <ul class="megamenu skyblue">
-			<li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
-			<li class="grid"><a class="color1" href="#">Category</a>
+                        <li class="active grid"><a class="color1" href="index.jsp">Home</a></li>
+                        <li class="grid"><a class="color1" href="#">Category</a>
                             <div class="megapanel">
                                 <div class="row">
                                     <div class="col1">
@@ -117,7 +123,7 @@
                                     </div>
                                 </div>
                             </div>
-			</li>
+                        </li>
                     </ul> 
                     <form action ="SearchProducts" method ="get">
                         <div class="search">
@@ -130,30 +136,30 @@
                 </div>
             </div>
         </div>
-<!---->
-<!-- banner -->
-    <div class="banner">
-        <div class="container">
-<!-- Slider-starts-Here -->
-            <script src="js/responsiveslides.min.js"></script>
+        <!---->
+        <!-- banner -->
+        <div class="banner">
+            <div class="container">
+                <!-- Slider-starts-Here -->
+                <script src="js/responsiveslides.min.js"></script>
                 <script>
-                    // You can also use "$(window).load(function() {"
-                    $(function () {
-                      // Slideshow 4
-                        $("#slider3").responsiveSlides({
-                            auto: true,
-                            pager: false,
-                            nav: true,
-                            speed: 500,
-                            namespace: "callbacks",
-                            before: function () {
-                                $('.events').append("<li>before event fired.</li>");
-                            },
-                            after: function () {
-                              $('.events').append("<li>after event fired.</li>");
-                            }
-                        });
-                    });
+// You can also use "$(window).load(function() {"
+$(function () {
+    // Slideshow 4
+    $("#slider3").responsiveSlides({
+        auto: true,
+        pager: false,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        before: function () {
+            $('.events').append("<li>before event fired.</li>");
+        },
+        after: function () {
+            $('.events').append("<li>after event fired.</li>");
+        }
+    });
+});
                 </script>
                 <!--//End-slider-script -->
                 <div  id="top" class="callbacks_container">
@@ -166,9 +172,7 @@
                                         <p>Itaque earum rerum hic tenetur a sapiente delectus, 
                                             ut aut reiciendis voluptatibus maiores alias consequatur 
                                             aut perferendis doloribus asperiores repellat.</p>
-                                        <div class="buy">
-                                            <a href="productDescription.jsp">Explore</a>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -181,24 +185,20 @@
                                         <p>Alias earum rerum hic tenetur a sapiente delectus, 
                                             ut aut reiciendis voluptatibus maiores alias consequatur 
                                             aut perferendis doloribus asperiores repellat.</p>
-                                        <div class="buy">
-                                            <a href="productDescription.jsp">Explore</a>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="banner-info">
-                                 <div class="banner-info1">
+                                <div class="banner-info1">
                                     <div class="banner-inf">
                                         <h1>doloribus alias consequatur aut perferendis</h1>
                                         <p>Repellat earum rerum hic tenetur a sapiente delectus, 
                                             ut aut reiciendis voluptatibus maiores alias consequatur 
                                             aut perferendis doloribus asperiores repellat.</p>
-                                        <div class="buy">
-                                            <a href="productDescription.jsp">Explore</a>
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -206,101 +206,25 @@
                     </ul>
                 </div>
             </div>
-	</div>
-<!-- //banner -->
-<!-- cate -->
-	<div class="cate">
-            <div class="container">
-                <div class="cate-left">
-                    <h3>Necklaces<span>Our Catelog</span></h3>
-                </div>
-                <div class="cate-right">
-                <!-- slider -->
-                    <ul id="flexiselDemo1">			
-                        <li>
-                            <div class="sliderfig-grid">
-                                <img src="images/a.jpg" alt=" " class="img-responsive" />
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sliderfig-grid">
-                                <img src="images/b.jpg" alt=" " class="img-responsive" />
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sliderfig-grid">
-                                <img src="images/c.jpg" alt=" " class="img-responsive" />
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sliderfig-grid">
-                                <img src="images/d.jpg" alt=" " class="img-responsive" />
-                            </div>
-                        </li>
-                    </ul>
-                    <script type="text/javascript">
-                        $(window).load(function() {
-                            $("#flexiselDemo1").flexisel({
-                                visibleItems: 4,
-                                animationSpeed: 1000,
-                                autoPlay: true,
-                                autoPlaySpeed: 3000,    		
-                                pauseOnHover: true,
-                                enableResponsiveBreakpoints: true,
-                                responsiveBreakpoints: { 
-                                    portrait: { 
-                                        changePoint:480,
-                                        visibleItems: 3
-                                    }, 
-                                    landscape: { 
-                                        changePoint:640,
-                                        visibleItems:4
-                                    },
-                                    tablet: { 
-                                        changePoint:768,
-                                        visibleItems: 3
-                                    }
-                                }
-                            });
-                        });
-                    </script>
-                    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
-                </div>
-<!-- //slider -->
-                <div class="clearfix"> </div>
-            </div>
         </div>
-<!-- //cate -->
-<!-- cate-bottom -->
-<!-- //cate-bottom -->
-<!-- welcome -->
-	<div class="welcome">
-            <div class="container">
-                <div class="welcome-info">
-                    <h3>Welcome To Our Store!</h3>
-                    <p class="non">Repellat molestiae non recusandae<span>Asperiores repellat</span></p>
-                    <p class="rep">Perferendis doloribus asperiores repellat</p>
-                    <div class="buy wel">
-                        <br/><br/>
-                    </div>
-                </div>
-            </div>
-	</div>
-<!-- //welcome -->
-<!-- banner-bottom1 -->
-	<div class="banner-bottom1">
-	</div>
-<!-- //banner-bottom1 -->
-<!-- banner-bottom -->
-	<div class="banner-bottom">
+        <!-- //banner -->
+     
+        <!-- cate-bottom -->
+        <!-- //cate-bottom -->
+        <!-- banner-bottom1 -->
+        <div class="banner-bottom1">
+        </div>
+        <!-- //banner-bottom1 -->
+        <!-- banner-bottom -->
+        <div class="banner-bottom">
             <div class="container">
                 <div class="product-one" id="randomProduct">
-                    
-                    
+
+
                     <div class="clearfix"> </div>
                 </div>
             </div>
-	</div>
-<%@ include file="footer.html" %>
+        </div>
+        <%@ include file="footer.html" %>
     </body>
 </html>
