@@ -82,12 +82,10 @@
                             <a href="AdminPages/login.jsp" ><i class="fa fa-user"></i> Login <b class="caret"></b></a>
                             </c:if>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                            </li>
+                           
                             <li class="divider"></li>
                             <li>
-                                <a href="../AdminPages/Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             </li>
                         </ul>
                     </li>

@@ -1,5 +1,6 @@
 package AdminServlets;
 
+import beans.Category;
 import beans.Order;
 import beans.User;
 import connections.DBController;
@@ -19,18 +20,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "userProfile", urlPatterns = {"/userProfile"})
 public class userProfile extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
+            throws ServletException, IOException {
         System.out.println("do get from user profile");
         int ID = Integer.parseInt(request.getParameter("userID"));
         User user = DBController.getInstance().getUser(ID);
-        if(user !=null)
-                    request.setAttribute("User", user);
-        RequestDispatcher ds = request.getRequestDispatcher("AdminPages/viewUserProfile.jsp");
-        ds.forward(request, response);
+        if (user != null) {
+            request.setAttribute("User", user);
+            ArrayList<Category> interest = DBController.getInstance().getInterests(user);
+             for (int i = 0; i < interest.size(); i++) {
+               System.out.println("admin view user int"+interest.get(i).getName());
+            }
+            request.setAttribute("userInterest", interest);
+
+            RequestDispatcher ds = request.getRequestDispatcher("AdminPages/viewUserProfile.jsp");
+            ds.forward(request, response);
+
+        }
+
     }
 
     @Override

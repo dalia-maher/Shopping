@@ -24,16 +24,14 @@
       <ul class="nav navbar-right top-nav">
         <li class="dropdown">
             <c:if test="${sessionScope.loggedInUser != null}">
-                <%User user = (User) session.getAttribute("loggedInUser");%>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user.getFirstName() + " " + user.getLastName()%> <b class="caret"></b></a>
+               
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${sessionScope.loggedInUser.getFirstName()} ${sessionScope.loggedInUser.getLastName()} <b class="caret"></b></a>
             </c:if>
             <c:if test="${sessionScope.loggedInUser == null}">
                 <a href="../login.jsp" ><i class="fa fa-user"></i> Login <b class="caret"></b></a>
             </c:if>
             <ul class="dropdown-menu">
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                </li>
+              
                 <li class="divider"></li>
                 <li>
                     <a href="../Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>

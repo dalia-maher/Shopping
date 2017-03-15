@@ -45,6 +45,9 @@
                 //serverPath = serverPath.replace(/\\/g, "\\\\");
                 if (statusTxt == "success") {
                 console.log(responseTxt.length + "size");
+                if(responseTxt.length <= 0){
+                   $("#result").append ("<span><h2>No available products in this category</h2></span>");
+                }
                 for (i = 0; i < responseTxt.length;i++)
                 {   var ProName=responseTxt[i].name;
                     ProName=ProName.replace(/\s/g, "");

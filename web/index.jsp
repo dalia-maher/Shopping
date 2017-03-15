@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sugar Store | Online Shopping </title>
         <!-- for-mobile-apps -->
@@ -27,7 +28,7 @@
         <!-- //js -->
         <!-- start-smoth-scrolling -->
         <script type="text/javascript">
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($){
     $(".scroll").click(function (event) {
         event.preventDefault();
         $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
@@ -50,6 +51,7 @@ function displayProduct(responseTxt, statusTxt, xhr) {
         {
 //                            var ProPrice = responseTxt[i].price;
 //                            ProPrice = ProPrice.replace(/\s/g, "");
+
             var item = responseTxt[Math.floor(Math.random() * responseTxt.length)];
             var catName = item.category.name;
             //alert(catName);
@@ -57,6 +59,7 @@ function displayProduct(responseTxt, statusTxt, xhr) {
             // var arr = data.split("&&");
             var arr = data.split("&&");
             var img = arr[0];
+
             
             for (var i = 1; i < arr.length; i++) {
                 if (img == "") {
@@ -66,7 +69,7 @@ function displayProduct(responseTxt, statusTxt, xhr) {
 
 
             $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
-                    "<div class='p-one simpleCart_shelfItem jwe'> " +
+                    "<div class='p-one simpleCart_shelfItem jwe sizeW'> " +
                     "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
                     "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' onerror='setDefault(this)' class='img-responsive' />" +
                     "<div class='mask'>" +
@@ -79,7 +82,7 @@ function displayProduct(responseTxt, statusTxt, xhr) {
                     "</div><div class='clearfix'></div></div> </div>" +
                     "</div>");
             // alert(item.name);
-            responseTxt.splice(i, 1);
+             responseTxt.splice(responseTxt.indexOf(item),1);
         }
 
     }
