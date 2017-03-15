@@ -89,6 +89,19 @@
     function previewModal(){
         $('#myModal').modal('show');
     }
+    function loginFunc(){
+        var curloc=window.location+"";
+        curloc=curloc.substring(curloc.lastIndexOf("/")+1);
+        if(!curloc.includes("login.jsp"))
+        $.ajax({url: "AddSessionVaraible",
+        data:"Name=lastVisited"+"&&Value="+curloc,
+        success: function (data, textStatus, jqXHR) {
+              window.location="login.jsp";
+                    }
+        
+    });
+        
+    }
 </script>
 
  <!--Modal--> 
@@ -162,7 +175,7 @@
                         <li class="top_link"><a href="userProfile.jsp">My Account</a></li>					
                     </c:if>
                     <c:if test="${sessionScope.loggedInUser == null}">
-                        <li class="top_link"><a href="login.jsp">Login</a></li>					
+                        <li class="top_link"><a href="javascript:loginFunc()">Login</a></li>					
                     </c:if>
                 </ul>
             </div>
