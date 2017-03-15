@@ -928,4 +928,23 @@ public class DBController implements DBHandler {
         }
         return cart;
     }
+
+    @Override
+    public boolean addMsg(Contact contact) {
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO `contact_us`(`name`, `email`, "
+                    + "`telephone`, `message`) "
+                    + "VALUES (?,?,?,?)");
+            preparedStatement.setString(1, contact.getName());
+            preparedStatement.setString(2, contact.getEmail());
+            preparedStatement.setString(3, contact.getTelephone());
+            preparedStatement.setString(4, contact.getMessage());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("error in adding contact us msg");
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }

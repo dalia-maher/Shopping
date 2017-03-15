@@ -9,12 +9,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Login :: w3layouts</title>
+        <title>Login | Sugar Store</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-        Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <meta name="keywords" content="Sugar Store Responsive Shopping Online Web Application" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                         function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
@@ -104,8 +103,8 @@
                             <input type="submit" value="Login">
                         </form>
                         <script>
-                            var msg = '<c:out value="${requestScope.attempt}"/>';
-                            if(msg != "") {
+                            var msg = '<c:out value="${param.attempt}"/>';
+                            if(msg == "1") {
                                 document.getElementById("loginValidation").innerHTML = "Invalid user credentials!";
                             } else {
                                 document.getElementById("loginValidation").innerHTML = "";

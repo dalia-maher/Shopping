@@ -8,12 +8,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Contact :: w3layouts</title>
+    <title>Contact Us | Sugar Store</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-    Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <meta name="keywords" content="Sugar Store Responsive Shopping Online Web Application" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                     function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
@@ -37,13 +36,6 @@
     <script type="text/javascript" src="js/megamenu.js"></script>
     <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
     <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
-
-    <script>
-        function sendMail() {
-            var body = document.getElementById("msg").innerHTML;
-            window.open('mailto:dalia.maher94@gmail.com?subject=contactUs&body=' + body);
-        }
-    </script>
 </head>
 	
 <body>
@@ -87,40 +79,53 @@
             </div>
         </div>
 <!---->
-<!-- contact -->
 	<div class="contact-bottom">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.73336023828!2d31.005420945024103!3d30.05884544177691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x88f29d027c44f959!2sInformation+Technology+Institute!5e0!3m2!1sen!2s!4v1489292418263" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
+<!-- contact -->
 	<div class="contact">
-		<div class="container">
-			<div class="col-md-4 contact-left">
-                            <h3>Address</h3>
-                            <p>ITI - Smart Village - Cairo-Alex Road KM 28
-                                <span>EWD Track - Intake 37</span></p>
-                            <ul>
-                                <li>Free Phone :+1 078 4589 2456</li>
-                                <li>Telephone :+1 078 4589 2456</li>
-                                <li><a href="mailto:dalia.maher94@gmail.com">info@example.com</a></li>
-                            </ul>
-			</div>
-			<div class="col-md-8 contact-left">
-                            <h3>Contact Form</h3>
-                            <form action="javascript:sendMail();">
-                                <input type="text" id="name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-                                <input type="email" id="from" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                                <input type="text" id="telephone" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
-                                <textarea id="msg" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
-                                <input type="submit" value="Submit" >
-                            </form>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
+            <div class="container">
+                <div class="col-md-4 contact-left">
+                    <h3>Address</h3>
+                    <p>ITI - Smart Village - Cairo-Alex Road KM 28
+                        <span>EWD Track - Intake 37</span></p>
+                    <ul>
+                        <li>Free Phone :+1 078 4589 2456</li>
+                        <li>Telephone :+1 078 4589 2456</li>
+                        <li><a href="mailto:dalia.maher94@gmail.com">info@sugar.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-8 contact-left">
+                    <h3>Contact Form</h3>
+                    <form action="AddContactMsg" method="post">
+                        <input type="text" name="name" placeholder="Name" required="">
+                        <input type="email" name="from" placeholder="Email" required="">
+                        <input type="text" name="telephone" placeholder="Telephone" required="">
+                        <textarea name="msg" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+                        <input type="submit" value="Submit" >
+                    </form>
+                    <br/>
+                    <label id='contactMsg'>Thank you. Your message has been sent.</label>
+                    <script>
+                        var msg = '<c:out value="${param.success}"/>';
+                        var fail = '<c:out value="${param.failed}"/>';
+                        if(msg == "1") {
+                            document.getElementById("contactMsg").innerHTML = "Thank you. Your message is sent.";
+                        } else if(fail == "1") {
+                            document.getElementById("contactMsg").innerHTML = "Error sending Message";
+                        } else {
+                            document.getElementById("contactMsg").innerHTML = "";
+                        }
+                    </script>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
 	</div>
-<!-- //contact -->
-<!-- footer -->
-<%@ include file="footer.html" %>
-<!-- for bootstrap working -->
-		<script src="js/bootstrap.js"> </script>
-<!-- //for bootstrap working -->
-</body>
+        <!-- //contact -->
+        <!-- footer -->
+        <%@ include file="footer.html" %>
+        <!-- for bootstrap working -->
+        <script src="js/bootstrap.js"> </script>
+        <!-- //for bootstrap working -->
+    </body>
 </html>

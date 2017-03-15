@@ -9,12 +9,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pendent Store a E-commerce Online Shopping Category Flat Bootstarp Resposive Website Template | Checkout :: w3layouts</title>
+        <title>Checkout | Sugar Store</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <meta name="keywords" content="Sugar Store Responsive Shopping Online Web Application" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- js -->
@@ -170,7 +169,7 @@
             function checkCredit(msg) {
                 if(msg == "credit") {
                     var count = 0;
-                    $('div > input').each(function() {
+                    $('.cart-header > input').each(function() {
                         count++;
                     });
                     if(count > 0) {

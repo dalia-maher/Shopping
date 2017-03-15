@@ -26,12 +26,12 @@ public class CheckCredit extends HttpServlet {
             throws ServletException, IOException {
 
         String credit = request.getParameter("credit");
+        System.out.println("credit = " + credit);
         try (PrintWriter out = response.getWriter()) {
             if(credit.trim().equals("")) {
                 out.print("true");
             }
             else {
-
                 int cardValue = DBController.getInstance().getCreditValue(credit);
                 if(cardValue > 0)
                    out.print("true");
