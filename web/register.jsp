@@ -10,12 +10,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pendent Store a Ecommerce Online Shopping Category Flat Bootstarp Resposive Website Template | Register :: w3layouts</title>
+        <title> Register | Sugar Store</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-        Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <meta name="keywords" content="Sugar Store Responsive Shopping Online Web Application" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                         function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
@@ -80,15 +79,16 @@
                             }
                         });
                 }
-                else if(id == "credit") {
+                else if(id == "creditCard") {
                     $.post("CheckCredit", {credit: value},
                         function(response) {
-                            if(response == "true") {
+                             if(response == "true") {
                                 $("#creditValidation").html("");
                                 validCredit = true;
                             }
                             else {
-                                $("#creditValidation").html("Invalid Card ID!");
+                                console.log("here");
+                                $("#creditValidation").html("invalid Card ID");
                                 validCredit = false;
                             }
                         });
@@ -207,9 +207,9 @@
                         </ul>
                         <ul>
                             <li class="text-info">Credit Card ID:</li>
-                            <li><input type="text" name="credit" id="credit" onblur="validateForm('credit')"></li>
+                            <li><input type="text" name="credit" id="creditCard" onblur="validateForm('creditCard')"></li>
                             <li>
-                                <label id="creditValidation" style="color:red; margin-left: 235px;"></label>
+                                <label style="color: red; margin-left: 235px;" id="creditValidation"></label>
                             </li>
                         </ul>
                         <c:set var="myCategories" value="${requestScope.categoriesList}" />
@@ -231,23 +231,16 @@
                        
                         <br/>
                         <input type="submit" value="Register Now"><br/>
-                        <% 
-                            if(request.getParameter("success") != null) {
-                        %>
-                                <script>
-                                    document.getElementById("info").innerHTML = "";
-                                    document.getElementById("info2").innerHTML = "";
-                                    document.getElementById("validationMsg").innerHTML = "You're successfully registered! click <a href='login.jsp'>here</a> to login";
-                                </script>
-                        <%
-                            } else if(request.getParameter("failed") != null) {
-                        %>
-                                <script>
-                                    document.getElementById("validationMsg").innerHTML = "Registration Failed";
-                                </script>
-                        <%
-                            }
-                        %>
+                        <script>
+                            <c:if test="${not empty param.success}">
+                                document.getElementById("info").innerHTML = "";
+                                document.getElementById("info2").innerHTML = "";
+                                document.getElementById("validationMsg").innerHTML = "You're successfully registered! click <a href='login.jsp'>here</a> to login";
+                            </c:if>
+                            <c:if test="${not empty param.failed}">
+                                document.getElementById("validationMsg").innerHTML = "Registration Failed";                                
+                            </c:if>
+                        </script>
                     </form>
                 </div>
             </div>

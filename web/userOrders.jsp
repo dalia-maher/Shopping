@@ -10,12 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>My Orders</title>
+        <title>My Orders | Sugar Store</title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <meta name="keywords" content="Sugar Store Responsive Shopping Online Web Application" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
@@ -119,8 +118,8 @@
                                                         </tr>
                                                         <c:if test="${loop.index == fn:length(userOrders)|| userOrders[loop.index].orderNumber != userOrders[loop.index+1].orderNumber}">
                                                         <tr>
-                                                            <td colspan="3"><b>Order Total Price</b></td>
-                                                            <td>${total}</td>
+                                                            <td colspan="3"><b>Order Total Price (including delivery)</b></td>
+                                                            <td>${total + 150}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table></center>

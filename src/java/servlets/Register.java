@@ -46,7 +46,6 @@ public class Register extends HttpServlet {
         double creditValue;
         if(!credit.trim().equals("")) {
             creditValue = dbCon.getCreditValue(credit);
-            dbCon.updateCreditCard(credit, dbCon.getUserID(email));
         }
         else {
             creditValue = 0;
@@ -56,6 +55,8 @@ public class Register extends HttpServlet {
         boolean signed_up = dbCon.signUp(user);
 
         if(signed_up) {
+            dbCon.updateCreditCard(credit, dbCon.getUserID(email));
+
             if(selectedInterests != null) {
                 ArrayList<Integer> interests = new ArrayList<>(selectedInterests.length);
                 for (String interest : selectedInterests) {

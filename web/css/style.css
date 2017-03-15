@@ -1200,9 +1200,6 @@ li.last_price span {
 	text-align: center;
 	position:relative;
 }
-.products-grd:nth-child(2){
-	margin:0 1em;
-}
 .products-grd:hover div.pro-grd{
 	display:block;
 }

@@ -11,13 +11,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pendent Store an E-commerce Online Shopping Website </title>
+        <title>Sugar Store | Online Shopping </title>
         <!-- for-mobile-apps -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="Pendent Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
-              Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <meta name="keywords" content="Sugar Store Responsive Shopping Online Web Application" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
             function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //for-mobile-apps -->
@@ -28,7 +28,7 @@
         <!-- //js -->
         <!-- start-smoth-scrolling -->
         <script type="text/javascript">
-jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($){
     $(".scroll").click(function (event) {
         event.preventDefault();
         $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
@@ -69,7 +69,7 @@ function displayProduct(responseTxt, statusTxt, xhr) {
 
 
             $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
-                    "<div class='p-one simpleCart_shelfItem jwe'> " +
+                    "<div class='p-one simpleCart_shelfItem jwe sizeW'> " +
                     "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
                     "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' onerror='setDefault(this)' class='img-responsive' />" +
                     "<div class='mask'>" +

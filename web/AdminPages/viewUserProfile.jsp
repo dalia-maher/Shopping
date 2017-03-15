@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Customer's Profile</title>
+        <title>Admin | Customer's Profile</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="AdminPages/css/bootstrap.min.css" rel="stylesheet">

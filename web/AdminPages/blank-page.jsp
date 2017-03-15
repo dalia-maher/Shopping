@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin - Bootstrap Admin Template</title>
+        <title>Admin - All Products</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -69,10 +69,11 @@
                         for (var i = 0; i < arr.length; i++) {
                             var item = "  <div id=\"imgdiv" + arr[i] + "\" class=\"modal-header\"><button onclick=\"deleteImage('" + arr[i] + "')\" type=\"button\" class=\"close\"  aria-label=\"Close\">" +
                                     "<span  aria-hidden=\"true\">&times;</span></button>";
-                            item += "<img  class=\"img-responsive img-rounded px-2\" src=\"" + "..\\images\\" + data.category.name + "\\" + arr[i] + ".png" + "\" ></img>";
+                            item += "<img  class=\"img-responsive img-rounded px-2\" src=\"" + "..\\images\\" + data.category.name + "\\" + arr[i] + ".png" + "\"  ></img>";
                             item += "</div>";
                             if (arr[i] != "")
                             {
+                                
                                 $("#imagesDiv").append(item);
                                 maxbound = arr[i];
                             }
@@ -80,6 +81,12 @@
                     }
                 });
             }
+            
+                 function setDefault(item){
+                     
+            item.src='../images/noImage.png';
+            item.className="img-responsive";
+        }
             function deleteImage(i) {
                 deletedindexes += i + "&&";
                 document.getElementById('imgdiv' + i).style.display = "none";
@@ -110,7 +117,7 @@
                                     "<td>" + data[i].price + "</td>" +
                                     "<td>" + data[i].quantity + "</td>" +
                                     "<td>" + data[i].description + "</td>" +
-                                    "<td><img src=\"" + img + "\" class=\"img-responsive img-rounded px-2\" width=100 height=100></img></td>" +
+                                    "<td><img src=\"" + img + "\" class=\"img-responsive img-rounded px-2\" width=100 height=100 onerror='setDefault(this)'></img></td>" +
                                     "</tr>";
                             $("#DataTable").append(item);
                         }
@@ -288,13 +295,14 @@
                                 <li class="active">
                                     <i class="fa fa-file"></i> Products
                                 </li>
-
+                                <ul class="pager">
                                 <li >
-                                    <button class="btn-info" id="btnprev" onclick="btnPrev()">Previous</button>
+                                    <a ><button id="btnprev" onclick="btnPrev()" type="button" class="btn btn-link btn-sm">Previous</button></a>
                                 </li>
                                 <li >
-                                    <button id="btnnext" onclick="btnNext()">Next</button>
+                                    <a ><button  id="btnnext" onclick="btnNext()" type="button" class="btn btn-link btn-sm">Next</button></a>
                                 </li>
+                                </ul>
                             </ol>
                         </div>
                     </div>

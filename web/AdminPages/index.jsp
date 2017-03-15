@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin - Bootstrap Admin Template</title>
+        <title>Admin - Sugar Store</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -93,21 +93,20 @@
                     data: "type=order",
                     dataType: 'JSON',
                     success: function (data, textStatus, jqXHR) {
-                        $("#datadiv").html("");
-                         $("#datadiv").append("<table class='table'><tr><th>Order Num</th><th>Customer</th><th>product</th>\n\
-                 <th>Quantity</th><th>Price</th><th>Total</th></tr></thead>");
+                        var item="<table class='table'><tr><th>Order Num</th><th>Customer</th><th>product</th>\n\
+                 <th>Quantity</th><th>Price</th><th>Total</th></tr></thead><tbody>";
 
                         for (var i = 0; i < data.length; i++) {
-                             $("#datadiv").append("<table class='table'><tr><td>"+data[i].orderNumber+"</td><td ><a href=\"../userProfile?userID="+data[i].customer.customerID+"\">"+data[i].customer.firstName+" "+data[i].customer.lastName+
-                                     "</a></td><td>"+data[i].product.name+"</td>\n\
-                 <td>"+data[i].quantity+"</td><td>"+data[i].price+"</td><td>"+data[i].price*data[i].quantity+"</td></tr></thead>");
+                           item+="<tr><td>" + data[i].orderNumber + "</td><td ><a href=\"../userProfile?userID=" + data[i].customer.customerID + "\">" + data[i].customer.firstName + " " + data[i].customer.lastName +
+                                    "</a></td><td>" + data[i].product.name + "</td>\
+                 <td>" + data[i].quantity + "</td><td>" + data[i].price + "</td><td>" + data[i].price * data[i].quantity + "</td></tr>";
                         }
-                       $("#datadiv").append("</table>");
-
+                       item+="</tbody></table>";
+                        $("#datadiv").html(item);
                     }
                 });
             }
-              function getMessages() {
+            function getMessages() {
                 $.ajax({
                     url: "../Stats",
                     type: 'POST',
@@ -115,20 +114,20 @@
                     dataType: 'JSON',
                     success: function (data, textStatus, jqXHR) {
                         $("#datadiv").html("");
-                         $("#datadiv").append("<table class='table'><tr><th>Name</th><th>EMail</th><th>Telephone</th>\n\
-                 <th>Message</th></tr></thead>");
+                        var item = "<table class='table'><tr><th>Name</th><th>EMail</th><th>Telephone</th>\
+                 <th>Message</th></tr></thead><tbody>";
 
                         for (var i = 0; i < data.length; i++) {
-                             $("#datadiv").append("<table class='table'><tr><td>"+data[i].name+"</td><td ><a href=\"mailto:"+data[i].email+"\">"+data[i].email+
-                                     "</a></td><td>"+data[i].telephone+"</td>\n\
-                 <td>"+data[i].message+"</td></tr></thead>");
+                            item += "<tr><td>" + data[i].name + "</td><td ><a href=\"mailto:" + data[i].email + "\">" + data[i].email +
+                                    "</a></td><td>" + data[i].telephone + "</td>\
+                 <td>" + data[i].message + "</td></tr>";
                         }
-                       $("#datadiv").append("</table>");
-
+                        item += "</tbody></table>";
+                        $("#datadiv").append(item);
                     }
                 });
             }
-            
+
             window.onload = function () {
                 getStats();
             }
@@ -253,8 +252,8 @@
 
                     <div class="row" >
                         <div id="datadiv">
-                         
-                            
+
+
                         </div>
                     </div>
                     <!-- /.row -->

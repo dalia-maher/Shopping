@@ -107,5 +107,9 @@ public interface DBHandler {
     public boolean insertInterests(User user, ArrayList<Integer> interests);
 
     public boolean deleteIntersts(User user);
-
+    
+    // contact us
+    
+    public boolean addMsg(Contact contact);
+    
 }

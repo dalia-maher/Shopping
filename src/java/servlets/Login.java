@@ -46,13 +46,13 @@ public class Login extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", user);
-            System.out.println("from login user credit is :" + user.getCredit());
+
             if (user.isType()) {
                 // todo: set admin page
                 response.sendRedirect("AdminPages/index.jsp");
             } else {
                 String lastvis = request.getSession().getAttribute("lastVisited").toString();
-                if (lastvis != null && lastvis != "") {
+                if (lastvis != null && !lastvis.equals("")) {
                     response.sendRedirect(lastvis);
                 } else {
                     response.sendRedirect("index.jsp");
@@ -62,22 +62,19 @@ public class Login extends HttpServlet {
 
             java.sql.Date sqlDate = new java.sql.Date(new Date().getTime());
             DBController.getInstance().signUp(new User(adminUser, adminUser, adminPass, adminUser, adminUser, "", 0.0, true, sqlDate, ""));
-           User admin = DBController.getInstance().signIn(email, password);
-           if(admin != null){
+            User admin = DBController.getInstance().signIn(email, password);
+            if (admin != null) {
                 HttpSession session = request.getSession();
-            session.setAttribute("loggedInUser", admin);
-            response.sendRedirect("AdminPages/index.jsp");
-           }
-           
-
+                session.setAttribute("loggedInUser", admin);
+                response.sendRedirect("AdminPages/index.jsp");
+            }
         } else {
             response.sendRedirect("login.jsp?attempt=1");
         }
     }
 
-
-@Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
     }
