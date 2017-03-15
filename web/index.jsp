@@ -23,6 +23,7 @@
         <!-- //for-mobile-apps -->
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+       
         <!-- js -->
         <script src="js/jquery-1.11.1.min.js"></script>
         <!-- //js -->
@@ -69,7 +70,7 @@ function displayProduct(responseTxt, statusTxt, xhr) {
 
 
             $("#randomProduct").append(" <div class='col-md-2 product-left'>" +
-                    "<div class='p-one simpleCart_shelfItem jwe sizeW'> " +
+                    "<div class='p-one simpleCart_shelfItem jwe'> " +
                     "<a href='productDescription.jsp?productID=" + item.productID + "'>" +
                     "<img src=\"" + "images/" + catName + "/" + img + ".png" + "\"alt='Error' onerror='setDefault(this)' class='img-responsive' />" +
                     "<div class='mask'>" +
