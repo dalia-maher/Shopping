@@ -160,16 +160,17 @@ $(function () {
                 </script>
                 <!--//End-slider-script -->
                 <div  id="top" class="callbacks_container">
-                    <ul class="rslides" id="slider3">
+<ul class="rslides" id="slider3">
                         <li>
                             <div class="banner-info">
                                 <div class="banner-info1">
                                     <div class="banner-inf">
-                                        <h1>maiores alias consequatur aut perferendis</h1>
-                                        <p>Itaque earum rerum hic tenetur a sapiente delectus, 
-                                            ut aut reiciendis voluptatibus maiores alias consequatur 
-                                            aut perferendis doloribus asperiores repellat.</p>
-                                       
+                                        <h1>Your items are fully insured & deliver to your doorstep</h1>
+                                        <p>Whatever you order , your items are fully insured and custom-cleared.
+                                        We grantee that you get your items wrapped and repackaged , on case of breakness or loss 
+                                        ,you will receive a FULL REFUND.
+                                        We ship everywhere in Egypt.</p>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -178,24 +179,24 @@ $(function () {
                             <div class="banner-info">
                                 <div class="banner-info1">
                                     <div class="banner-inf">
-                                        <h1>asperiores alias consequatur aut perferendis</h1>
-                                        <p>Alias earum rerum hic tenetur a sapiente delectus, 
-                                            ut aut reiciendis voluptatibus maiores alias consequatur 
-                                            aut perferendis doloribus asperiores repellat.</p>
-                                       
+                                        <h1>Good Quality Items </h1>
+                                        <h1>Local Prices</h1>
+                                        <h1>Delivered to your doorstep</h1>
+                                        <p>Shopping is no more a hassle</p>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
                             <div class="banner-info">
-                                <div class="banner-info1">
+                                 <div class="banner-info1">
                                     <div class="banner-inf">
-                                        <h1>doloribus alias consequatur aut perferendis</h1>
-                                        <p>Repellat earum rerum hic tenetur a sapiente delectus, 
-                                            ut aut reiciendis voluptatibus maiores alias consequatur 
-                                            aut perferendis doloribus asperiores repellat.</p>
-                                      
+                                        <h1>We sell and Deliver anything you want </h1>
+                                        <p>Borderless Shopping ,you don't need to travel anywhere.<br>
+                                        Easy Payments , just add credit required and pay in your local Currency.</p>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
