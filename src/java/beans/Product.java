@@ -13,6 +13,18 @@ public class Product
     private double price;
     private int quantity;
     private String images;
+    private boolean valid;
+
+    public Product(int productID, Category category, String name, String description, double price, int quantity, String images, boolean valid) {
+        this.productID = productID;
+        this.category = category;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.images = images;
+        this.valid = valid;
+    }
 
     public Product() {
     }
@@ -100,6 +112,14 @@ public class Product
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
     }
     
 }

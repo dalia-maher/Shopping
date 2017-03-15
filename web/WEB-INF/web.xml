@@ -6,7 +6,15 @@
     </context-param>
     <context-param>
         <param-name>Password</param-name>
-        <param-value>root</param-value>
+        <param-value></param-value>
+    </context-param>
+    <context-param>
+        <param-name>AdminEmail</param-name>
+        <param-value>admin@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>AdminPassword</param-name>
+        <param-value>1234</param-value>
     </context-param>
     <filter>
         <filter-name>AdminFilter</filter-name>

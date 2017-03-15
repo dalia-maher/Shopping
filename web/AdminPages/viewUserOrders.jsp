@@ -17,7 +17,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Order</title>
+        <title>Admin | Orders</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="AdminPages/css/bootstrap.min.css" rel="stylesheet">

@@ -88,7 +88,7 @@
                             }
                             else {
                                 console.log("here");
-                                $("#creditValidation").html("Invalid Card ID!");
+                                $("#creditValidation").html("invalid Card ID");
                                 validCredit = false;
                             }
                         });
@@ -209,7 +209,7 @@
                             <li class="text-info">Credit Card ID:</li>
                             <li><input type="text" name="credit" id="creditCard" onblur="validateForm('creditCard')"></li>
                             <li>
-                                <label id="creditValidation" style="color:red; margin-left: 235px;"></label>
+                                <label style="color: red; margin-left: 235px;" id="creditValidation"></label>
                             </li>
                         </ul>
                         <c:set var="myCategories" value="${requestScope.categoriesList}" />

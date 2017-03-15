@@ -104,7 +104,7 @@
                             }
                             var item = "<div class='cart-header' id='item" + list[i].product.productID + "'>\
                                 <input type='hidden' value=" + list[i].product.productID + ">\
-                                <div class='close' onclick='hideDiv(" + list[i].product.productID + ", " + list[i].product.price + ")'> </div>\
+                                <div style='opacity: 0.5; filter: alpha(opacity=50);' class='close' onclick='hideDiv(" + list[i].product.productID + ", " + list[i].product.price + ")'> </div>\
                                 <div class='cart-sec simpleCart_shelfItem'>\
                                     <div class='cart-item cyc'>\
                                         <img src='images/" + list[i].product.category.name + "/" + imgName+ ".png" + "' class='img-responsive' alt=''/></div>\

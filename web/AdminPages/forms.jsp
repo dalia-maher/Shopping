@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin - Bootstrap Admin Template</title>
+        <title>Admin - Add Product</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -142,11 +142,13 @@
                     success: function (data, textStatus, jqXHR) {
                         $("#lstProducts").empty();
                         for (var i = 0; i < data.length; i++) {
-                            var item="<li class=\"list-group-item \">"+data[i].name+
+                            
+            var item="<li class=\"list-group-item \">"+data[i].name+
                                 "<a href=\"javascript:delProduct("+data[i].productID+");\"><span class=\"glyphicon glyphicon-remove pull-right marginitem\"></span></a>"+
                     "</li>";
                             $("#lstProducts").append(item);
-                        }
+                        
+                    }
                     }
                 });                
             }

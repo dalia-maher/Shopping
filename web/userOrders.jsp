@@ -118,8 +118,8 @@
                                                         </tr>
                                                         <c:if test="${loop.index == fn:length(userOrders)|| userOrders[loop.index].orderNumber != userOrders[loop.index+1].orderNumber}">
                                                         <tr>
-                                                            <td colspan="3"><b>Order Total Price</b></td>
-                                                            <td>${total}</td>
+                                                            <td colspan="3"><b>Order Total Price (including delivery)</b></td>
+                                                            <td>${total + 150}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table></center>

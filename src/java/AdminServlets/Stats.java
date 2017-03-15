@@ -28,7 +28,7 @@ public class Stats extends HttpServlet {
             resp.getWriter().write(new Gson().toJson(DBController.getInstance().selectTodayOrders()));
         }
             else if (req.getParameter("type").equals("contact")) {
-            resp.getWriter().write(new Gson().toJson(DBController.getInstance().selectTodayOrders()));
+            resp.getWriter().write(new Gson().toJson(DBController.getInstance().selectMessages()));
         }
             
     }
@@ -38,7 +38,9 @@ public class Stats extends HttpServlet {
        String user= DBController.getInstance().getValue("Select count(*) AS count from customer where type!=1", "count");
        String product= DBController.getInstance().getValue("Select count(*) AS count from product ", "count");
        String order=DBController.getInstance().getValue("SELECT Count(*) AS count FROM shopping.`order` where DATE(`date`) = CURDATE()", "count");               
-       resp.getWriter().write(user+"&&"+product+"&&"+order);
+             String Messages=DBController.getInstance().getValue("SELECT Count(*) AS count FROM shopping.`contact_us`", "count");               
+
+       resp.getWriter().write(user+"&&"+product+"&&"+order+"&&"+Messages);
     }
 
    
