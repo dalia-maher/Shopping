@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- top-header -->
+ <link href="../css/style.css"  rel="stylesheet">
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script>
@@ -188,7 +189,7 @@
 <div class="header_top">
     <div class="container">
         <div class="logo">
-            <a href="index.jsp">Pendent Store</a>			 
+            <a href="index.jsp">Sugar Store</a>			 
         </div>
         <div class="header_right">
             <div class="cart box_1">

@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<%@page import="beans.User"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="beans.User"%>
+
+<!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -18,7 +21,8 @@
 
         <!-- Custom CSS -->
         <link href="AdminPages/css/sb-admin.css" rel="stylesheet">
-
+<!--        <link href="../css/style.css"  rel="stylesheet">-->
+    
         <!-- Custom Fonts -->
         <link href="AdminPages/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -29,10 +33,11 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <!-- jQuery -->
+        
         <script src="AdminPages/js/jquery.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="AdminPages/js/bootstrap.min.js"></script>
-
+        
     </head>
     <body>
         <style>
@@ -76,19 +81,17 @@
                 <ul class="nav navbar-right top-nav">
                     <li class="dropdown">
                         <c:if test="${sessionScope.loggedInUser != null}">
-                            <%User user1 = (User) session.getAttribute("loggedInUser");%>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%=user1.getFirstName() + " " + user1.getLastName()%> <b class="caret"></b></a>
+                           
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${sessionScope.loggedInUser.getFirstName()} ${sessionScope.loggedInUser.getLastName()} <b class="caret"></b></a>
                             </c:if>
                             <c:if test="${sessionScope.loggedInUser == null}">
                             <a href="AdminPages/login.jsp" ><i class="fa fa-user"></i> Login <b class="caret"></b></a>
                             </c:if>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                            </li>
+                           
                             <li class="divider"></li>
                             <li>
-                                <a href="../AdminPages/Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                <a href="Logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                             </li>
                         </ul>
                     </li>
@@ -146,15 +149,14 @@
                     <!-- /.row -->
                     <div class="row">
 
-                        <div class="col-lg-10">
+                        <div class="col-lg-10 form-inline">
                             <c:if test="${!empty User}">
-                                <div class="table-responsive">
-                                    <div class="reg-form">
-                                        <div class="reg">
-                                            <ul>
-                                                <li class="text-info">First Name: </li>
-
+                                <div>
+                                  <ul>
+                                                <li class="text-info">First Name:</li>
                                                 <li><p> ${User.firstName}</p></li>
+
+                                                
                                             </ul>
                                             <hr>
                                             <ul>
@@ -168,12 +170,12 @@
 
                                                 <li><p>${User.email}</p></li>
                                             </ul>
-                                            <hr>
-                                            <ul>
+                                            
+<!--                                            <ul>
                                                 <li class="text-info">Password: </li>
 
                                                 <li><p>${User.password}</p></li>
-                                            </ul>
+                                            </ul>-->
                                             <hr>
                                             <ul>
                                                 <li class="text-info">Job:</li>
@@ -200,7 +202,7 @@
                                                 <li><p id="lastCredit">EGP ${User.credit}</p></li>
                                             </ul>
                                             <hr>
-
+                                           
                                             <ul>
                                                 <li class="text-info">Interests:</li>
                                                 <li>
@@ -208,16 +210,14 @@
                                                     <ul>
                                                         <c:forEach  items= "${requestScope.userInterest}" var="interest">
 
-                                                            <li><c:out value="${interest.getName()}"/></li>
+                                                            <li><c:out value="${interest.name}"/></li>
                                                             <br>
 
                                                         </c:forEach>
                                                     </ul>
                                                 </li>
                                             </ul>
-
-                                        </div>
-                                    </div>
+     
                                 </div>
                             </c:if>
                         </div>

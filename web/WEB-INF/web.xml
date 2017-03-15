@@ -6,7 +6,15 @@
     </context-param>
     <context-param>
         <param-name>Password</param-name>
-        <param-value>root</param-value>
+        <param-value></param-value>
+    </context-param>
+    <context-param>
+        <param-name>AdminUser</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+     <context-param>
+        <param-name>AdminPass</param-name>
+        <param-value>admin</param-value>
     </context-param>
     <filter>
         <filter-name>AdminFilter</filter-name>
